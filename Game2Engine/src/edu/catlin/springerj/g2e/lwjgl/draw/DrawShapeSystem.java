@@ -1,4 +1,4 @@
-package edu.catlin.springerj.g2e.lwjgl.shape;
+package edu.catlin.springerj.g2e.lwjgl.draw;
 
 import static org.lwjgl.opengl.GL11.*;
 

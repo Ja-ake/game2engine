@@ -2,6 +2,7 @@ package edu.catlin.springerj.explore;
 
 import edu.catlin.springerj.g2e.core.Core;
 import edu.catlin.springerj.g2e.lwjgl.LWJGLManager;
+import edu.catlin.springerj.g2e.lwjgl.game.FPSDisplay;
 import edu.catlin.springerj.g2e.math.Vector2;
 import edu.catlin.springerj.g2e.object.PhysicalObject;
 
@@ -17,7 +18,8 @@ public class Test {
 		Core.initialize(new LWJGLManager());
 		//Core.getRootManager().add(new Player());
 		//Core.getRootManager().add(new PhysicalObject(new Vector2(0.0f, 0.0f)));
-		Core.getRootManager().add(new Triangle(triangle));
+		Core.getRootManager().add(new Teather());
+		Core.getRootManager().add(new FPSDisplay());
 		Core.run();
 	}
 }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
 
 import edu.catlin.springerj.g2e.core.AbstractManager;
 
@@ -37,6 +38,25 @@ public class EventManager extends AbstractManager {
 	public void run() {
 		while (Keyboard.next()) {
 			fire(new KeyboardEvent(Keyboard.getEventKey(), Keyboard.getEventKeyState()));
+		}
+		
+		while (Mouse.next()) {
+			int action = 0, button = 0, x = Mouse.getEventX(), y = Mouse.getEventY();
+			if (Mouse.getEventDX() != 0 || Mouse.getEventDY() != 0) {
+				action = MouseEvent.ACTION_MOVE;
+				button = 0x10;
+			} else if (Mouse.getEventButton() != -1) { if (Mouse.getEventButtonState()) {
+				action = MouseEvent.ACTION_PRESS;
+				button = Mouse.getEventButton() + 0x10 + 1;
+			} else {
+				action = MouseEvent.ACTION_RELEASE;
+				button = Mouse.getEventButton() + 0x10 + 1;
+			} } else {
+				action = MouseEvent.ACTION_OTHER;
+				button = 0x10;
+			}
+			
+			fire(new MouseEvent(action, button, x, y));
 		}
 		
 		if (listeners.size() == 0) return;

@@ -1,4 +1,4 @@
-package edu.catlin.springerj.g2e.lwjgl.shape;
+package edu.catlin.springerj.g2e.lwjgl.draw;
 
 import edu.catlin.springerj.g2e.core.AbstractComponent;
 import edu.catlin.springerj.g2e.math.Color;

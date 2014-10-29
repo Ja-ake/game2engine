@@ -1,8 +1,8 @@
 package edu.catlin.springerj.explore;
 
 import edu.catlin.springerj.g2e.core.AbstractEntity;
-import edu.catlin.springerj.g2e.lwjgl.shape.DrawShapeSystem;
-import edu.catlin.springerj.g2e.lwjgl.shape.ShapeComponent;
+import edu.catlin.springerj.g2e.lwjgl.draw.DrawShapeSystem;
+import edu.catlin.springerj.g2e.lwjgl.draw.ShapeComponent;
 import edu.catlin.springerj.g2e.math.Color;
 import edu.catlin.springerj.g2e.math.Vector2;
 
