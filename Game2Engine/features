@@ -1,0 +1,19 @@
+-- Classes --
+
+AbstractComponent:
+--
+
+AbstractEntity:
+- add(component...)
+- add(system...)
+- get(system)
+- get(component)
+
+AbstractManager:
+- add(submanager)
+- add(entity)
+- get(submanager by type)
+- get(entity)
+
+AbstractSystem
+- update
