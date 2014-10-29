@@ -1,4 +1,4 @@
-package edu.catlin.springerj.g2e.extra;
+package edu.catlin.springerj.g2e.thread;
 
 public abstract class Task implements Runnable {
 	private boolean once;

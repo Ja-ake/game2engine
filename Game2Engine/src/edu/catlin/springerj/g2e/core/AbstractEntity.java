@@ -5,7 +5,7 @@ import java.util.List;
 
 import edu.catlin.springerj.g2e.exception.InvalidComponentException;
 import edu.catlin.springerj.g2e.exception.InvalidSystemException;
-import edu.catlin.springerj.g2e.extra.Task;
+import edu.catlin.springerj.g2e.thread.Task;
 
 public abstract class AbstractEntity extends ManagedObject {
 	public abstract void initialize();

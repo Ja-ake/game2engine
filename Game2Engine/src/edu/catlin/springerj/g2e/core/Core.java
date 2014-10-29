@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.catlin.springerj.g2e.exception.CoreException;
-import edu.catlin.springerj.g2e.extra.Task;
-import edu.catlin.springerj.g2e.extra.TaskThread;
+import edu.catlin.springerj.g2e.thread.Task;
+import edu.catlin.springerj.g2e.thread.TaskThread;
 
 /**
  * Handles basic functions of the game such as loop and events.
@@ -14,6 +14,7 @@ public abstract class Core {
 	private static AbstractManager manager;
 	private static List<TaskThread> threads;
 	private static List<TaskThread> tostart;
+	private static List<Timer> threadtimers;
 	
 	private static boolean closeRequested;
 
@@ -21,7 +22,9 @@ public abstract class Core {
 		closeRequested = false;
 		threads = new ArrayList<TaskThread>();
 		tostart = new ArrayList<TaskThread>();
+		threadtimers = new ArrayList<Timer>();
 		threads.add(new TaskThread());
+		threadtimers.add(new Timer());
 	}
 
 	public static void initialize(AbstractManager initialManager) {
@@ -34,10 +37,22 @@ public abstract class Core {
 			for (TaskThread t : tostart) {
 				if (!t.isAlive()) {
 					t.start();
+					final Timer ty = new Timer();
 					threads.add(t);
+					threadtimers.add(ty);
+					t.add(new Task(true) {
+						public void run() {
+							ty.update();
+						}
+					});
 				}
 			}
 			
+			threads.get(0).add(new Task(true) {
+				public void run() {
+					Core.getDefaultTimer().update();
+				}
+			});
 			threads.get(0).run();
 		}
 	}
@@ -58,6 +73,10 @@ public abstract class Core {
 	public static TaskThread getDefaultTaskThread() {
 		if (threads.size() > 0) return threads.get(0);
 		throw new CoreException("Default thread has not been created.");
+	}
+	
+	public static Timer getDefaultTimer() {
+		return threadtimers.get(0);
 	}
 	
 	public static String getResourceFolder() {

@@ -1,4 +1,4 @@
-package edu.catlin.springerj.g2e.extra;
+package edu.catlin.springerj.g2e.thread;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;

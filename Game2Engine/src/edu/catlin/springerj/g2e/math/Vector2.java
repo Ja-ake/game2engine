@@ -65,6 +65,39 @@ public class Vector2 {
 		return v2;
 	}
 
+	// Sum of two vectors ....
+
+	public Vector2 addSelf(Vector2 v1) {
+		this.dX += v1.dX; this.dY += v1.dY;
+		return this;
+	}
+
+	// Subtract vector v1 from v .....
+
+	public Vector2 subSelf(Vector2 v1) {
+		this.dX -= v1.dX; this.dY -= v1.dY;
+		return this;
+	}
+
+	// Scale vector by a constant ...
+
+	public Vector2 scaleSelf(double scaleFactor) {
+		this.dX *= scaleFactor; this.dY *= scaleFactor;
+		return this;
+	}
+
+	// Normalize a vectors length....
+
+	public Vector2 normalizeSelf() {
+		double length = Math.sqrt(this.dX * this.dX + this.dY * this.dY);
+		if (length != 0) {
+			this.dX = this.dX / length;
+			this.dY = this.dY / length;
+		}
+
+		return this;
+	}
+
 	// Dot product of two vectors .....
 
 	public double dotProduct(Vector2 v1) {

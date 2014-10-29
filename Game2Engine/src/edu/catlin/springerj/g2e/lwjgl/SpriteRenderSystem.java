@@ -4,6 +4,7 @@ import static org.lwjgl.opengl.GL11.GL_QUADS;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
 import static org.lwjgl.opengl.GL11.glBegin;
 import static org.lwjgl.opengl.GL11.glColor3d;
+import static org.lwjgl.opengl.GL11.glDisable;
 import static org.lwjgl.opengl.GL11.glEnable;
 import static org.lwjgl.opengl.GL11.glEnd;
 import static org.lwjgl.opengl.GL11.glPopMatrix;
@@ -17,14 +18,22 @@ import java.io.IOException;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.AbstractSystem;
 import edu.catlin.springerj.g2e.core.Core;
+import edu.catlin.springerj.g2e.exception.InvalidComponentException;
 import edu.catlin.springerj.g2e.lwjgl.util.TextureLoader;
 import edu.catlin.springerj.g2e.math.Vector2;
+import edu.catlin.springerj.g2e.object.component.PositionComponent;
 
 public class SpriteRenderSystem extends AbstractSystem {
 	private SpriteComponent sc;
+	private PositionComponent pc;
 	
 	public SpriteRenderSystem(AbstractEntity e, String image) {
 		sc = e.getComponent(SpriteComponent.class);
+		try {
+			pc = e.getComponent(PositionComponent.class);
+		} catch (InvalidComponentException exception) {
+			pc = null;
+		}
 		
 		try {
 			sc.textures = TextureLoader.getTexture(Core.getResourceFolder() + image + ".png", 1);
@@ -40,6 +49,8 @@ public class SpriteRenderSystem extends AbstractSystem {
 
 	@Override
 	public void update() {
+		if (pc != null) { setPosition(pc.position); }
+		
 		glPushMatrix();
         glEnable(GL_TEXTURE_2D);
         sc.getTexture(0).bind();
@@ -60,6 +71,7 @@ public class SpriteRenderSystem extends AbstractSystem {
             glVertex2d(sc.getWidth(), sc.getHeight());
         }
         glEnd();
+        glDisable(GL_TEXTURE_2D);
         glPopMatrix();
 	}
 	

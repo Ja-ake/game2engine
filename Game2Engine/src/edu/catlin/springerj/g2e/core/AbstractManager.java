@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.catlin.springerj.g2e.exception.InvalidManagerException;
-import edu.catlin.springerj.g2e.extra.Task;
+import edu.catlin.springerj.g2e.thread.Task;
 
 /**
  * Handles:
