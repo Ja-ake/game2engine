@@ -1,5 +1,7 @@
 package edu.catlin.springerj.g2e.core;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,7 +82,7 @@ public abstract class Core {
 	}
 	
 	public static String getResourceFolder() {
-		return "Z:\\GameResources\\";
+		return "..\\game2engine\\resources\\";
 	}
 	
 	public static AbstractManager getRootManager() {

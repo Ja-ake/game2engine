@@ -8,6 +8,7 @@ import java.util.List;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
+import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.AbstractManager;
 
 public class EventManager extends AbstractManager {
@@ -31,6 +32,12 @@ public class EventManager extends AbstractManager {
 	}
 	
 	public void fire(Event e) {
+		e.setTarget(null);
+		queue.add(e);
+	}
+	
+	public void fire(Event e, EventListener tar) {
+		e.setTarget(tar);
 		queue.add(e);
 	}
 
@@ -81,19 +88,25 @@ public class EventManager extends AbstractManager {
 			}
 
 			for (EventListener listener : listeners) {
-				try {
-					Method[] methods = listener.getClass().getDeclaredMethods();
-					for (Method method : methods) {
-						if (method.getName().equals("onEvent") && method.getParameterTypes().length == 1) {
-							if (((Class) method.getGenericParameterTypes()[0]).getName().equals(
-									event.getClass().getName())) {
-								method.invoke(listener, event);
+				if (event.target == null || event.target == listener) {
+					try {
+						Method[] methods = listener.getClass()
+								.getDeclaredMethods();
+						for (Method method : methods) {
+							if (method.getName().equals("onEvent")
+									&& method.getParameterTypes().length == 1) {
+								if (((Class) method.getGenericParameterTypes()[0])
+										.getName().equals(
+												event.getClass().getName())) {
+									method.invoke(listener, event);
+								}
 							}
 						}
+					} catch (SecurityException | IllegalAccessException
+							| IllegalArgumentException
+							| InvocationTargetException e) {
+						e.printStackTrace();
 					}
-				} catch (SecurityException | IllegalAccessException | IllegalArgumentException
-						| InvocationTargetException e) {
-					e.printStackTrace();
 				}
 
 			}

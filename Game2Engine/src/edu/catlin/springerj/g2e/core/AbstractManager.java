@@ -5,6 +5,7 @@ import java.util.List;
 
 import edu.catlin.springerj.g2e.exception.InvalidManagerException;
 import edu.catlin.springerj.g2e.thread.Task;
+import edu.catlin.springerj.g2e.web.WebManager;
 
 /**
  * Handles:
@@ -13,7 +14,7 @@ import edu.catlin.springerj.g2e.thread.Task;
  * 
  */
 public abstract class AbstractManager extends ManagedObject {
-	public abstract void initialize(); private boolean initialized;
+	public abstract void initialize(); protected boolean initialized;
 	public abstract void run();
 	
 	private List<AbstractManager> 	managers;
@@ -71,21 +72,34 @@ public abstract class AbstractManager extends ManagedObject {
 				fm.run();
 			}
 		});
-		return man;
+
+		return this;
 	}
 	
-	public AbstractEntity add(AbstractEntity ent) {
+	public AbstractManager add(AbstractEntity ent) {
 		entities.add(ent);
 		ent.setManager(this);
 		if (initialized) ent.initialize();
-		return ent;
+		final AbstractEntity et = ent;
+		Core.task(new Task(true) {
+			@Override
+			public void run() {
+				et.update();
+			}
+		});
+		
+		return this;
 	}
 	
-	public <T extends AbstractManager>T get(Class<T> type) {
+	public <T extends AbstractManager>T getManager(Class<T> type) {
 		for (AbstractManager m : managers) {
 			if (m.getClass().equals(type)) return (T) m;
 		}
 		
 		return null;
+	}
+	
+	public List<AbstractEntity> getEntities() {
+		return entities;
 	}
 }

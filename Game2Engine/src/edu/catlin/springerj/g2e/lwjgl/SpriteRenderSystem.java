@@ -21,7 +21,7 @@ import edu.catlin.springerj.g2e.core.Core;
 import edu.catlin.springerj.g2e.exception.InvalidComponentException;
 import edu.catlin.springerj.g2e.lwjgl.util.TextureLoader;
 import edu.catlin.springerj.g2e.math.Vector2;
-import edu.catlin.springerj.g2e.object.component.PositionComponent;
+import edu.catlin.springerj.g2e.object.movement.PositionComponent;
 
 public class SpriteRenderSystem extends AbstractSystem {
 	private SpriteComponent sc;
@@ -43,7 +43,7 @@ public class SpriteRenderSystem extends AbstractSystem {
 	}
 	
 	@Override
-	public void initialize() {
+	public void initialize(AbstractEntity ent) {
 		
 	}
 

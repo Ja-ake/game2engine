@@ -15,17 +15,14 @@ import edu.catlin.springerj.g2e.core.Core;
 public class WindowSystem extends AbstractSystem {
 	WindowComponent wc;
 	
-	public WindowSystem(AbstractEntity e) {
-		wc = e.getComponent(WindowComponent.class);
-	}
-	
 	@Override
-	public void initialize() {
+	public void initialize(AbstractEntity e) {
+		wc = e.getComponent(WindowComponent.class);
 		setDisplayMode(wc.width, wc.height, false);
 		{
 			try {
 				if (Display.isCreated()) return;
-				Display.setVSyncEnabled(true);
+				Display.setVSyncEnabled(false);
 				Display.setResizable(false);
 				Display.setTitle(wc.title);
 				Display.create();
@@ -37,6 +34,14 @@ public class WindowSystem extends AbstractSystem {
 		}
 		
 		glOrtho(-wc.width/2, wc.width/2, -wc.height/2, wc.height/2, -1, 1);
+		
+		glDisable(GL_DEPTH_TEST);
+		glDisable(GL_LIGHTING);
+		
+		glEnable(GL_BLEND);
+		
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		
 		update();
 	}
 	
@@ -46,6 +51,7 @@ public class WindowSystem extends AbstractSystem {
 		
 		Display.update();
 		glClear(GL_COLOR_BUFFER_BIT);
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	}
 	
 	public void setDisplayMode(int width, int height, boolean fullscreen) {

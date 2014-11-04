@@ -1,32 +1,29 @@
 package edu.catlin.springerj.g2e.lwjgl.draw;
 
 import static org.lwjgl.opengl.GL11.*;
-
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.AbstractSystem;
 import edu.catlin.springerj.g2e.exception.InvalidComponentException;
-import edu.catlin.springerj.g2e.object.component.PositionComponent;
+import edu.catlin.springerj.g2e.object.movement.PositionComponent;
 
 public class DrawShapeSystem extends AbstractSystem {
 	private ShapeComponent sc;
 	private PositionComponent pc;
 
-	public DrawShapeSystem(AbstractEntity ent) {
+	@Override
+	public void initialize(AbstractEntity ent) {
 		sc = ent.getComponent(ShapeComponent.class);
 		try {
 			pc = ent.getComponent(PositionComponent.class);
 		} catch (InvalidComponentException e) {
 			pc = null;
-		}
-	}
-	
-	@Override
-	public void initialize() {
-		
+		}		
 	}
 
 	@Override
 	public void update() {
+		glEnable(GL_TEXTURE_2D);
+		
 		glPushMatrix();
 		if (pc != null) glTranslated(-pc.position.x(), -pc.position.y(), 0.0f);
 		glBegin(GL_TRIANGLES);
@@ -38,6 +35,8 @@ public class DrawShapeSystem extends AbstractSystem {
 		}
 		glEnd();
 		glPopMatrix();
+		
+		glDisable(GL_TEXTURE_2D);
 	}
 	
 }

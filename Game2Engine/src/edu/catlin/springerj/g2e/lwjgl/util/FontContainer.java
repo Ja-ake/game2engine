@@ -1,5 +1,7 @@
 package edu.catlin.springerj.g2e.lwjgl.util;
 
+import static org.lwjgl.opengl.GL11.*;
+
 import java.awt.Font;
 import java.util.HashMap;
 
@@ -14,15 +16,17 @@ public class FontContainer {
         Font awtFont = new Font(name, style, size);
         GLFont glFont = new GLFont(awtFont, false);
         fontMap.put(gameName, glFont);
+        
+        System.out.println(awtFont.getFamily());
     }
 
     public static void create() {
-    	if (fontMap == null) fontMap = new HashMap();
+    	if (fontMap == null) fontMap = new HashMap<String, GLFont>();
         if (!fontMap.isEmpty()) return;
     	
     	System.out.println("Loading fonts");
         
-        add("Default", "ChunkFiveEx", Font.PLAIN, 24);
+        add("Default", "", Font.PLAIN, 12);
     }
 
     public static GLFont get(String name) {
@@ -30,8 +34,12 @@ public class FontContainer {
     }
     
     public static void drawText(String s, String font, double x, double y, Color c) {
-        TextureImpl.bindNone();
+        glEnable(GL_TEXTURE_2D);
+    	TextureImpl.bindNone();
+    	//glDrawBuffer(GL_BACK);
         FontContainer.get(font).drawString((float) x, (float) y, s, c);
+        //glDrawBuffer(GL_FRONT);
+        glDisable(GL_TEXTURE_2D);
     }
     
     public static void drawText(String s, double x, double y) {

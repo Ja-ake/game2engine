@@ -4,7 +4,7 @@ package edu.catlin.springerj.g2e.core;
 abstract class ManagedObject {
 	private AbstractManager manager;
 	
-	void setManager(AbstractManager m) {
+	public void setManager(AbstractManager m) {
 		manager = m;
 	}
 	

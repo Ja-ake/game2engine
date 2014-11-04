@@ -51,6 +51,7 @@ public abstract class AbstractEntity extends ManagedObject {
 	public boolean add(AbstractSystem... ss) {
 		boolean r = true;
 
+		final AbstractEntity thus = this;
 		for (AbstractSystem s : ss) {
 			String cName = s.getClass().getName();
 			boolean contains = false;
@@ -66,7 +67,7 @@ public abstract class AbstractEntity extends ManagedObject {
 				final AbstractSystem fs = s;
 				Core.task(new Task() {
 					public void run() {
-						fs.initialize();
+						fs.initialize(thus);
 					}
 				});
 				

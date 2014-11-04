@@ -14,7 +14,7 @@ public class Player extends AbstractEntity implements EventListener<KeyboardEven
 	public void initialize() {
 		add(new SpriteComponent());
 		add(new SpriteRenderSystem(this, "boulder"));
-		this.getManager().get(EventManager.class).register(this);
+		this.getManager().getManager(EventManager.class).register(this);
 	}
 
 	@Override

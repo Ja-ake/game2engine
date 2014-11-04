@@ -13,7 +13,7 @@ public class LWJGLManager extends AbstractManager {
 		window = new Window();
 		window.initialize();
 		windowSystem = window.getSystem(WindowSystem.class);
-		windowSystem.initialize();
+		windowSystem.initialize(window);
 		System.out.println("Window has been created successfully.");
 		
 		// Attach the event manager
