@@ -7,12 +7,18 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 
 import edu.catlin.springerj.g2e.core.AbstractComponent;
+import edu.catlin.springerj.g2e.core.AbstractEntity;
 import static org.lwjgl.opengl.GL11.*;
 
 public class WindowComponent extends AbstractComponent {
 	protected int width, height;
 	protected String title;
 
+	@Override
+	public void initialize(AbstractEntity e) {
+		
+	}
+	
 	/**
 	 * Creates a window of the default size.
 	 */

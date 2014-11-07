@@ -5,4 +5,5 @@ package edu.catlin.springerj.g2e.core;
  */
 public abstract class AbstractComponent extends ManagedObject {
 	void background(boolean started) { }
+	public abstract void initialize(AbstractEntity e);
 }

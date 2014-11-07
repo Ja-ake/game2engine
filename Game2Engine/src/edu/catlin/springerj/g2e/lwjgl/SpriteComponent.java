@@ -3,11 +3,17 @@ package edu.catlin.springerj.g2e.lwjgl;
 import java.util.ArrayList;
 
 import edu.catlin.springerj.g2e.core.AbstractComponent;
+import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.lwjgl.util.Texture;
 
 public class SpriteComponent extends AbstractComponent {
 	public double x, y;
 	public ArrayList<Texture> textures = new ArrayList<Texture>();
+	
+	@Override
+	public void initialize(AbstractEntity e) {
+		
+	}
 	
     /**
      * Returns the width of the sprite.
