@@ -16,12 +16,12 @@ public class Test {
 		triangle[2] = new Vector2(40.0f, -10.0f);
 		triangle[3] = new Vector2(50.0f, -20.0f);
 		
-		Core.initialize(new LWJGLManager().add(new WebManager()));
+		Core.initialize(new LWJGLManager());//.add(new WebManager()));
 		//Core.getRootManager().add(new Player());
-		Core.getRootManager().add(new PhysicalObject(new Vector2(-200.0f, 0.0f), new Vector2(50.0f, -15.0f)));
-		Core.getRootManager().add(new PhysicalObject(new Vector2(200.0f, 0.0f), new Vector2(-50.0f, 15.0f)));
-		Core.getRootManager().add(new PhysicalObject(new Vector2(0.0f, -200.0f), new Vector2(-1.0f, 30.0f)));
-		Core.getRootManager().add(new PhysicalObject(new Vector2(0.0f, 200.0f), new Vector2(1.0f, -30.0f)));
+		//Core.getRootManager().add(new PhysicalObject(new Vector2(-200.0f, 0.0f), new Vector2(50.0f, -15.0f)));
+		//Core.getRootManager().add(new PhysicalObject(new Vector2(200.0f, 0.0f), new Vector2(-50.0f, 15.0f)));
+		Core.getRootManager().add(new PhysicalObject(new Vector2(-10.0f, -200.0f), new Vector2(0.0f, 30.0f)));
+		Core.getRootManager().add(new PhysicalObject(new Vector2(10.0f, 200.0f), new Vector2(0.0f, -30.0f)));
 		Core.getRootManager().add(new FPSDisplay());
 		//Core.getRootManager().add(new Teather());
 		

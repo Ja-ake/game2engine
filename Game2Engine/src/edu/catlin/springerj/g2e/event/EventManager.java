@@ -66,10 +66,12 @@ public class EventManager extends AbstractManager {
 			fire(new MouseEvent(action, button, x, y));
 		}
 		
-		if (listeners.size() == 0) return;
+		//if (listeners.size() == 0) return;
 		for (int i = 0; i < queue.size(); i++) {
 			Event event = queue.get(i);
 			queue.remove(event); i--;
+			
+			System.out.println(event.getClass().getSimpleName());
 
 			// TickEvent
 			if (event instanceof TickEvent) {

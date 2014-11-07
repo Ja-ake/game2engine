@@ -4,6 +4,11 @@ import java.lang.Math;
 
 public class Vector2 {
 
+	public static final Vector2 NORTH = new Vector2(0.0f, 1.0f);
+	public static final Vector2 SOUTH = new Vector2(0.0f, -1.0f);
+	public static final Vector2 EAST = new Vector2(1.0f, 0.0f);
+	public static final Vector2 WEST = new Vector2(-1.0f, 0.0f);
+	
 	protected double dX;
 	protected double dY;
 
@@ -102,6 +107,17 @@ public class Vector2 {
 
 	public double dotProduct(Vector2 v1) {
 		return this.dX * v1.dX + this.dY * v1.dY;
+	}
+	
+	public Vector2 normal() {
+		return new Vector2(dY, -dX);
+	}
+	
+	public Vector2 normalSelf() {
+		double dx = dX, dy = dY;
+		dX = dy;
+		dY = -dx;
+		return this;
 	}
 	
 	public double x() {

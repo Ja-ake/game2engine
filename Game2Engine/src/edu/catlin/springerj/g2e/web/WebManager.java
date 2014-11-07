@@ -5,6 +5,8 @@ import java.util.List;
 
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.AbstractManager;
+import edu.catlin.springerj.g2e.core.Core;
+import edu.catlin.springerj.g2e.thread.Task;
 
 public class WebManager extends AbstractManager {
 	private List<WebEntity> web;
@@ -29,6 +31,7 @@ public class WebManager extends AbstractManager {
 	 * Adds entity to all groups that have a rule that accepts entity.
 	 */
 	public WebManager add(AbstractEntity ent) {
+		//ent.setManager(this);
 		for (WebEntity w : web) {
 			w.autojoin(ent);
 		}
@@ -40,6 +43,7 @@ public class WebManager extends AbstractManager {
 	 * Forces entity to be added to the Web(s) that are named whatever is stored in the Web name parameter.
 	 */
 	public WebManager add(AbstractEntity ent, String webname) {
+		//ent.setManager(this); // already does this
 		for (WebEntity w : web) {
 			if (w.getName().equals(webname)) add(ent, w);
 		}
@@ -58,9 +62,9 @@ public class WebManager extends AbstractManager {
 		return we.getEntities();
 	}
 	
-	public List<AbstractEntity> get(String name) {
+	public WebEntity get(String name) {
 		for (WebEntity w : web) {
-			if (w.getName().equals(name)) return get(w);
+			if (w.getName().equals(name)) return w;
 		}
 		
 		return null;
@@ -68,10 +72,19 @@ public class WebManager extends AbstractManager {
 	
 	public void register(WebEntity group) {
 		web.add(group);
+		group.setManager(this);
 		
 		AbstractManager prev = this, next;
 		for (next = prev.getManager(); next != null; next = prev.getManager()) prev = next; // get top-level manager
 		for (AbstractEntity e : prev.getEntities()) group.autojoin(e); 
+		
+		final AbstractEntity et = group;
+		Core.task(new Task(true) {
+			@Override
+			public void run() {
+				et.update();
+			}
+		});
 	}
 	
 	public void remove(WebEntity group) {

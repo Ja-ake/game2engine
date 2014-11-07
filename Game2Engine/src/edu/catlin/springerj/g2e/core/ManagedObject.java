@@ -12,5 +12,11 @@ abstract class ManagedObject {
 		return manager;
 	}
 	
+	public AbstractManager getRootManager() {
+		AbstractManager prev = manager, next = manager;
+		for (prev = manager; next != null; next = prev.getManager()) prev = next;
+		return prev;
+	}
+	
 	abstract void background(boolean started);
 }

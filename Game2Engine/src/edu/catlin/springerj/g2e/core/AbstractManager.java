@@ -64,15 +64,22 @@ public abstract class AbstractManager extends ManagedObject {
 		if (managers.contains(man)) throw new InvalidManagerException("Manager has already been created.");
 		managers.add(man);
 		man.setManager(this);
-		if (initialized) man.initialize();
+		//if (initialized) man.initialize();
 		final AbstractManager fm = man;
+		Core.task(new Task() {
+			@Override
+			public void run() {
+				fm.initialize();
+			}
+		});
+		
 		Core.task(new Task(true) {
 			@Override
 			public void run() {
 				fm.run();
 			}
 		});
-
+		
 		return this;
 	}
 	
@@ -96,7 +103,7 @@ public abstract class AbstractManager extends ManagedObject {
 			if (m.getClass().equals(type)) return (T) m;
 		}
 		
-		return null;
+		throw new RuntimeException("Invalid manager type.");
 	}
 	
 	public List<AbstractEntity> getEntities() {
