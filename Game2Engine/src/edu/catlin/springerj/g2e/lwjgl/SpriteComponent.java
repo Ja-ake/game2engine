@@ -4,49 +4,43 @@ import java.util.ArrayList;
 
 import edu.catlin.springerj.g2e.core.AbstractComponent;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
+import edu.catlin.springerj.g2e.lwjgl.util.SpriteContainer;
 import edu.catlin.springerj.g2e.lwjgl.util.Texture;
+import java.io.IOException;
 
 public class SpriteComponent extends AbstractComponent {
-	public double x, y;
-	public ArrayList<Texture> textures = new ArrayList<Texture>();
-	
-	@Override
-	public void initialize(AbstractEntity e) {
-		
-	}
-	
-    /**
-     * Returns the width of the sprite.
-     */
-    public int getWidth() {
-        return textures.get(0).getImageWidth();
+
+    private ArrayList<Texture> textureArray;
+    public int imageIndex;
+    public boolean visible;
+
+    public SpriteComponent() {
+        this("default");
     }
 
-    /**
-     * Returns the height of the sprite.
-     */
-    public int getHeight() {
-        return textures.get(0).getImageHeight();
+    public SpriteComponent(String name) {
+        setSprite(name);
+        imageIndex = 0;
+        visible = true;
     }
 
-    /**
-     * Returns the texture of animation number "index".
-     */
-    public Texture getTexture(int index) {
-        return textures.get(index % textures.size());
+    @Override
+    public void initialize(AbstractEntity e) {
     }
-    
-    /**
-     * Returns x coordinate of sprite.
-     */
-    public double getX() {
-    	return x;
+
+    public Texture getTexture() {
+        return textureArray.get(imageIndex);
     }
-    
-    /**
-     * Returns y coordinate of sprite.
-     */
-    public double getY() {
-    	return y;
+
+    public void setSprite(String name) {
+        setSprite(name, 1);
+    }
+
+    public void setSprite(String name, int n) {
+        try {
+            textureArray = SpriteContainer.loadSprite(name, n);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }
