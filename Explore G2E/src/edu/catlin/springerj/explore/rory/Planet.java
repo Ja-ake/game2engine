@@ -13,9 +13,11 @@ public class Planet extends AbstractEntity {
         add(new PositionComponent(pos));
         add(new VelocityComponent());
         add(new CircleCollisionComponent(size));
+        add(new PlanetComponent());
         //Systems
         add(new VelocityMovementSystem());
         add(new CircleCollisionSystem());
+        add(new PlanetRenderSystem());
     }
 
     @Override
