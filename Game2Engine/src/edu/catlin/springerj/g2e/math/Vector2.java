@@ -55,6 +55,10 @@ public class Vector2 {
         return new Vector2(-x, -y);
     }
 
+    public Vector2 setLength(double l) {
+        return multiply(l / length());
+    }
+
     public Vector2 setX(double x) {
         return new Vector2(x, y);
     }
