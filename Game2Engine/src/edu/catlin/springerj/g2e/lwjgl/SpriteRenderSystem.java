@@ -21,7 +21,7 @@ import edu.catlin.springerj.g2e.core.Core;
 import edu.catlin.springerj.g2e.exception.InvalidComponentException;
 import edu.catlin.springerj.g2e.lwjgl.util.TextureLoader;
 import edu.catlin.springerj.g2e.math.Vector2;
-import edu.catlin.springerj.g2e.object.movement.PositionComponent;
+import edu.catlin.springerj.g2e.movement.PositionComponent;
 
 public class SpriteRenderSystem extends AbstractSystem {
 	private SpriteComponent sc;
@@ -87,8 +87,8 @@ public class SpriteRenderSystem extends AbstractSystem {
      * Sets the position of the sprite.
      */
     public void setPosition(Vector2 pos) {
-    	sc.x = pos.x();
-    	sc.y = pos.y();
+    	sc.x = pos.x;
+    	sc.y = pos.y;
     }
     
     /**
@@ -103,7 +103,7 @@ public class SpriteRenderSystem extends AbstractSystem {
      * Sets the position of the sprite relative to the sprite's previous position.
      */
     public void setPositionRelative(Vector2 off) {
-    	sc.x += off.x();
-    	sc.y += off.y();
+    	sc.x += off.x;
+    	sc.y += off.y;
     }
 }

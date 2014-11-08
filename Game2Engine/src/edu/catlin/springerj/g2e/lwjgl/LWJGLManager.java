@@ -2,7 +2,6 @@ package edu.catlin.springerj.g2e.lwjgl;
 
 import edu.catlin.springerj.g2e.core.AbstractManager;
 import edu.catlin.springerj.g2e.event.EventManager;
-import edu.catlin.springerj.g2e.object.collision.PolygonalCollisionManager;
 import edu.catlin.springerj.g2e.web.WebManager;
 
 public class LWJGLManager extends AbstractManager {
@@ -21,7 +20,6 @@ public class LWJGLManager extends AbstractManager {
 		// Attach the event manager
 		add(new EventManager());
 		add(new WebManager());
-		add(new PolygonalCollisionManager());
 	}
 
 	@Override

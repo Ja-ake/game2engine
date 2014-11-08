@@ -21,7 +21,7 @@ public class ShapeComponent extends AbstractComponent {
 		verticies = new Vector2[vert.length];
 
 		for (int i = 0; i < vert.length; i++) {
-			verticies[i] = new Vector2(vert[i].x(), vert[i].y());
+			verticies[i] = new Vector2(vert[i].x, vert[i].y);
 		}
 		
 		color = new Color(0.0f, 0.0f, 0.0f);
@@ -34,7 +34,7 @@ public class ShapeComponent extends AbstractComponent {
 		verticies = new Vector2[vert.length];
 
 		for (int i = 0; i < vert.length; i++) {
-			verticies[i] = new Vector2(vert[i].x(), vert[i].y());
+			verticies[i] = new Vector2(vert[i].x, vert[i].y);
 		}
 		
 		color = new Color(c.red, c.green, c.blue);

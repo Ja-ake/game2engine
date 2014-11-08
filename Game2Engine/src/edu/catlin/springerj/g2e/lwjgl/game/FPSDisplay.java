@@ -7,11 +7,10 @@ import javax.swing.Timer;
 
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.Core;
-import edu.catlin.springerj.g2e.lwjgl.SpriteComponent;
 import edu.catlin.springerj.g2e.lwjgl.draw.DrawTextSystem;
 import edu.catlin.springerj.g2e.lwjgl.draw.TextComponent;
 import edu.catlin.springerj.g2e.math.Vector2;
-import edu.catlin.springerj.g2e.object.movement.PositionComponent;
+import edu.catlin.springerj.g2e.movement.PositionComponent;
 
 public class FPSDisplay extends AbstractEntity {
 	@Override

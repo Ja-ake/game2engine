@@ -5,7 +5,7 @@ import org.newdawn.slick.Color;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.AbstractSystem;
 import edu.catlin.springerj.g2e.lwjgl.util.FontContainer;
-import edu.catlin.springerj.g2e.object.movement.PositionComponent;
+import edu.catlin.springerj.g2e.movement.PositionComponent;
 
 public class DrawTextSystem extends AbstractSystem {
 	private TextComponent tc;
@@ -20,7 +20,7 @@ public class DrawTextSystem extends AbstractSystem {
 
 	@Override
 	public void update() {
-		FontContainer.drawText(tc.text, "Default", pc.position.x(), pc.position.y(), Color.black);
+		FontContainer.drawText(tc.text, "Default", pc.position.x, pc.position.y, Color.black);
 	}
 
 }

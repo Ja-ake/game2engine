@@ -5,9 +5,17 @@ import edu.catlin.springerj.g2e.core.AbstractEntity;
 
 public class RotationComponent extends AbstractComponent {
 
-	@Override
-	public void initialize(AbstractEntity e) {
-		
-	}
+    public double rot;
+    public double aVel;
+
+    public RotationComponent() {
+        rot = 0;
+        aVel = 0;
+    }
+
+    @Override
+    public void initialize(AbstractEntity e) {
+
+    }
 
 }

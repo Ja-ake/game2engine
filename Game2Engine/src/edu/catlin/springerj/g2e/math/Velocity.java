@@ -48,7 +48,7 @@ public class Velocity {
 			current.normalize();
 			if (currentX < maxX) currentX += amount;
 			else currentX = maxX;
-			current.scale(change.f(currentX));
+			current.multiply(change.f(currentX));
 		}
 	}
 	
