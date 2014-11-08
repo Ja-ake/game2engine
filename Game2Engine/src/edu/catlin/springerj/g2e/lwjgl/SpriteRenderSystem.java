@@ -12,14 +12,11 @@ public class SpriteRenderSystem extends AbstractSystem {
     private RotationComponent rotation;
     private SpriteComponent sprite;
 
-    public SpriteRenderSystem(PositionComponent position, RotationComponent rotation, SpriteComponent sprite) {
-        this.position = position;
-        this.rotation = rotation;
-        this.sprite = sprite;
-    }
-
-    public SpriteRenderSystem(PositionComponent position, SpriteComponent sprite) {
-        this(position, new RotationComponent(), sprite);
+    @Override
+    public void initialize(AbstractEntity e) {
+        position = e.get(PositionComponent.class);
+        rotation = e.get(RotationComponent.class);
+        sprite = e.get(SpriteComponent.class);
     }
 
     @Override
@@ -27,11 +24,6 @@ public class SpriteRenderSystem extends AbstractSystem {
         if (sprite.visible) {
             Graphics.drawSprite(sprite.getTexture(), position.position.x, position.position.y, rotation.rot);
         }
-    }
-
-    @Override
-    public void initialize(AbstractEntity e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
