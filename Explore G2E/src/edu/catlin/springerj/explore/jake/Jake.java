@@ -9,6 +9,8 @@ import edu.catlin.springerj.g2e.core.Core;
 import edu.catlin.springerj.g2e.lwjgl.LWJGLManager;
 import edu.catlin.springerj.g2e.lwjgl.game.FPSDisplay;
 import edu.catlin.springerj.g2e.lwjgl.view.View;
+import edu.catlin.springerj.g2e.math.Vector2;
+import edu.catlin.springerj.g2e.movement.PositionComponent;
 import edu.catlin.springerj.g2e.tiled.TiledMap;
 import edu.catlin.springerj.g2e.tiled.TiledObject;
 import edu.catlin.springerj.g2e.tiled.TiledTile;
@@ -44,16 +46,19 @@ public class Jake {
 		while((object = tmx.nextObject()) != null) {
 			switch (object.type) {
 			case "planet":
-				Core.getRootManager().add(new FilledCircle(-object.x, -object.y, -object.width/2));
-				System.out.println("Planet!");
+				Core.getRootManager().add(new FilledCircle(object.x, -object.y, object.width/2));
 				break;
+			case "player":
+				p.getComponent(PositionComponent.class).position = new Vector2(object.x, -object.y);
+				System.out.println(p.getComponent(PositionComponent.class).position);
+				Core.getRootManager().add(p);
 			default:
 				break;
 			}
 		}
 		
 		//Core.getRootManager().add(new FilledCircle());
-		Core.getRootManager().add(p);
+		//Core.getRootManager().add(p);
 		
 		//Core.getRootManager().add(new FPSDisplay());
 		Core.run();

@@ -4,10 +4,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import edu.catlin.springerj.g2e.core.Core;
+
 public abstract class SpriteContainer {
 
     private static HashMap<String, ArrayList<Texture>> spriteMap = new HashMap();
-    private static String path = "sprites/";
+    private static String path = Core.getResourceFolder();
     private static String type = ".png";
 
     public static ArrayList<Texture> loadSprite(String name, int n) throws IOException {

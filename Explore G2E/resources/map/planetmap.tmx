@@ -1032,15 +1032,17 @@
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
-  <object type="planet" x="47" y="138" width="248" height="248">
+  <object type="planet" x="137" y="204" width="248" height="248">
    <ellipse/>
   </object>
-  <object type="planet" x="755" y="184" width="168" height="168">
+  <object type="planet" x="654" y="278" width="96" height="96">
    <ellipse/>
   </object>
-  <object type="planet" x="420" y="338" width="231" height="231">
+  <object type="planet" x="416" y="229" width="192" height="192">
    <ellipse/>
   </object>
-  <object type="player" x="269.208" y="124.011" width="41" height="39" rotation="44.833"/>
+  <object type="player" x="507" y="203" width="32" height="32">
+   <ellipse/>
+  </object>
  </objectgroup>
 </map>

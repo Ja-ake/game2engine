@@ -10,18 +10,24 @@ import edu.catlin.springerj.g2e.lwjgl.SpriteComponent;
 import edu.catlin.springerj.g2e.lwjgl.SpriteRenderSystem;
 import edu.catlin.springerj.g2e.math.Vector2;
 import edu.catlin.springerj.g2e.movement.PositionComponent;
+import edu.catlin.springerj.g2e.movement.RotationComponent;
 
 public class Player extends AbstractEntity implements
 		EventListener<KeyboardEvent> {
 
 	public Player() {
-		add(new PositionComponent(new Vector2(100.0f, 100.0f)));
+		this(0.0d, 0.0d);
+	}
+	
+	public Player(double x, double y) {
+		add(new PositionComponent(new Vector2(x, y)));
+		add(new RotationComponent(0.0d));
+		add(new SpriteComponent("sprite\\block_red"));
 	}
 
 	@Override
 	public void initialize() {
-		add(new SpriteComponent());
-		add(new SpriteRenderSystem(this, "sprite\\block_red"));
+		add(new SpriteRenderSystem());
 		this.getManager().getManager(EventManager.class).register(this);
 	}
 

@@ -21,7 +21,7 @@ public class FilledCircleRenderSystem extends AbstractSystem {
 		glDisable(GL_TEXTURE_2D);
         //glDisable(GL_BLEND);
         glTranslated(pc.position.x, pc.position.y, 0);
-        //glTranslated(-cc.radius, cc.radius, 0);
+        glTranslated(cc.radius, -cc.radius, 0);
 
         double sides = 64.0d;
         double linewidth = 10.0d;
