@@ -1,14 +1,17 @@
 package edu.catlin.springerj.explore;
 
+import java.io.File;
+
 import edu.catlin.springerj.g2e.core.Core;
 import edu.catlin.springerj.g2e.lwjgl.LWJGLManager;
 import edu.catlin.springerj.g2e.lwjgl.game.FPSDisplay;
 import edu.catlin.springerj.g2e.math.Vector2;
 import edu.catlin.springerj.g2e.object.PhysicalObject;
+import edu.catlin.springerj.g2e.tiled.XMLParser;
 import edu.catlin.springerj.g2e.web.WebManager;
 
 public class Test {
-	public static void main(String[] args) {
+	public static void maina(String[] args) {
 		// triangle
 		Vector2[] triangle = new Vector2[4];
 		triangle[0] = new Vector2(0.0f, 0.0f);
@@ -28,8 +31,11 @@ public class Test {
 		Core.run();
 	}
 	
-	public static void maina(String[] args) {
-		Core.initialize(new LWJGLManager());
-		Core.getRootManager().add(new Player());
+	public static void main(String[] args) {
+		//Core.initialize(new LWJGLManager());
+		//Core.getRootManager().add(new Player());
+		
+		XMLParser xml = new XMLParser(new File("C:\\dev\\xmltest.xml"));
+		System.out.println(xml.get("Employees").getNodeValue());
 	}
 }
