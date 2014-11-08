@@ -2,11 +2,28 @@ package edu.catlin.springerj.g2e.lwjgl.draw;
 
 import edu.catlin.springerj.g2e.lwjgl.util.FontContainer;
 import edu.catlin.springerj.g2e.lwjgl.util.Texture;
+import edu.catlin.springerj.g2e.math.Color4d;
 import static org.lwjgl.opengl.GL11.*;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.opengl.TextureImpl;
 
 public abstract class Graphics {
+
+    public static void drawCircle(double x, double y, double size, Color4d c) {
+        double detail = 50;
+        glPushMatrix();
+        glDisable(GL_TEXTURE_2D);
+        glColor4d(c.r, c.g, c.b, c.a);
+        glBegin(GL_TRIANGLE_FAN);
+        {
+            glVertex2d(x, y);
+            for (double angle = 0; angle <= detail; angle++) {
+                glVertex2d(x + size * Math.cos(angle / detail * Math.PI * 2), y + size * Math.sin(angle / detail * Math.PI * 2));
+            }
+        }
+        glEnd();
+        glPopMatrix();
+    }
 
     public static void drawLine(double x1, double y1, double x2, double y2) {
         drawLine(x1, y1, x2, y2, 0, 0, 0);
