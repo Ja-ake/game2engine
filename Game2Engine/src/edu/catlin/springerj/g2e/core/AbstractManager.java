@@ -95,6 +95,10 @@ public abstract class AbstractManager extends ManagedObject {
 			}
 		});
 		
+		for (AbstractManager m : managers) {
+			m.add(ent);
+		}
+		
 		return this;
 	}
 	
