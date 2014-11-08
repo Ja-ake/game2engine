@@ -60,7 +60,7 @@ public class EventManager extends AbstractManager {
 				button = Mouse.getEventButton() + 0x10 + 1;
 			} } else {
 				action = MouseEvent.ACTION_OTHER;
-				button = 0x10;
+				button = Mouse.getEventDWheel();
 			}
 			
 			fire(new MouseEvent(action, button, x, y));
