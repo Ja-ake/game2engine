@@ -4,7 +4,7 @@ import edu.catlin.springerj.g2e.core.AbstractEntity;
 
 public class Window extends AbstractEntity {
 	public Window() {
-		add(new WindowComponent());
+		add(new WindowComponent("Game", 1200, 800));
 		add(new WindowSystem());
 	}
 	

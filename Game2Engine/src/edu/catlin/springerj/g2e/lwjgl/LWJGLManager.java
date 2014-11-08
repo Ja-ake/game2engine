@@ -32,4 +32,8 @@ public class LWJGLManager extends AbstractManager {
 		window.update();
 		windowSystem.update();
 	}
+	
+	public Window getWindow() {
+		return window;
+	}
 }

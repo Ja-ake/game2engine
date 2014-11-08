@@ -16,8 +16,6 @@ public class FontContainer {
         Font awtFont = new Font(name, style, size);
         GLFont glFont = new GLFont(awtFont, false);
         fontMap.put(gameName, glFont);
-        
-        System.out.println(awtFont.getFamily());
     }
 
     public static void create() {

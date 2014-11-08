@@ -70,8 +70,6 @@ public class EventManager extends AbstractManager {
 		for (int i = 0; i < queue.size(); i++) {
 			Event event = queue.get(i);
 			queue.remove(event); i--;
-			
-			System.out.println(event.getClass().getSimpleName());
 
 			// TickEvent
 			if (event instanceof TickEvent) {

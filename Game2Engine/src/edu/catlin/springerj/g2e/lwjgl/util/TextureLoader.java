@@ -12,8 +12,11 @@ import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
+
 import javax.imageio.ImageIO;
+
 import org.lwjgl.BufferUtils;
+
 import static org.lwjgl.opengl.GL11.*;
 
 /**
@@ -34,7 +37,7 @@ public class TextureLoader {
     /**
      * The table of textures that have been loaded in this loader
      */
-    private static HashMap<String, ArrayList<Texture>> table = new HashMap();
+    private static HashMap<String, ArrayList<Texture>> table = new HashMap<String, ArrayList<Texture>>();
     /**
      * The color model including alpha for the GL image
      */
@@ -113,7 +116,7 @@ public class TextureLoader {
         int srcPixelFormat;
 
         ArrayList<BufferedImage> images = loadImage(resourceName, n);
-        ArrayList<Texture> textures = new ArrayList();
+        ArrayList<Texture> textures = new ArrayList<Texture>();
         for (int i = 0; i < n; i++) {
             // create the texture ID for this texture
             int textureID = createTextureID();
@@ -190,10 +193,10 @@ public class TextureLoader {
         // for a texture
         if (bufferedImage.getColorModel().hasAlpha()) {
             raster = Raster.createInterleavedRaster(DataBuffer.TYPE_BYTE, texWidth, texHeight, 4, null);
-            texImage = new BufferedImage(glAlphaColorModel, raster, false, new Hashtable());
+            texImage = new BufferedImage(glAlphaColorModel, raster, false, new Hashtable<Object, Object>());
         } else {
             raster = Raster.createInterleavedRaster(DataBuffer.TYPE_BYTE, texWidth, texHeight, 3, null);
-            texImage = new BufferedImage(glColorModel, raster, false, new Hashtable());
+            texImage = new BufferedImage(glColorModel, raster, false, new Hashtable<Object, Object>());
         }
 
         // copy the source image into the produced image
@@ -229,7 +232,7 @@ public class TextureLoader {
             ex.printStackTrace();
             System.out.println(ref);
         }
-        ArrayList<BufferedImage> imageArray = new ArrayList();
+        ArrayList<BufferedImage> imageArray = new ArrayList<BufferedImage>();
         for (int i = 0; i < n; i++) {
             double currentX = i * image.getWidth() * 1.0 / n;
             double nextX = (i + 1) * image.getWidth() * 1.0 / n;
@@ -242,8 +245,8 @@ public class TextureLoader {
         int srcPixelFormat;
 
         ArrayList<BufferedImage> images = loadImage(resourceName, x, y);
-        ArrayList<Texture> textures = new ArrayList();
-        for (int i = 0; i < x; i++) {
+        ArrayList<Texture> textures = new ArrayList<Texture>();
+        for (int i = 0; i < x*y; i++) {
             // create the texture ID for this texture
             int textureID = createTextureID();
             textures.add(i, new Texture(target, textureID));
@@ -271,6 +274,8 @@ public class TextureLoader {
             // produce a texture from the byte buffer
             glTexImage2D(target, 0, dstPixelFormat, get2Fold(bufferedImage.getWidth()), get2Fold(bufferedImage.getHeight()), 0, srcPixelFormat, GL_UNSIGNED_BYTE, textureBuffer);
         }
+        
+        System.out.println("Height: " + textures.get(0).getHeight());
         return textures;
     }
 
@@ -282,7 +287,7 @@ public class TextureLoader {
             ex.printStackTrace();
             System.out.println(ref);
         }
-        ArrayList<BufferedImage> imageArray = new ArrayList();
+        ArrayList<BufferedImage> imageArray = new ArrayList<BufferedImage>();
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
                 double currentX = (double) i * image.getWidth() / x;
@@ -292,6 +297,7 @@ public class TextureLoader {
                 imageArray.add(image.getSubimage((int) currentX, (int) currentY, (int) (nextX - currentX), (int) (nextY - currentY)));
             }
         }
+        
         return imageArray;
     }
 }

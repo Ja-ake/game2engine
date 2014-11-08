@@ -11,6 +11,7 @@ import org.lwjgl.opengl.DisplayMode;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.AbstractSystem;
 import edu.catlin.springerj.g2e.core.Core;
+import edu.catlin.springerj.g2e.utility.Logger;
 
 public class WindowSystem extends AbstractSystem {
 	WindowComponent wc;
@@ -33,12 +34,15 @@ public class WindowSystem extends AbstractSystem {
 			}
 		}
 		
+		//setViewport(-wc.width/2, wc.width/2, -wc.height/2, wc.height/2);
 		glOrtho(-wc.width/2, wc.width/2, -wc.height/2, wc.height/2, -1, 1);
 		
 		glDisable(GL_DEPTH_TEST);
 		glDisable(GL_LIGHTING);
 		
 		glEnable(GL_BLEND);
+		glEnable(GL_COLOR);
+		glEnable(GL_ALPHA);
 		
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		
@@ -94,5 +98,11 @@ public class WindowSystem extends AbstractSystem {
 		} catch (LWJGLException e) {
 			System.out.println("Unable to setup mode " + width + "x" + height + " fullscreen=" + fullscreen + e);
 		}
+	}
+	
+	public void setViewport(double x0, double x1, double y0, double y1) {
+		glOrtho(x0, y0, x1, y1, -1, 1);
+		wc.centerx = (x0+x1)/2;
+		wc.centery = (y0+y1)/2;
 	}
 }

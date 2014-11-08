@@ -1,18 +1,12 @@
 package edu.catlin.springerj.g2e.lwjgl;
 
-import org.lwjgl.LWJGLException;
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.DisplayMode;
-
 import edu.catlin.springerj.g2e.core.AbstractComponent;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
-import static org.lwjgl.opengl.GL11.*;
 
 public class WindowComponent extends AbstractComponent {
-	protected int width, height;
-	protected String title;
+	public int width, height;
+	public double centerx = 0, centery = 0;
+	public String title;
 
 	@Override
 	public void initialize(AbstractEntity e) {
