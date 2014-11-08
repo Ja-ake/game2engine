@@ -22,7 +22,7 @@ public class Player extends AbstractEntity implements
 	public Player(double x, double y) {
 		add(new PositionComponent(new Vector2(x, y)));
 		add(new RotationComponent(0.0d));
-		add(new SpriteComponent("sprite\\block_red"));
+		add(new SpriteComponent("sprite\\character_walking", 8));
 	}
 
 	@Override
