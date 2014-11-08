@@ -34,8 +34,8 @@ public class WindowSystem extends AbstractSystem {
 			}
 		}
 		
-		//setViewport(-wc.width/2, wc.width/2, -wc.height/2, wc.height/2);
-		glOrtho(-wc.width/2, wc.width/2, -wc.height/2, wc.height/2, -1, 1);
+		setViewport(-wc.width/2, wc.width/2, -wc.height/2, wc.height/2);
+		//glOrtho(-wc.width/2, wc.width/2, -wc.height/2, wc.height/2, -1, 1);
 		
 		glDisable(GL_DEPTH_TEST);
 		glDisable(GL_LIGHTING);
@@ -101,7 +101,10 @@ public class WindowSystem extends AbstractSystem {
 	}
 	
 	public void setViewport(double x0, double x1, double y0, double y1) {
-		glOrtho(x0, y0, x1, y1, -1, 1);
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glOrtho(x0, x1, y0, y1, -1, 1);
+		glMatrixMode(GL_MODELVIEW);
 		wc.centerx = (x0+x1)/2;
 		wc.centery = (y0+y1)/2;
 	}

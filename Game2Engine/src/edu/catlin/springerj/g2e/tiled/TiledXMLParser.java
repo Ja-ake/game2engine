@@ -16,6 +16,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import edu.catlin.springerj.g2e.core.Core;
 import edu.catlin.springerj.g2e.lwjgl.util.Texture;
 import edu.catlin.springerj.g2e.utility.Logger;
 
@@ -71,7 +72,7 @@ public class TiledXMLParser {
 				if (baseChildNodes.item(i).getNodeType() == Node.ELEMENT_NODE) {
 					Element tileset = (Element) baseChildNodes.item(i);
 					Element tilesetsource = (Element) baseChildNodes.item(i).getChildNodes().item(1);
-					tilesets.add(new TiledTileset(tilesetsource.getAttribute("source"), 
+					tilesets.add(new TiledTileset(Core.getResourceFolder() + "map\\" + tilesetsource.getAttribute("source"), 
 							Integer.parseInt(tilesetsource.getAttribute("width")) / Integer.parseInt(tileset.getAttribute("tilewidth")), 
 							Integer.parseInt(tilesetsource.getAttribute("height")) / Integer.parseInt(tileset.getAttribute("tileheight")), 
 							Integer.parseInt(tileset.getAttribute("firstgid"))));
@@ -131,6 +132,7 @@ public class TiledXMLParser {
 			}
 		}
 		
+		System.out.println("");
 		Logger.println("Map has finished loading!");
 	}
 	

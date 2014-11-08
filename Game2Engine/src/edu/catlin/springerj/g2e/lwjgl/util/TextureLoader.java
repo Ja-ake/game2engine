@@ -275,7 +275,6 @@ public class TextureLoader {
             glTexImage2D(target, 0, dstPixelFormat, get2Fold(bufferedImage.getWidth()), get2Fold(bufferedImage.getHeight()), 0, srcPixelFormat, GL_UNSIGNED_BYTE, textureBuffer);
         }
         
-        System.out.println("Height: " + textures.get(0).getHeight());
         return textures;
     }
 

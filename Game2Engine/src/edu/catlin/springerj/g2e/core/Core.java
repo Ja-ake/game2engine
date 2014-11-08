@@ -82,7 +82,7 @@ public abstract class Core {
 	}
 	
 	public static String getResourceFolder() {
-		return "..\\game2engine\\resources\\";
+		return ".\\resources\\";
 	}
 	
 	public static AbstractManager getRootManager() {
