@@ -23,6 +23,12 @@ public class SpriteComponent extends AbstractComponent {
         imageIndex = 0;
         visible = true;
     }
+    
+    public SpriteComponent(String name, int n) {
+        setSprite(name, n);
+        imageIndex = 0;
+        visible = true;
+    }
 
     @Override
     public void initialize(AbstractEntity e) {
@@ -30,6 +36,10 @@ public class SpriteComponent extends AbstractComponent {
 
     public Texture getTexture() {
         return textureArray.get(imageIndex);
+    }
+    
+    public int animationCount() {
+    	return textureArray.size();
     }
 
     public void setSprite(String name) {
