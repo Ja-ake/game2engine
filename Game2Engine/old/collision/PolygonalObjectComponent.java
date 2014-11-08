@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.catlin.springerj.g2e.core.AbstractComponent;
+import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.math.Vertex2;
 
 public class PolygonalObjectComponent extends AbstractComponent {
@@ -32,4 +33,9 @@ public class PolygonalObjectComponent extends AbstractComponent {
 		vertices = new ArrayList<Vertex2>(vert);
 		if (vertices.size() < 3) throw new RuntimeException("Invalid number of vertices.");
 	}
+
+    @Override
+    public void initialize(AbstractEntity e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
