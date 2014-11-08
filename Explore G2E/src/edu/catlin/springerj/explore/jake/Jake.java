@@ -10,6 +10,7 @@ import edu.catlin.springerj.g2e.lwjgl.LWJGLManager;
 import edu.catlin.springerj.g2e.lwjgl.game.FPSDisplay;
 import edu.catlin.springerj.g2e.lwjgl.view.View;
 import edu.catlin.springerj.g2e.tiled.TiledMap;
+import edu.catlin.springerj.g2e.tiled.TiledObject;
 import edu.catlin.springerj.g2e.tiled.TiledTile;
 import edu.catlin.springerj.g2e.tiled.TiledXMLParser;
 
@@ -39,7 +40,19 @@ public class Jake {
 			i++;
 		}
 		
-		Core.getRootManager().add(new FilledCircle());
+		TiledObject object;
+		while((object = tmx.nextObject()) != null) {
+			switch (object.type) {
+			case "planet":
+				Core.getRootManager().add(new FilledCircle(-object.x, -object.y, -object.width/2));
+				System.out.println("Planet!");
+				break;
+			default:
+				break;
+			}
+		}
+		
+		//Core.getRootManager().add(new FilledCircle());
 		Core.getRootManager().add(p);
 		
 		//Core.getRootManager().add(new FPSDisplay());
