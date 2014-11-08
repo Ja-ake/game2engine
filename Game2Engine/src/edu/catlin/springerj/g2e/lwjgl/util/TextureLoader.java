@@ -73,7 +73,7 @@ public class TextureLoader {
      * @return A new texture ID
      */
     private static int createTextureID() {
-    	glGenTextures(textureIDBuffer);
+        glGenTextures(textureIDBuffer);
         return textureIDBuffer.get(0);
     }
 
@@ -234,6 +234,63 @@ public class TextureLoader {
             double currentX = i * image.getWidth() * 1.0 / n;
             double nextX = (i + 1) * image.getWidth() * 1.0 / n;
             imageArray.add(image.getSubimage((int) currentX, 0, (int) (nextX - currentX), image.getHeight()));
+        }
+        return imageArray;
+    }
+
+    public static ArrayList<Texture> getTileSet(String resourceName, int x, int y, int target, int dstPixelFormat, int minFilter, int magFilter) throws IOException {
+        int srcPixelFormat;
+
+        ArrayList<BufferedImage> images = loadImage(resourceName, x, y);
+        ArrayList<Texture> textures = new ArrayList();
+        for (int i = 0; i < x; i++) {
+            // create the texture ID for this texture
+            int textureID = createTextureID();
+            textures.add(i, new Texture(target, textureID));
+            // bind this texture
+            glBindTexture(target, textureID);
+
+            BufferedImage bufferedImage = images.get(i);
+            textures.get(i).setWidth(bufferedImage.getWidth());
+            textures.get(i).setHeight(bufferedImage.getHeight());
+
+            if (bufferedImage.getColorModel().hasAlpha()) {
+                srcPixelFormat = GL_RGBA;
+            } else {
+                srcPixelFormat = GL_RGB;
+            }
+
+            // convert that image into a byte buffer of texture data
+            ByteBuffer textureBuffer = convertImageData(bufferedImage, textures.get(i));
+
+            if (target == GL_TEXTURE_2D) {
+                glTexParameteri(target, GL_TEXTURE_MIN_FILTER, minFilter);
+                glTexParameteri(target, GL_TEXTURE_MAG_FILTER, magFilter);
+            }
+
+            // produce a texture from the byte buffer
+            glTexImage2D(target, 0, dstPixelFormat, get2Fold(bufferedImage.getWidth()), get2Fold(bufferedImage.getHeight()), 0, srcPixelFormat, GL_UNSIGNED_BYTE, textureBuffer);
+        }
+        return textures;
+    }
+
+    private static ArrayList<BufferedImage> loadImage(String ref, int x, int y) {
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(new File(ref));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            System.out.println(ref);
+        }
+        ArrayList<BufferedImage> imageArray = new ArrayList();
+        for (int i = 0; i < x; i++) {
+            for (int j = 0; j < y; j++) {
+                double currentX = (double) i * image.getWidth() / x;
+                double nextX = (double) (i + 1) * image.getWidth() / x;
+                double currentY = (double) j * image.getHeight() / y;
+                double nextY = (double) (j + 1) * image.getHeight() / y;
+                imageArray.add(image.getSubimage((int) currentX, (int) currentY, (int) (nextX - currentX), (int) (nextY - currentY)));
+            }
         }
         return imageArray;
     }
