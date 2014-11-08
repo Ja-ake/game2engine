@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32">
+ <objectgroup name="Planets">
+  <object type="planet" x="-99" y="236" width="242" height="242">
+   <ellipse/>
+  </object>
+  <object type="planet" x="406" y="90" width="154" height="154">
+   <ellipse/>
+  </object>
+  <object type="planet" x="847" y="245" width="231" height="231">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup name="Living">
+  <object type="player" x="22" y="215" width="4" height="4">
+   <ellipse/>
+  </object>
+ </objectgroup>
+</map>
