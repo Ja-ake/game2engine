@@ -24,7 +24,7 @@ public class PlayerBulletSystem extends AbstractSystem {
     public void destroy() {
         super.destroy();
         if (pbc.type == 2) {
-            Core.getRootManager().add(new ParticleEmitter(pos.position, vel.velocity.setLength(-20), 10, 1, new Color4d(.2, .2, 0), true));
+            Core.getRootManager().add(new ParticleEmitter(pos.position, vel.velocity.setLength(-20), 100, 5, new Color4d(.1, .1, 0), true));
         }
     }
 

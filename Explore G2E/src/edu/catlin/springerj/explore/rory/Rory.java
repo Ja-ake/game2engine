@@ -6,6 +6,7 @@ import java.io.File;
 import edu.catlin.springerj.explore.graphics.GreyStripedBackground;
 import edu.catlin.springerj.explore.collisions.CollisionManager;
 import edu.catlin.springerj.explore.enemy.Enemy;
+import edu.catlin.springerj.explore.enemy.Spawner;
 import edu.catlin.springerj.explore.graphics.TitleScreenButtons;
 import edu.catlin.springerj.explore.player.PlayerEntity;
 import edu.catlin.springerj.explore.planets.Planet;
@@ -59,6 +60,9 @@ public class Rory {
                             break;
                         case "slimeenemy":
                             Core.getRootManager().add(new Enemy(new Vector2(object.x + 32 / 2, -object.y - 32 / 2)));
+                            break;
+                        case "spawner":
+                            Core.getRootManager().add(new Spawner(new Vector2(object.x + 32 / 2, -object.y - 32 / 2)));
                             break;
                         default:
                             break;

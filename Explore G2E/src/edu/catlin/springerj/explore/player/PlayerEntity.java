@@ -7,6 +7,7 @@ import edu.catlin.springerj.explore.grapple.GrappleComponent;
 import edu.catlin.springerj.explore.collisions.CircleCollisionComponent;
 import edu.catlin.springerj.explore.collisions.CircleCollisionSystem;
 import edu.catlin.springerj.explore.enemy.HealthComponent;
+import edu.catlin.springerj.explore.enemy.HealthbarSystem;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.lwjgl.SpriteComponent;
 import edu.catlin.springerj.g2e.lwjgl.SpriteRenderSystem;
@@ -39,6 +40,7 @@ public class PlayerEntity extends AbstractEntity {
         add(new CircleCollisionSystem());
         add(new PlayerWeaponSystem());
         add(new BulletCooldownSystem());
+        add(new HealthbarSystem());
     }
 
     @Override

@@ -28,6 +28,7 @@ public class Spawner extends AbstractEntity {
         add(new DeathSystem());
         add(new BulletCooldownSystem());
         add(new SpawnerSystem());
+        add(new HealthbarSystem());
     }
 
     @Override

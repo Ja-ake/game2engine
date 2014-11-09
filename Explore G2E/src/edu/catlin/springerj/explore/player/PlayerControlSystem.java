@@ -97,9 +97,6 @@ public class PlayerControlSystem extends AbstractSystem {
             }
         }
         //Health
-        Graphics.fillRect(pos.position.x - 16, pos.position.y - 32, 32, 8, 0, 0, 0);
-        Graphics.fillRect(pos.position.x - 14, pos.position.y - 30, 28, 4, 1, 0, 0);
-        Graphics.fillRect(pos.position.x - 14, pos.position.y - 30, .28 * hc.currentHealth, 4, 0, 1, 0);
         if (hc.currentHealth == 0) {
             //Restart game
         }

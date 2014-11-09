@@ -31,6 +31,7 @@ public class Enemy extends AbstractEntity {
         add(new DeathSystem());
         add(new BulletCooldownSystem());
         add(new CircleCollisionSystem());
+        add(new HealthbarSystem());
     }
 
     @Override
