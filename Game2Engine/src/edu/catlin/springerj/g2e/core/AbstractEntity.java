@@ -10,6 +10,7 @@ import edu.catlin.springerj.g2e.thread.Task;
 public abstract class AbstractEntity extends ManagedObject {
 	public abstract void initialize();
 	public abstract void update();
+	public void destroy() {destroyed = true;} boolean destroyed = false;
 
 	Task updatetask;
 	

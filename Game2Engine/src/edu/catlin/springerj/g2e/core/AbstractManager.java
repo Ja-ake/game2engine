@@ -123,7 +123,7 @@ public abstract class AbstractManager extends ManagedObject {
         Core.getDefaultTaskThread().remove(ent.updatetask.getID());
         entities.remove(ent);
         for (AbstractComponent ac : ent.components) {
-            //Core.getDefaultTaskThread().remove(ac.id);
+        	ac.destroy();
         }
 
         for (AbstractSystem sc : ent.systems) {
@@ -136,7 +136,8 @@ public abstract class AbstractManager extends ManagedObject {
             @Override
             public void run() {
                 //en.components.clear();
-                en.systems.clear();
+            	for (int i=0; i<en.components.size(); i++) if (en.components.get(i).destroyed) en.components.remove(i--);
+            	for (int i=0; i<en.systems.size(); i++) if (en.systems.get(i).destroyed) en.systems.remove(i--);
             }
 
         });

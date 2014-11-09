@@ -1,5 +1,10 @@
 package edu.catlin.springerj.g2e.lwjgl;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.AbstractManager;
 import edu.catlin.springerj.g2e.event.EventManager;
 import edu.catlin.springerj.g2e.web.WebManager;
@@ -7,8 +12,10 @@ import edu.catlin.springerj.g2e.web.WebManager;
 public class LWJGLManager extends AbstractManager {
 	private Window window;
 	private WindowSystem windowSystem;
+	private Map<String, Runnable> rooms;
 	
 	public LWJGLManager() {
+		rooms = new HashMap<String, Runnable>();
 		
 		// Create the window
 		window = new Window();
@@ -35,5 +42,17 @@ public class LWJGLManager extends AbstractManager {
 	
 	public Window getWindow() {
 		return window;
+	}
+	
+	public void addRoom(String name, Runnable code) {
+		rooms.put(name, code);
+	}
+	
+	public void setRoom(String name) {
+		for (int i=0; i<entities.size(); i++) {
+			this.remove(entities.get(i)); i--;
+		}
+		
+		rooms.get(name).run();
 	}
 }

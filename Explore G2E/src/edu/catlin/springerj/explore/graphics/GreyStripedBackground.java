@@ -11,6 +11,14 @@ import edu.catlin.springerj.g2e.lwjgl.util.TextureLoader;
 
 public class GreyStripedBackground extends AbstractEntity {
 
+	public GreyStripedBackground() {
+		add(new ImageRepeatComponent(16, 16));
+	}
+	
+	public GreyStripedBackground(int x, int y) {
+		add(new ImageRepeatComponent(x, y));
+	}
+	
 	@Override
 	public void initialize() {
 		try {
