@@ -1,10 +1,11 @@
 package edu.catlin.springerj.explore.jake.newjake;
 
-import edu.catlin.springerj.explore.planets.PlanetGravityComponent;
 import edu.catlin.springerj.explore.Keys;
 import edu.catlin.springerj.explore.MouseInput;
 import edu.catlin.springerj.explore.jake.items.Bullet;
 import edu.catlin.springerj.explore.jake.items.Grapple;
+import edu.catlin.springerj.explore.jake.items.GrappleComponent;
+import edu.catlin.springerj.explore.planets.PlanetGravityComponent;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.AbstractSystem;
 import edu.catlin.springerj.g2e.core.Core;
@@ -18,12 +19,13 @@ import org.lwjgl.input.Keyboard;
 
 public class PlayerControlSystem extends AbstractSystem {
 
-    public PositionComponent pos;
-    public VelocityComponent vel;
-    public RotationComponent rot;
-    public SpriteComponent spr;
-    public PlanetGravityComponent pg;
+    private PositionComponent pos;
+    private VelocityComponent vel;
+    private RotationComponent rot;
+    private SpriteComponent spr;
     private CircleCollisionComponent ccc;
+    private PlanetGravityComponent pg;
+    private GrappleComponent gc;
     private PlayerEntity player;
 
     @Override
@@ -32,15 +34,16 @@ public class PlayerControlSystem extends AbstractSystem {
         vel = e.get(VelocityComponent.class);
         rot = e.get(RotationComponent.class);
         spr = e.get(SpriteComponent.class);
-        pg = e.get(PlanetGravityComponent.class);
         ccc = e.get(CircleCollisionComponent.class);
+        pg = e.get(PlanetGravityComponent.class);
+        gc = e.get(GrappleComponent.class);
         player = (PlayerEntity) e;
     }
 
     @Override
     public void update() {
-        Vector2 toPlanet = pg.planet.get(PositionComponent.class).position.subtract(pos.position).normalize();
-        Vector2 relativeVel = vel.velocity.subtract(pg.planet.get(VelocityComponent.class).velocity);
+        Vector2 toPlanet = pg.planetPos.position.subtract(pos.position).normalize();
+        Vector2 relativeVel = vel.velocity.subtract(pg.planetVel.velocity);
         //Rotate to face planet
         rot.rot = toPlanet.direction() + Math.PI / 2;
         //If you're on a planet
@@ -73,13 +76,21 @@ public class PlayerControlSystem extends AbstractSystem {
                 //Stick to planet
                 vel.velocity = vel.velocity.add(toPlanet);
             }
+            //Possible destroy grapple
+            if (gc.planet != null && pg.planetPos == gc.planet.pc) {
+                gc.destroyGrapple();
+                //gc.grapple.get(SpriteComponent.class).alpha = .5;
+            }
         }
         //Slight friction
         vel.velocity = vel.velocity.multiply(.9999);
         //Grapple
         if (Core.getRootManager().getManager(MouseInput.class).isReleased(MouseEvent.BUTTON_MB2)) {
-            Vector2 velocity = Core.getRootManager().getManager(MouseInput.class).mousePos.subtract(pos.position).setLength(100);
-            Core.getRootManager().add(new Grapple(player, velocity));
+            if (gc.grapple == null) {
+                Vector2 velocity = Core.getRootManager().getManager(MouseInput.class).mousePos.subtract(pos.position).setLength(100);
+                gc.grapple = new Grapple(player, velocity);
+                Core.getRootManager().add(gc.grapple);
+            }
         }
         //Shooting
         if (Core.getRootManager().getManager(MouseInput.class).isReleased(MouseEvent.BUTTON_MB1)) {
