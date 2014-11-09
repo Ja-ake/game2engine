@@ -20,19 +20,12 @@ public class SpriteRenderSystem extends AbstractSystem {
         sprite = e.get(SpriteComponent.class);
     }
 
-    private double deltatime = 0.0d;
     @Override
     public void update() {
         if (sprite.visible) {
             Graphics.drawSprite(sprite.getTexture(), position.position.x, position.position.y, rotation.rot);
         }
-        
-        deltatime += Core.getDefaultTimer().getDeltaTime();
-        if (deltatime > 0.25d) {
-        	deltatime = 0;
-        	sprite.imageIndex++;
-        	sprite.imageIndex %= sprite.animationCount();
-        }
+        sprite.imageIndex += Core.getDefaultTimer().getDeltaTime() * sprite.imageSpeed;
     }
 
 }

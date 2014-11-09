@@ -11,7 +11,8 @@ import java.io.IOException;
 public class SpriteComponent extends AbstractComponent {
 
     private ArrayList<Texture> textureArray;
-    public int imageIndex;
+    public double imageIndex;
+    public double imageSpeed;
     public boolean visible;
 
     public SpriteComponent() {
@@ -21,12 +22,14 @@ public class SpriteComponent extends AbstractComponent {
     public SpriteComponent(String name) {
         setSprite(name);
         imageIndex = 0;
+        imageSpeed = 0;
         visible = true;
     }
-    
+
     public SpriteComponent(String name, int n) {
         setSprite(name, n);
         imageIndex = 0;
+        imageSpeed = 0;
         visible = true;
     }
 
@@ -35,11 +38,7 @@ public class SpriteComponent extends AbstractComponent {
     }
 
     public Texture getTexture() {
-        return textureArray.get(imageIndex);
-    }
-    
-    public int animationCount() {
-    	return textureArray.size();
+        return textureArray.get((int) imageIndex % textureArray.size());
     }
 
     public void setSprite(String name) {
@@ -48,7 +47,7 @@ public class SpriteComponent extends AbstractComponent {
 
     public void setSprite(String name, int n) {
         try {
-        	imageIndex = 0;
+            imageIndex = 0;
             textureArray = SpriteContainer.loadSprite(name, n);
         } catch (IOException ex) {
             ex.printStackTrace();
