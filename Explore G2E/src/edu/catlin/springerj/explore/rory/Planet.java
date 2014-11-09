@@ -16,7 +16,7 @@ public class Planet extends AbstractEntity {
         add(new PlanetComponent());
         //Systems
         add(new VelocityMovementSystem());
-        add(new CircleCollisionSystem());
+//        add(new CircleCollisionSystem());
         add(new PlanetRenderSystem());
     }
 

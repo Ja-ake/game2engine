@@ -48,6 +48,8 @@ public abstract class AbstractEntity extends ManagedObject {
 						fc.initialize(thus);
 					}
 				});
+				
+				//c.initialize(thus);
 			}
 		}
 

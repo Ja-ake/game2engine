@@ -14,7 +14,7 @@ import edu.catlin.springerj.g2e.movement.PositionComponent;
 import edu.catlin.springerj.g2e.movement.RotationComponent;
 
 public class Player extends AbstractEntity implements
-		EventListener<KeyboardEvent>, EventListener<MouseEvent> {
+		EventListener<KeyboardEvent> {
 
 	public Player() {
 		this(0.0d, 0.0d);
@@ -63,8 +63,8 @@ public class Player extends AbstractEntity implements
 		}
 	}
 	
-	@Override
-	public void onEvent(MouseEvent event) {
-		
-	}
+//	@Override
+//	public void onEvent(MouseEvent event) {
+//		
+//	}
 }

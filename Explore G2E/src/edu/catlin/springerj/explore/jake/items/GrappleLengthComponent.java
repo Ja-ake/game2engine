@@ -13,7 +13,7 @@ public class GrappleLengthComponent extends AbstractComponent {
 	
 	@Override
 	public void initialize(AbstractEntity e) {
-		
+		System.out.println("hi22");
 	}
 	
 }
