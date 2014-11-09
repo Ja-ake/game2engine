@@ -43,15 +43,23 @@ public class PlayerControlSystem extends AbstractSystem {
             boolean left = Core.getRootManager().getManager(Keys.class).isDown(Keyboard.KEY_A);
             boolean right = Core.getRootManager().getManager(Keys.class).isDown(Keyboard.KEY_D);
             if (left && !right) {
-                vel.velocity = vel.velocity.add(toPlanet.normal().multiply(-.5));
+                vel.velocity = vel.velocity.add(toPlanet.normal().multiply(-.4));
+                spr.setSprite("character_walking_left", 8);
             } else if (right && !left) {
-                vel.velocity = vel.velocity.add(toPlanet.normal().multiply(.5));
+                vel.velocity = vel.velocity.add(toPlanet.normal().multiply(.4));
+                spr.setSprite("character_walking_right", 8);
+            } else {
+                if (relativeVel.dot(toPlanet.normal()) < 0) {
+                    spr.setSprite("character_idle_left", 8);
+                } else if (relativeVel.dot(toPlanet.normal()) > 0) {
+                    spr.setSprite("character_idle_right", 8);
+                }
             }
             //Friction
             Vector2 sideVel = toPlanet.normal().multiply(relativeVel.dot(toPlanet.normal()));
             vel.velocity = vel.velocity.add(sideVel.multiply(-.004));
             //Jumping
-            boolean jump = Core.getRootManager().getManager(Keys.class).isDown(Keyboard.KEY_W);
+            boolean jump = Core.getRootManager().getManager(Keys.class).isDown(Keyboard.KEY_W) || Core.getRootManager().getManager(Keys.class).isDown(Keyboard.KEY_SPACE);
             if (jump) {
                 vel.velocity = toPlanet.normal().multiply(relativeVel.dot(toPlanet.normal())).add(toPlanet.multiply(-100));
             } else {
