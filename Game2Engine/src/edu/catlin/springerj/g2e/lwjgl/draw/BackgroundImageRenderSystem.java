@@ -29,8 +29,8 @@ public class BackgroundImageRenderSystem extends AbstractSystem {
 
 		for (int ia=(-irc.xrepeat/2); ia<(irc.xrepeat/2); ia++) {
 			for (int ja=(-irc.yrepeat/2); ja<(irc.yrepeat/2); ja++) {
-				int i= ia + 1;
-				int j= ja + 1;
+				int i = ia + 1;
+				int j = ja + 1;
 				glColor3d(1.0d, 1.0d, 1.0d);
 				glBegin(GL_QUADS);
 				{

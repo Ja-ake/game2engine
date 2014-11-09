@@ -46,8 +46,6 @@ public abstract class AbstractManager extends ManagedObject {
         final AbstractManager thus = this;
         Core.task(new Task() {
             public void run() {
-                //for (AbstractManager m : managers) m.initialize();
-                //for (AbstractEntity e : entities) e.initialize();
                 thus.background(false);
             }
         });
@@ -120,8 +118,6 @@ public abstract class AbstractManager extends ManagedObject {
     }
 
     public AbstractManager remove(AbstractEntity ent) {
-        Core.getDefaultTaskThread().remove(ent.updatetask.getID());
-        entities.remove(ent);
         for (AbstractComponent ac : ent.components) {
         	ac.destroy();
         	if (ac.destroyed) Core.getDefaultTaskThread().remove(ac.id);
@@ -131,20 +127,21 @@ public abstract class AbstractManager extends ManagedObject {
         	sc.destroy();
         	if (sc.destroyed) Core.getDefaultTaskThread().remove(sc.id);
         }
-
-        final AbstractEntity en = ent;
-        Core.task(new Task() {
-
-            @Override
-            public void run() {
-                //en.components.clear();
-            	for (int i=0; i<en.components.size(); i++) if (en.components.get(i).destroyed) en.components.remove(i--);
-            	for (int i=0; i<en.systems.size(); i++) if (en.systems.get(i).destroyed) en.systems.remove(i--);
-            }
-
-        });
+        
+        for (int i=0; i<ent.components.size(); i++) if (ent.components.get(i).destroyed) ent.components.remove(i--);
+        for (int i=0; i<ent.systems.size(); i++) if (ent.systems.get(i).destroyed) ent.systems.remove(i--);
+        
+        Core.getDefaultTaskThread().remove(ent.updatetask.getID());
+        entities.remove(ent);
 
         return this;
+    }
+    
+    public AbstractManager removeAll() {
+    	entities.clear();
+    	this.start();
+    	for (AbstractManager am : this.managers) am.removeAll();
+    	return this;
     }
 
     public AbstractManager autoAdd(AbstractEntity ent) {

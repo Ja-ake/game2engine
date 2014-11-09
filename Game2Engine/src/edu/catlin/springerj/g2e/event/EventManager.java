@@ -87,7 +87,8 @@ public class EventManager extends AbstractManager {
 					System.exit(0);
 			}
 
-			for (EventListener listener : listeners) {
+			for (int j=0; j<listeners.size(); j++) {
+				EventListener listener = listeners.get(j);
 				if (event.target == null || event.target == listener) {
 					try {
 						Method[] methods = listener.getClass()
@@ -117,5 +118,13 @@ public class EventManager extends AbstractManager {
 	@Override
 	public void initialize() {
 
+	}
+	
+	@Override
+	public AbstractManager removeAll() {
+		super.removeAll();
+		listeners.clear();
+		queue.clear();
+		return this;
 	}
 }

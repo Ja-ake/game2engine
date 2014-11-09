@@ -6,6 +6,7 @@ import edu.catlin.springerj.explore.rory.Keys;
 import edu.catlin.springerj.explore.rory.MouseInput;
 import edu.catlin.springerj.explore.enemy.Enemy;
 import edu.catlin.springerj.explore.graphics.GreyStripedBackground;
+import edu.catlin.springerj.explore.graphics.TitleScreenButtons;
 import edu.catlin.springerj.explore.graphics.particle.ParticleEmitter;
 import edu.catlin.springerj.explore.collisions.CollisionManager;
 import edu.catlin.springerj.explore.player.PlayerEntity;
@@ -14,6 +15,8 @@ import edu.catlin.springerj.explore.planets.PlanetGravityManager;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.Core;
 import edu.catlin.springerj.g2e.lwjgl.LWJGLManager;
+import edu.catlin.springerj.g2e.lwjgl.SpriteComponent;
+import edu.catlin.springerj.g2e.lwjgl.draw.StaticImageRenderSystem;
 import edu.catlin.springerj.g2e.lwjgl.view.InstantView;
 import edu.catlin.springerj.g2e.lwjgl.view.View;
 import edu.catlin.springerj.g2e.math.Vector2;
@@ -87,15 +90,31 @@ public class Jake {
 		        
 		        Core.getRootManager().add(ae);
 		        Core.getRootManager().add(new GreyStripedBackground(8, 8));
-		       // Core.getRootManager().add(new );
+		        Core.getRootManager().add(new AbstractEntity() {
+
+					@Override
+					public void initialize() {
+						add(new PositionComponent(new Vector2()));
+						add(new SpriteComponent("titlescreen"));
+						
+						add(new StaticImageRenderSystem());
+					}
+
+					@Override
+					public void update() {
+						
+					}
+		        	
+		        });
 		        
+		        Core.getRootManager().add(new TitleScreenButtons());
 		        Core.getRootManager().add(new Keys()).add(new MouseInput());
 			}
         };
         
         ((LWJGLManager) Core.getRootManager()).addRoom("tutorial00", tutorial);
         ((LWJGLManager) Core.getRootManager()).addRoom("titlescreen", titlescreen);
-        ((LWJGLManager) Core.getRootManager()).setRoom("tutorial00");
+        ((LWJGLManager) Core.getRootManager()).setRoom("titlescreen");
         Core.run();
 	}
 }
