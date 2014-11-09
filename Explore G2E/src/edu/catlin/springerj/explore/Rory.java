@@ -16,7 +16,7 @@ import edu.catlin.springerj.g2e.tiled.TiledXMLParser;
 public class Rory {
 
     public static void main(String[] args) {
-        Core.initialize(new LWJGLManager().add(new PlanetGravityManager()).add(new CollisionManager()));
+        Core.initialize(new LWJGLManager().add(new PlanetGravityManager()).add(new CollisionManager()).add(new Keys()));
 
         PlayerEntity p = new PlayerEntity(new Vector2(100, 0));
 
