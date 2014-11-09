@@ -1,5 +1,6 @@
 package edu.catlin.springerj.explore.player;
 
+import edu.catlin.springerj.explore.bullets.Fireball;
 import edu.catlin.springerj.explore.rory.Keys;
 import edu.catlin.springerj.explore.rory.MouseInput;
 import edu.catlin.springerj.explore.bullets.PlayerBullet;
@@ -99,8 +100,14 @@ public class PlayerControlSystem extends AbstractSystem {
         }
         //Shooting
         if (Core.getRootManager().getManager(MouseInput.class).isReleased(MouseEvent.BUTTON_MB1)) {
-            Vector2 velocity = Core.getRootManager().getManager(MouseInput.class).mousePos.subtract(pos.position).setLength(300);
-            Core.getRootManager().add(new PlayerBullet(pos.position, velocity));
+            double time = Core.getRootManager().getManager(MouseInput.class).getTimeR(MouseEvent.BUTTON_MB1);
+            if (time < 1) {
+                Vector2 velocity = Core.getRootManager().getManager(MouseInput.class).mousePos.subtract(pos.position).setLength(300);
+                Core.getRootManager().add(new PlayerBullet(pos.position, velocity));
+            } else {
+                Vector2 velocity = Core.getRootManager().getManager(MouseInput.class).mousePos.subtract(pos.position).setLength(200);
+                Core.getRootManager().add(new Fireball(pos.position, velocity));
+            }
         }
         //Health
         Graphics.fillRect(pos.position.x - 16, pos.position.y - 32, 32, 8, 0, 0, 0);

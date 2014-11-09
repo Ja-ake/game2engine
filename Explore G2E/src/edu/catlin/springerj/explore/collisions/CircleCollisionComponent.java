@@ -6,6 +6,7 @@ import edu.catlin.springerj.g2e.core.Core;
 import edu.catlin.springerj.g2e.math.Vector2;
 import edu.catlin.springerj.g2e.movement.PositionComponent;
 import edu.catlin.springerj.g2e.movement.VelocityComponent;
+import java.util.ArrayList;
 
 public class CircleCollisionComponent extends AbstractComponent {
 
@@ -30,7 +31,7 @@ public class CircleCollisionComponent extends AbstractComponent {
     public boolean contains(Vector2 point) {
         return point.subtract(pc.position).lengthSquared() < size * size;
     }
-    
+
     @Override
     public void destroy() {
         super.destroy();
@@ -92,6 +93,20 @@ public class CircleCollisionComponent extends AbstractComponent {
             }
         }
         return null;
+    }
+
+    public ArrayList<CircleCollisionComponent> touchingList(String name) {
+        ArrayList<CircleCollisionComponent> r = new ArrayList();
+        for (CircleCollisionComponent other : Core.getRootManager().getManager(CollisionManager.class).list) {
+            if (other != this) {
+                if (name.equals(other.name)) {
+                    if (intersects(other)) {
+                        r.add(other);
+                    }
+                }
+            }
+        }
+        return r;
     }
 
 }

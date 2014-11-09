@@ -11,7 +11,6 @@ import edu.catlin.springerj.g2e.lwjgl.draw.Graphics;
 import edu.catlin.springerj.g2e.math.Vector2;
 import edu.catlin.springerj.g2e.movement.PositionComponent;
 import edu.catlin.springerj.g2e.movement.VelocityComponent;
-import static javax.swing.UIManager.get;
 
 public class BulletSystem extends AbstractSystem {
 
