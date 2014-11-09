@@ -54,7 +54,7 @@ public class CircleCollisionComponent extends AbstractComponent {
         if ((r1 > center && r2 > center) || (r1 < center && r2 < center)) {
             return false;
         }
-        return size > pc.position.subtract(p1).dot(axis.normal());
+        return size > Math.abs(pc.position.subtract(p1).dot(axis.normal()));
     }
 
     public boolean placeSolid(Vector2 pos) {
