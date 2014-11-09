@@ -11,6 +11,7 @@ import edu.catlin.springerj.explore.planets.Planet;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.AbstractSystem;
 import edu.catlin.springerj.g2e.core.Core;
+import edu.catlin.springerj.g2e.math.Color4d;
 import edu.catlin.springerj.g2e.movement.PositionComponent;
 import edu.catlin.springerj.g2e.movement.VelocityComponent;
 
@@ -25,7 +26,7 @@ public class FireballSystem extends AbstractSystem {
     @Override
     public void destroy() {
         super.destroy();
-        Core.getRootManager().add(new ParticleEmitter(pos.position, vel.velocity.setLength(-20), 100, 5, .8, .15, .05, true));
+        Core.getRootManager().add(new ParticleEmitter(pos.position, vel.velocity.setLength(-20), 100, 5, new Color4d(.8, .15, .05), true));
         for (CircleCollisionComponent other : ccc.touchingList("Enemy")) {
             other.entity.get(HealthComponent.class).damage(10);
             other.applyImpulse(other.pc.position.subtract(pos.position).setLength(1000));

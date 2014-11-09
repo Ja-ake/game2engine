@@ -27,13 +27,13 @@ public class PlayerBulletSystem extends AbstractSystem {
         pbc = e.get(PlayerBulletComponent.class);
         switch (pbc.type) {
             case 0:
-                bc.color = new Color4d(1, 0, 0);
+                bc.color = new Color4d(1, .2, .2);
                 break;
             case 1:
-                bc.color = new Color4d(0, 0, 1);
+                bc.color = new Color4d(.2, .5, 1);
                 break;
             case 2:
-                bc.color = new Color4d(.2, .8, 0);
+                bc.color = new Color4d(.6, .8, .2);
                 break;
             case 3:
                 bc.color = new Color4d(.9, .9, 1);

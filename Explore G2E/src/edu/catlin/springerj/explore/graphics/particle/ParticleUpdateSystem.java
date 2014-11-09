@@ -27,7 +27,7 @@ public class ParticleUpdateSystem extends AbstractSystem {
                 pac.particles.remove(i);
                 i--;
             }
-            p.alpha = p.life / p.maxlife;
+            p.color.a = p.life / p.maxlife;
             p.position = p.position.add(p.velocity.multiply(p.life / p.maxlife).multiply(Core.getDefaultTimer().getDeltaTime()));
         }
 
