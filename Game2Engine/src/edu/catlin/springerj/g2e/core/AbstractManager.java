@@ -34,8 +34,8 @@ public abstract class AbstractManager extends ManagedObject {
             mo.background(started);
         }
 
-        for (ManagedObject mo : entities) {
-            mo.background(started);
+        for (int i = 0; i < entities.size(); i++) {
+            entities.get(i).background(started);
         }
     }
 
