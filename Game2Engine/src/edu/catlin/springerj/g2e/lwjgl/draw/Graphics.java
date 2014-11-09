@@ -26,14 +26,14 @@ public abstract class Graphics {
     }
 
     public static void drawLine(double x1, double y1, double x2, double y2) {
-        drawLine(x1, y1, x2, y2, 0, 0, 0, 1);
+        drawLine(x1, y1, x2, y2, new Color4d(0, 0, 0));
     }
 
-    public static void drawLine(double x1, double y1, double x2, double y2, double r, double g, double b, double a) {
+    public static void drawLine(double x1, double y1, double x2, double y2, Color4d c) {
         glPushMatrix();
         glDisable(GL_TEXTURE_2D);
         glLineWidth(2);
-        glColor4d(r, g, b, a);
+        glColor4d(c.r, c.g, c.b, c.a);
         glBegin(GL_LINES);
         {
             glVertex2d(x1, y1);
