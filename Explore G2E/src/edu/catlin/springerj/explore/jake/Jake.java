@@ -31,6 +31,8 @@ public class Jake {
         Core.initialize(new LWJGLManager().add(new PlanetGravityManager()).add(new CollisionManager()));
         Core.getRootManager().add(new EventManager());
         Core.getRootManager().add(new WebManager());
+        Core.getRootManager().add(new Keys());
+        Core.getRootManager().add(new MouseInput());
         Runnable tutorial = new Runnable() {
 
 			@Override
@@ -59,10 +61,7 @@ public class Jake {
 		                default:
 		                    break;
 		            }
-		        }
-		        
-		        Core.getRootManager().add(new Keys());
-		        Core.getRootManager().add(new MouseInput());
+		        }   
 			}
         };
         
@@ -113,7 +112,6 @@ public class Jake {
 		        });
 		        
 		        Core.getRootManager().add(new TitleScreenButtons());
-		        Core.getRootManager().add(new Keys()).add(new MouseInput());
 			}
         };
         
