@@ -19,6 +19,10 @@ public abstract class Core {
 	private static boolean closeRequested;
 
 	static {
+		init();
+	}
+	
+	public static void init() {
 		closeRequested = false;
 		threads = new ArrayList<TaskThread>();
 		tostart = new ArrayList<TaskThread>();

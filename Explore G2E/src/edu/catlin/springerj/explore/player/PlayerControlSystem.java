@@ -128,6 +128,9 @@ public class PlayerControlSystem extends AbstractSystem {
 //						Jake.tutorial.run();
 //					}
 //				});
+				
+				Core.init();
+				Jake.main(new String[1]);
 			}
 		} catch (Exception e) {
 			return;
