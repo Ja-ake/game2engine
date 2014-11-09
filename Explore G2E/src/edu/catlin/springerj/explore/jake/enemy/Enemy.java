@@ -1,6 +1,5 @@
 package edu.catlin.springerj.explore.jake.enemy;
 
-import edu.catlin.springerj.explore.jake.Player;
 import edu.catlin.springerj.explore.jake.items.BulletRechargeComponent;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.lwjgl.SpriteComponent;
@@ -21,7 +20,7 @@ public class Enemy extends AbstractEntity {
 		add(new RotationComponent());
 		add(new SpriteComponent("enemy_smoking_black", 5, 2.0d));
 		add(new EntityTargetComponent(e));
-		add(new BulletRechargeComponent(5.0d));
+		add(new BulletRechargeComponent(2.5d));
 	}
 	
 	@Override

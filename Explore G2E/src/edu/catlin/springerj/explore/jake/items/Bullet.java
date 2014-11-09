@@ -2,7 +2,7 @@ package edu.catlin.springerj.explore.jake.items;
 
 import java.util.List;
 
-import edu.catlin.springerj.explore.jake.Player;
+import edu.catlin.springerj.explore.jake.newjake.CircleCollisionComponent;
 import edu.catlin.springerj.explore.jake.newjake.CollisionManager;
 import edu.catlin.springerj.explore.jake.newjake.PlayerEntity;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
@@ -47,6 +47,7 @@ public class Bullet extends AbstractEntity {
 					PlayerEntity p = (PlayerEntity) e;
 					final SpriteComponent sc = p.getComponent(SpriteComponent.class);
 					sc.setSprite("character_idle_left_red", 8);
+					p.get(CircleCollisionComponent.class).applyImpulse(get(VelocityComponent.class).velocity.setLength(10000.0d));
 					Core.getRootManager().remove(this);
 					Core.task(new Task(true) {
 						private double time = 0;
