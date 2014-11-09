@@ -27,6 +27,7 @@ public class PlayerGravitySystem extends AbstractSystem {
 
     @Override
     public void update() {
+    	try {
         if (gc.planet == null) {
             Planet planet = Core.getRootManager().getManager(PlanetGravityManager.class).nearest(p.position);
             pg.planetPos = planet.get(PositionComponent.class);
@@ -36,6 +37,9 @@ public class PlayerGravitySystem extends AbstractSystem {
             pg.planetVel = gc.planet.vc;
         }
         v.velocity = v.velocity.add(pg.planetPos.position.subtract(p.position).setLength(50 * Core.getDefaultTimer().getDeltaTime()));
+        
+    	}catch(Exception e) {
+        	return;
+        }
     }
-
 }

@@ -22,7 +22,7 @@ public abstract class AbstractEntity extends ManagedObject {
 		systems = new ArrayList<AbstractSystem>();
 	}
 	
-	void background(boolean started) { if (started) for (int i=0; i<systems.size(); i++) systems.get(i).update(); }
+	void background(boolean started) { try { if (started) for (int i=0; i<systems.size(); i++) systems.get(i).update(); } catch(Exception e) { return; } }
 
 	/**
 	 * Adds a list of components to the entity.

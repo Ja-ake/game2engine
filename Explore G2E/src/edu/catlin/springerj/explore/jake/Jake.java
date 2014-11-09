@@ -5,6 +5,7 @@ import java.io.File;
 import edu.catlin.springerj.g2e.event.Keys;
 import edu.catlin.springerj.g2e.event.MouseInput;
 import edu.catlin.springerj.explore.enemy.Enemy;
+import edu.catlin.springerj.explore.enemy.Spawner;
 import edu.catlin.springerj.explore.graphics.GreyStripedBackground;
 import edu.catlin.springerj.explore.graphics.TitleScreenButtons;
 import edu.catlin.springerj.explore.graphics.particle.ParticleEmitter;
@@ -28,50 +29,53 @@ import edu.catlin.springerj.g2e.web.WebManager;
 
 public class Jake {
 
+	public static final Runnable tutorial = new Runnable() {
+
+        @Override
+        public void run() {
+//            Core.getRootManager().add(new EventManager());
+//            Core.getRootManager().add(new MouseInput());
+//            Core.getRootManager().add(new Keys());
+//            Core.getRootManager().add(new WebManager());
+//            Core.getRootManager().add(new PlanetGravityManager());
+//            Core.getRootManager().add(new CollisionManager());
+
+            PlayerEntity p = new PlayerEntity(new Vector2(100, 0));
+
+            Core.getRootManager().add(new View(p));
+            Core.getRootManager().add(new GreyStripedBackground());
+
+            TiledXMLParser tmx = new TiledXMLParser(new File(Core.getResourceFolder() + "map\\tutorial-00.tmx"));
+            tmx.parse();
+
+            TiledObject object;
+            while ((object = tmx.nextObject()) != null) {
+                switch (object.type) {
+                    case "planet":
+                        Core.getRootManager().add(new Planet(new Vector2(object.x + object.width / 2, -object.y - object.width / 2), object.width / 2));
+                        break;
+                    case "player":
+                        p.getComponent(PositionComponent.class).position = new Vector2(object.x + 32 / 2, -object.y - 32 / 2);
+                        break;
+                    case "slimeenemy":
+                        Core.getRootManager().add(new Enemy(new Vector2(object.x + 32 / 2, -object.y - 32 / 2)));
+                        break;
+                    case "spawner":
+                    	Core.getRootManager().add(new Spawner(new Vector2(object.x + 32 / 2, -object.y - 32 / 2)));
+                    	break;
+                    default:
+                        break;
+                }
+            }
+
+            Core.getRootManager().add(p);
+
+            //Core.getRootManager().add(new MouseInput());
+        }
+    };
+	
     public static void main(String[] args) {
         Core.initialize(new LWJGLManager());
-
-        final Runnable tutorial = new Runnable() {
-
-            @Override
-            public void run() {
-//                Core.getRootManager().add(new EventManager());
-//                Core.getRootManager().add(new MouseInput());
-//                Core.getRootManager().add(new Keys());
-//                Core.getRootManager().add(new WebManager());
-//                Core.getRootManager().add(new PlanetGravityManager());
-//                Core.getRootManager().add(new CollisionManager());
-
-                PlayerEntity p = new PlayerEntity(new Vector2(100, 0));
-
-                Core.getRootManager().add(new View(p));
-                Core.getRootManager().add(new GreyStripedBackground());
-
-                TiledXMLParser tmx = new TiledXMLParser(new File(Core.getResourceFolder() + "map\\tutorial-00.tmx"));
-                tmx.parse();
-
-                TiledObject object;
-                while ((object = tmx.nextObject()) != null) {
-                    switch (object.type) {
-                        case "planet":
-                            Core.getRootManager().add(new Planet(new Vector2(object.x + object.width / 2, -object.y - object.width / 2), object.width / 2));
-                            break;
-                        case "player":
-                            p.getComponent(PositionComponent.class).position = new Vector2(object.x + 32 / 2, -object.y - 32 / 2);
-                            break;
-                        case "slimeenemy":
-                            Core.getRootManager().add(new Enemy(new Vector2(object.x + 32 / 2, -object.y - 32 / 2)));
-                            break;
-                        default:
-                            break;
-                    }
-                }
-
-                Core.getRootManager().add(p);
-
-                //Core.getRootManager().add(new MouseInput());
-            }
-        };
 
         Runnable titlescreen = new Runnable() {
 

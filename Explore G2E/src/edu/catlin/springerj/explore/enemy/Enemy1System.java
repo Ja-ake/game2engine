@@ -26,6 +26,7 @@ public class Enemy1System extends AbstractSystem {
 
     @Override
     public void update() {
+    	try{
         Vector2 target = Core.getRootManager().getEntity(PlayerEntity.class).getComponent(PositionComponent.class).position;
         vc.velocity = vc.velocity.add(target.subtract(pc.position).setLength((Math.min(500, -100 + target.subtract(pc.position).length()/3)) * Core.getDefaultTimer().getDeltaTime())).multiply(.99);
 
@@ -36,6 +37,9 @@ public class Enemy1System extends AbstractSystem {
                         .add(new Vector2(Math.random() * 75 - 37.5, Math.random() * 75 - 37.5)).setLength(300)));
             }
         }
+    	} catch(Exception e) {
+    		return;
+    	}
     }
 
 }

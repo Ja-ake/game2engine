@@ -36,7 +36,7 @@ public class Rory {
                 Core.getRootManager().add(new EventManager());
                 Core.getRootManager().add(new MouseInput());
                 Core.getRootManager().add(new Keys());
-                Core.getRootM`anager().add(new WebManager());
+                Core.getRootManager().add(new WebManager());
                 Core.getRootManager().add(new PlanetGravityManager());
                 Core.getRootManager().add(new CollisionManager());
 

@@ -36,7 +36,8 @@ public class TitleScreenButtons extends AbstractEntity implements EventListener<
 
 	@Override
 	public void onEvent(MouseEvent event) {
-		PositionComponent pc = get(PositionComponent.class);
+		PositionComponent pc;
+		try { pc = get(PositionComponent.class); } catch (Exception e) { return; }
 		if (event.action == MouseEvent.ACTION_RELEASE) {
 			if (pc.position.y == -12.5d) {
 				for (int i=0; i<Core.getRootManager().getEntities().size(); i++) {
