@@ -98,6 +98,7 @@ public class EventManager extends AbstractManager {
 								if (((Class) method.getGenericParameterTypes()[0])
 										.getName().equals(
 												event.getClass().getName())) {
+									method.setAccessible(true);
 									method.invoke(listener, event);
 								}
 							}

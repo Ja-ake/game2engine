@@ -21,8 +21,9 @@ public class SpriteRenderSystem extends AbstractSystem {
     }
 
     @Override
-    public void update() {
+    public void update() {    	
         if (sprite.visible) {
+        	//System.out.println(rotation.rot);
             Graphics.drawSprite(sprite.getTexture(), position.position.x, position.position.y, rotation.rot);
         }
         sprite.imageIndex += Core.getDefaultTimer().getDeltaTime() * sprite.imageSpeed;

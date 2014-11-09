@@ -13,8 +13,9 @@ public class TaskThread extends Thread {
 		noncontinuousTasks = new CopyOnWriteArrayList<Task>();
 	}
 
+	public int ssa = 0;
 	public void run() {
-		while (true) {
+		while (true) {			
 			for (int i = 0; i < noncontinuousTasks.size(); i++) {
 				Task t = noncontinuousTasks.get(i);
 				t.run();

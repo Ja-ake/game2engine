@@ -92,11 +92,18 @@ public abstract class AbstractManager extends ManagedObject {
     public AbstractManager add(AbstractEntity ent) {
         entities.add(ent);
         ent.setManager(this);
-        //if (initialized) {
-        ent.initialize();
-        //}
+        final AbstractEntity et = ent;
         
-		final AbstractEntity et = ent;
+//        Core.task(new Task(false) {
+//			@Override
+//			public void run() {
+//				 et.initialize();
+//				 System.out.println("i");
+//			}
+//        });
+        et.initialize();
+        //System.out.println("otheri");
+		
 		ent.updatetask = new Task(true) {
 			@Override
 			public void run() {
