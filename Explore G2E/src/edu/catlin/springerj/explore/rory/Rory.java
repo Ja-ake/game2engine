@@ -1,9 +1,9 @@
-package edu.catlin.springerj.explore;
+package edu.catlin.springerj.explore.rory;
 
 import java.io.File;
-import edu.catlin.springerj.explore.jake.graphics.GreyStripedBackground;
-import edu.catlin.springerj.explore.jake.newjake.CollisionManager;
-import edu.catlin.springerj.explore.jake.newjake.PlayerEntity;
+import edu.catlin.springerj.explore.graphics.GreyStripedBackground;
+import edu.catlin.springerj.explore.collisions.CollisionManager;
+import edu.catlin.springerj.explore.player.PlayerEntity;
 import edu.catlin.springerj.explore.planets.Planet;
 import edu.catlin.springerj.explore.planets.PlanetGravityManager;
 import edu.catlin.springerj.g2e.core.Core;

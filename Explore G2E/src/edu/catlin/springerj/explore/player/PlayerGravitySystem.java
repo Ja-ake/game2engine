@@ -1,6 +1,6 @@
-package edu.catlin.springerj.explore.jake.newjake;
+package edu.catlin.springerj.explore.player;
 
-import edu.catlin.springerj.explore.jake.items.GrappleComponent;
+import edu.catlin.springerj.explore.grapple.GrappleComponent;
 import edu.catlin.springerj.explore.planets.Planet;
 import edu.catlin.springerj.explore.planets.PlanetGravityComponent;
 import edu.catlin.springerj.explore.planets.PlanetGravityManager;

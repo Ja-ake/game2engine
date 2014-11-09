@@ -2,12 +2,12 @@ package edu.catlin.springerj.explore.jake;
 
 import java.io.File;
 
-import edu.catlin.springerj.explore.Keys;
-import edu.catlin.springerj.explore.MouseInput;
-import edu.catlin.springerj.explore.jake.enemy.Enemy;
-import edu.catlin.springerj.explore.jake.graphics.GreyStripedBackground;
-import edu.catlin.springerj.explore.jake.newjake.CollisionManager;
-import edu.catlin.springerj.explore.jake.newjake.PlayerEntity;
+import edu.catlin.springerj.explore.rory.Keys;
+import edu.catlin.springerj.explore.rory.MouseInput;
+import edu.catlin.springerj.explore.enemy.Enemy;
+import edu.catlin.springerj.explore.graphics.GreyStripedBackground;
+import edu.catlin.springerj.explore.collisions.CollisionManager;
+import edu.catlin.springerj.explore.player.PlayerEntity;
 import edu.catlin.springerj.explore.planets.Planet;
 import edu.catlin.springerj.explore.planets.PlanetGravityManager;
 import edu.catlin.springerj.g2e.core.Core;

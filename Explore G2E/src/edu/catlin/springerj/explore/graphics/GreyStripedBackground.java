@@ -1,4 +1,4 @@
-package edu.catlin.springerj.explore.jake.graphics;
+package edu.catlin.springerj.explore.graphics;
 
 import java.io.IOException;
 

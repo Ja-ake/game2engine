@@ -1,4 +1,4 @@
-package edu.catlin.springerj.explore.jake.items;
+package edu.catlin.springerj.explore.bullets;
 
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.Core;

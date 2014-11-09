@@ -1,10 +1,11 @@
-package edu.catlin.springerj.explore.jake.newjake;
+package edu.catlin.springerj.explore.player;
 
-import edu.catlin.springerj.explore.Keys;
-import edu.catlin.springerj.explore.MouseInput;
-import edu.catlin.springerj.explore.jake.items.EnemyBullet;
-import edu.catlin.springerj.explore.jake.items.Grapple;
-import edu.catlin.springerj.explore.jake.items.GrappleComponent;
+import edu.catlin.springerj.explore.rory.Keys;
+import edu.catlin.springerj.explore.rory.MouseInput;
+import edu.catlin.springerj.explore.bullets.EnemyBullet;
+import edu.catlin.springerj.explore.grapple.Grapple;
+import edu.catlin.springerj.explore.grapple.GrappleComponent;
+import edu.catlin.springerj.explore.collisions.CircleCollisionComponent;
 import edu.catlin.springerj.explore.planets.PlanetGravityComponent;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.AbstractSystem;

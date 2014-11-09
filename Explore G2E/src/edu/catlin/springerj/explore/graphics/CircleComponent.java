@@ -1,4 +1,4 @@
-package edu.catlin.springerj.explore.jake.graphics;
+package edu.catlin.springerj.explore.graphics;
 
 import edu.catlin.springerj.g2e.core.AbstractComponent;
 import edu.catlin.springerj.g2e.core.AbstractEntity;

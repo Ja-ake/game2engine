@@ -1,7 +1,7 @@
 package edu.catlin.springerj.explore.planets;
 
-import edu.catlin.springerj.explore.jake.newjake.CircleCollisionComponent;
-import edu.catlin.springerj.explore.jake.newjake.CircleCollisionSystem;
+import edu.catlin.springerj.explore.collisions.CircleCollisionComponent;
+import edu.catlin.springerj.explore.collisions.CircleCollisionSystem;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.math.Vector2;
 import edu.catlin.springerj.g2e.movement.PositionComponent;

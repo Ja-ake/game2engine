@@ -1,4 +1,4 @@
-package edu.catlin.springerj.explore.jake.enemy;
+package edu.catlin.springerj.explore.enemy;
 
 import edu.catlin.springerj.g2e.core.AbstractComponent;
 import edu.catlin.springerj.g2e.core.AbstractEntity;

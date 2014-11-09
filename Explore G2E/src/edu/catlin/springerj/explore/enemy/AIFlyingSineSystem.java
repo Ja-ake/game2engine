@@ -1,10 +1,10 @@
-package edu.catlin.springerj.explore.jake.enemy;
+package edu.catlin.springerj.explore.enemy;
 
-import edu.catlin.springerj.explore.jake.items.EnemyBullet;
-import edu.catlin.springerj.explore.jake.items.BulletRechargeComponent;
+import edu.catlin.springerj.explore.bullets.EnemyBullet;
+import edu.catlin.springerj.explore.bullets.BulletRechargeComponent;
 import edu.catlin.springerj.explore.planets.Planet;
-import edu.catlin.springerj.explore.jake.newjake.CircleCollisionComponent;
-import edu.catlin.springerj.explore.jake.newjake.CollisionManager;
+import edu.catlin.springerj.explore.collisions.CircleCollisionComponent;
+import edu.catlin.springerj.explore.collisions.CollisionManager;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.AbstractSystem;
 import edu.catlin.springerj.g2e.core.Core;

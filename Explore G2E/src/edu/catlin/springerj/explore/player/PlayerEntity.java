@@ -1,7 +1,9 @@
-package edu.catlin.springerj.explore.jake.newjake;
+package edu.catlin.springerj.explore.player;
 
 import edu.catlin.springerj.explore.planets.PlanetGravityComponent;
-import edu.catlin.springerj.explore.jake.items.GrappleComponent;
+import edu.catlin.springerj.explore.grapple.GrappleComponent;
+import edu.catlin.springerj.explore.collisions.CircleCollisionComponent;
+import edu.catlin.springerj.explore.collisions.CircleCollisionSystem;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.lwjgl.SpriteComponent;
 import edu.catlin.springerj.g2e.lwjgl.SpriteRenderSystem;

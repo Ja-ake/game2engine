@@ -1,10 +1,10 @@
-package edu.catlin.springerj.explore.jake.items;
+package edu.catlin.springerj.explore.bullets;
 
 import java.util.List;
 
-import edu.catlin.springerj.explore.jake.newjake.CircleCollisionComponent;
-import edu.catlin.springerj.explore.jake.newjake.CollisionManager;
-import edu.catlin.springerj.explore.jake.newjake.PlayerEntity;
+import edu.catlin.springerj.explore.collisions.CircleCollisionComponent;
+import edu.catlin.springerj.explore.collisions.CollisionManager;
+import edu.catlin.springerj.explore.player.PlayerEntity;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.Core;
 import edu.catlin.springerj.g2e.lwjgl.SpriteComponent;
@@ -16,9 +16,9 @@ import edu.catlin.springerj.g2e.movement.VelocityMovementSystem;
 import edu.catlin.springerj.g2e.thread.Task;
 import edu.catlin.springerj.g2e.utility.Logger;
 
-public class PlayerBullet extends AbstractEntity {
+public class EnemyBullet extends AbstractEntity {
 
-	public PlayerBullet(Vector2 position, Vector2 velocity) {
+	public EnemyBullet(Vector2 position, Vector2 velocity) {
 		add(new PositionComponent(position));
 		add(new VelocityComponent(velocity));
 		add(new LengthComponent());
@@ -41,7 +41,7 @@ public class PlayerBullet extends AbstractEntity {
 		for (CircleCollisionComponent ccc : Core.getRootManager().getManager(CollisionManager.class)
 				.collisionLine(pos, line)) {
 			List<AbstractEntity> entities = Core.getRootManager().getEntities();
-			if (ccc.name.equals("PlayerEntity")) {
+			if (ccc.name.equals("PlayerEntity")) { // change this to deal with enemies instead of players
 				for (int i = 0; i < entities.size(); i++) {
 					AbstractEntity e;
 					if (!((e = entities.get(i)) instanceof PlayerEntity)) continue;

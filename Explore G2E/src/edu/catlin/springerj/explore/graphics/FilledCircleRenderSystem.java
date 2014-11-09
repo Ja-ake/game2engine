@@ -1,4 +1,4 @@
-package edu.catlin.springerj.explore.jake.graphics;
+package edu.catlin.springerj.explore.graphics;
 
 import static org.lwjgl.opengl.GL11.*;
 import edu.catlin.springerj.g2e.core.AbstractEntity;

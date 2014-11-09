@@ -1,4 +1,4 @@
-package edu.catlin.springerj.explore;
+package edu.catlin.springerj.explore.rory;
 
 import edu.catlin.springerj.g2e.core.AbstractManager;
 import edu.catlin.springerj.g2e.core.Core;

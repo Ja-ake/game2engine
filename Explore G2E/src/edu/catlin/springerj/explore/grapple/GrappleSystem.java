@@ -1,7 +1,7 @@
-package edu.catlin.springerj.explore.jake.items;
+package edu.catlin.springerj.explore.grapple;
 
-import edu.catlin.springerj.explore.jake.newjake.CircleCollisionComponent;
-import edu.catlin.springerj.explore.jake.newjake.CollisionManager;
+import edu.catlin.springerj.explore.collisions.CircleCollisionComponent;
+import edu.catlin.springerj.explore.collisions.CollisionManager;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.AbstractSystem;
 import edu.catlin.springerj.g2e.core.Core;

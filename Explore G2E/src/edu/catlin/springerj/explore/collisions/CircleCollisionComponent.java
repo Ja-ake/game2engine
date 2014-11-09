@@ -1,4 +1,4 @@
-package edu.catlin.springerj.explore.jake.newjake;
+package edu.catlin.springerj.explore.collisions;
 
 import edu.catlin.springerj.g2e.core.AbstractComponent;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
