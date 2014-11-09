@@ -21,6 +21,10 @@ public class CircleCollisionComponent extends AbstractComponent {
         invMass = 1 / (size * size);
         this.solid = solid;
     }
+    
+    public boolean contains(Vector2 point) {
+    	return point.subtract(pc.position).lengthSquared() < size * size;
+    }
 
     @Override
     public void initialize(AbstractEntity e) {
@@ -35,6 +39,10 @@ public class CircleCollisionComponent extends AbstractComponent {
         return (size + other.size) * (size + other.size) > pc.position.subtract(other.pc.position).lengthSquared();
     }
 
+    public boolean intersects(Vector2 p1, Vector2 p2) {
+    	
+    }
+    
     public boolean placeSolid(Vector2 pos) {
         Vector2 old = pc.position;
         pc.position = pos;
