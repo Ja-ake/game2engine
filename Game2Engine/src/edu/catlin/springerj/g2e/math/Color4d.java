@@ -20,4 +20,8 @@ public class Color4d {
         this.b = b;
         a = 1;
     }
+
+    public Color4d copy() {
+        return new Color4d(r, g, b, a);
+    }
 }
