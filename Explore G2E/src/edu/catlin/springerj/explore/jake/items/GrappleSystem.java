@@ -1,6 +1,7 @@
 package edu.catlin.springerj.explore.jake.items;
 
 import edu.catlin.springerj.explore.jake.newjake.CircleCollisionComponent;
+import edu.catlin.springerj.explore.jake.newjake.CollisionManager;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.AbstractSystem;
 import edu.catlin.springerj.g2e.core.Core;
@@ -33,28 +34,30 @@ public class GrappleSystem extends AbstractSystem {
     @Override
     public void update() {
         Vector2 playerPos = gc.player.getComponent(PositionComponent.class).position;
+        Vector2 toMe = pc.position.subtract(playerPos);
         //Graphics
-        rc.rot = pc.position.subtract(playerPos).direction() - Math.PI / 2;
+        rc.rot = toMe.direction() - Math.PI / 2;
         Graphics.drawLine(pc.position.x, pc.position.y, playerPos.x, playerPos.y, 0, 0, 0, sc.alpha);
         //If you're active
         if (sc.alpha == 1) {
             //If you should die
-            if (pc.position.subtract(playerPos).lengthSquared() > 100000) {
+            if (toMe.lengthSquared() > 100000 || Core.getRootManager().getManager(CollisionManager.class).collisionLine(playerPos, pc.position, "Planet")) {
                 vc.velocity = new Vector2();
                 sc.alpha = .5;
             } else {
-                if (ccc.pc != null) {
-                    CircleCollisionComponent planet = ccc.touching("Planet");
-                    if (planet != null) {
-                        vc.velocity = planet.vc.velocity;
-                        if (pc.position.subtract(playerPos).lengthSquared() > 10000) {
-                            Vector2 impulse = planet.pc.position.subtract(playerPos).setLength(2000 * Core.getDefaultTimer().getDeltaTime());
-                            planet.applyImpulse(impulse.multiply(-1));
-                            gc.player.getComponent(CircleCollisionComponent.class).applyImpulse(impulse);
-                        } else {
-                            sc.alpha = .5;
-                        }
-                    }
+                //If you don't have a planet
+                if (gc.planet == null) {
+                    //Try to find a planet
+                    gc.planet = ccc.touching("Planet");
+                } else {//If you have a planet
+                    vc.velocity = gc.planet.vc.velocity;
+                    //if (toMe.lengthSquared() > 10000) {
+                        Vector2 impulse = gc.planet.pc.position.subtract(playerPos).setLength(2000 * Core.getDefaultTimer().getDeltaTime());
+                        gc.planet.applyImpulse(impulse.multiply(-1));
+                        gc.player.getComponent(CircleCollisionComponent.class).applyImpulse(impulse);
+                    //} else {
+                    //    sc.alpha = .5;
+                    //}
                 }
             }
         } else {

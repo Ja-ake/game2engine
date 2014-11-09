@@ -47,7 +47,7 @@ public class CircleCollisionComponent extends AbstractComponent {
         if (contains(p1) || contains(p2)) {
             return true;
         }
-        Vector2 axis = p2.subtract(p1).normal();
+        Vector2 axis = p2.subtract(p1).normalize();
         double center = pc.position.dot(axis);
         double r1 = p1.dot(axis);
         double r2 = p2.dot(axis);

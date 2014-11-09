@@ -1,5 +1,6 @@
 package edu.catlin.springerj.explore.jake.newjake;
 
+import edu.catlin.springerj.explore.jake.items.GrappleComponent;
 import edu.catlin.springerj.explore.planets.PlanetGravityComponent;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.lwjgl.SpriteComponent;
@@ -23,6 +24,7 @@ public class PlayerEntity extends AbstractEntity {
         add(new PlanetGravityComponent());
         add(new CircleCollisionComponent(12, true));
         add(new FrictionComponent());
+        add(new GrappleComponent(this, null));
         //Systems
         add(new SpriteRenderSystem());
         add(new VelocityMovementSystem());
