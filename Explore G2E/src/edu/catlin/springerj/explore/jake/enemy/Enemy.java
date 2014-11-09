@@ -21,6 +21,7 @@ public class Enemy extends AbstractEntity {
 		add(new SpriteComponent("enemy_smoking_black", 5, 2.0d));
 		add(new EntityTargetComponent(e));
 		add(new BulletRechargeComponent(2.5d));
+		add(new HealthComponent(5.0d));
 	}
 	
 	@Override
@@ -28,6 +29,7 @@ public class Enemy extends AbstractEntity {
 		add(new SpriteRenderSystem());
 		add(new VelocityMovementSystem());
 		add(new AIFlyingSineSystem());
+		add(new OnDeathKillSystem());
 	}
 
 	@Override

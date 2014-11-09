@@ -15,7 +15,7 @@ public class GreyStripedBackground extends AbstractEntity {
 	public void initialize() {
 		try {
 			add(new ImageComponent(TextureLoader.getTexture(Core.getResourceFolder() + "tileset\\un.png", 1).get(0)));
-			add(new ImageRepeatComponent(8, 8));
+			add(new ImageRepeatComponent(16, 16));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

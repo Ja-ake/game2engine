@@ -20,7 +20,7 @@ import edu.catlin.springerj.g2e.tiled.TiledXMLParser;
 
 public class Jake {
 	public static void main(String[] args) {
-        Core.initialize(new LWJGLManager().add(new PlanetGravityManager()).add(new CollisionManager()).add(new Keys()).add(new MouseInput()));
+        Core.initialize(new LWJGLManager().add(new PlanetGravityManager()).add(new CollisionManager()));
 
         PlayerEntity p = new PlayerEntity(new Vector2(100, 0));
 
@@ -47,6 +47,8 @@ public class Jake {
                     break;
             }
         }
+        
+        Core.getRootManager().add(new Keys()).add(new MouseInput());
 
         Core.run();
 	}

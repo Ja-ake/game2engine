@@ -7,6 +7,7 @@ import edu.catlin.springerj.g2e.exception.InvalidComponentException;
 import edu.catlin.springerj.g2e.math.Vector2;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CollisionManager extends AbstractManager {
 
@@ -30,6 +31,17 @@ public class CollisionManager extends AbstractManager {
             }
         }
         return false;
+    }
+    
+    public List<CircleCollisionComponent> collisionLine(Vector2 p1, Vector2 p2) {
+    	List<CircleCollisionComponent> returnval = new ArrayList<CircleCollisionComponent>();
+    	for (CircleCollisionComponent ccc : Core.getRootManager().getManager(CollisionManager.class).list) {
+    		if (ccc.intersects(p1, p2)) {
+            	returnval.add(ccc);
+            }
+        }
+    	
+    	return returnval;
     }
 
     public boolean collisionPoint(Vector2 point, String name) {
