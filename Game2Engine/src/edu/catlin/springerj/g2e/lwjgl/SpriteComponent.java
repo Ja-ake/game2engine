@@ -14,6 +14,7 @@ public class SpriteComponent extends AbstractComponent {
     public double imageIndex;
     public double imageSpeed;
     public boolean visible;
+    public double alpha;
 
     public SpriteComponent() {
         this("default");
@@ -24,6 +25,7 @@ public class SpriteComponent extends AbstractComponent {
         imageIndex = 0;
         imageSpeed = 0;
         visible = true;
+        alpha = 1.0d;
     }
 
     public SpriteComponent(String name, int n) {
@@ -31,6 +33,15 @@ public class SpriteComponent extends AbstractComponent {
         imageIndex = 0;
         imageSpeed = 0;
         visible = true;
+        alpha = 1.0d;
+    }
+    
+    public SpriteComponent(String name, int n, double a) {
+    	 setSprite(name, n);
+         imageIndex = 0;
+         imageSpeed = 0;
+         visible = true;
+         alpha = a;
     }
 
     @Override

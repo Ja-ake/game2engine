@@ -34,7 +34,14 @@ public class Grapple extends AbstractEntity {
 
 	@Override
 	public void update() {
-		if (getComponent(LengthComponent.class).length > 100.0d) getComponent(VelocityComponent.class).velocity = getComponent(VelocityComponent.class).velocity.setLength(0.00001);
-		getComponent(LengthComponent.class).length += getComponent(VelocityComponent.class).velocity.length() * Core.getDefaultTimer().getDeltaTime();
+		if (get(LengthComponent.class).length > 75.0d) {
+			get(VelocityComponent.class).velocity = get(VelocityComponent.class).velocity.setLength(0.00001);
+			get(SpriteComponent.class).alpha = 0.5d;
+		}
+		
+		get(LengthComponent.class).length += get(VelocityComponent.class).velocity.length() * Core.getDefaultTimer().getDeltaTime();
+		
+		if ((get(VelocityComponent.class).velocity).length() < 0.001) get(SpriteComponent.class).alpha -= Core.getDefaultTimer().getDeltaTime()/1;
+		if (get(SpriteComponent.class).alpha < 0.0d) this.getManager().remove(this);
 	}
 }

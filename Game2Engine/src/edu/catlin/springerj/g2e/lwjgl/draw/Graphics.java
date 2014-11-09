@@ -26,14 +26,14 @@ public abstract class Graphics {
     }
 
     public static void drawLine(double x1, double y1, double x2, double y2) {
-        drawLine(x1, y1, x2, y2, 0, 0, 0);
+        drawLine(x1, y1, x2, y2, 0, 0, 0, 1);
     }
 
-    public static void drawLine(double x1, double y1, double x2, double y2, double r, double g, double b) {
+    public static void drawLine(double x1, double y1, double x2, double y2, double r, double g, double b, double a) {
         glPushMatrix();
         glDisable(GL_TEXTURE_2D);
         glLineWidth(2);
-        glColor3d(r, g, b);
+        glColor4d(r, g, b, a);
         glBegin(GL_LINES);
         {
             glVertex2d(x1, y1);
@@ -43,7 +43,7 @@ public abstract class Graphics {
         glPopMatrix();
     }
 
-    public static void drawSprite(Texture s, double x, double y, double angle) {
+    public static void drawSprite(Texture s, double x, double y, double angle, double alpha) {
         glPushMatrix();
         glEnable(GL_TEXTURE_2D);
         s.bind();
@@ -52,7 +52,7 @@ public abstract class Graphics {
         glRotated((double) (angle * 180 / Math.PI), 0, 0, 1f);
         glTranslated(-s.getImageWidth() / 2, -s.getImageHeight() / 2, 0);
 
-        glColor3d(1, 1, 1);
+        glColor4d(1, 1, 1, alpha);
         glBegin(GL_QUADS);
         {
             glTexCoord2d(0, 0);

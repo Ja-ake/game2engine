@@ -12,8 +12,9 @@
   </object>
  </objectgroup>
  <objectgroup name="Living">
-  <object type="player" x="153" y="331" width="36" height="34">
+  <object type="player" x="13" y="195" width="36" height="34">
    <ellipse/>
   </object>
+  <object type="slimeenemy" x="264" y="90" width="33" height="32"/>
  </objectgroup>
 </map>

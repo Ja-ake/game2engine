@@ -27,7 +27,7 @@ public class Bullet extends AbstractEntity {
 		
 		Vector2 pos = get(PositionComponent.class).position;
 		Vector2 line = get(VelocityComponent.class).velocity.setLength(10.0d);
-		Graphics.drawLine(pos.x, pos.y, pos.x+line.x, pos.y+line.y, 1.0d, 0.3d, 0.3d);
+		Graphics.drawLine(pos.x, pos.y, pos.x+line.x, pos.y+line.y, 1.0d, 0.3d, 0.3d, 1.0d);
 		get(LengthComponent.class).length += get(VelocityComponent.class).velocity.multiply(Core.getDefaultTimer().getDeltaTime()).length();
 	}
 
