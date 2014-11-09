@@ -1,5 +1,7 @@
 package edu.catlin.springerj.explore.jake.newjake;
 
+import edu.catlin.springerj.explore.jake.items.GrappleComponent;
+import edu.catlin.springerj.explore.planets.Planet;
 import edu.catlin.springerj.explore.planets.PlanetGravityComponent;
 import edu.catlin.springerj.explore.planets.PlanetGravityManager;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
@@ -13,18 +15,27 @@ public class PlayerGravitySystem extends AbstractSystem {
     private PositionComponent p;
     private VelocityComponent v;
     private PlanetGravityComponent pg;
+    private GrappleComponent gc;
 
     @Override
     public void initialize(AbstractEntity e) {
         p = e.get(PositionComponent.class);
         v = e.get(VelocityComponent.class);
         pg = e.get(PlanetGravityComponent.class);
+        gc = e.get(GrappleComponent.class);
     }
 
     @Override
     public void update() {
-        pg.planet = Core.getRootManager().getManager(PlanetGravityManager.class).nearest(p.position);
-        v.velocity = v.velocity.add(pg.planet.get(PositionComponent.class).position.subtract(p.position).setLength(50 * Core.getDefaultTimer().getDeltaTime()));
+        if (gc.planet == null) {
+            Planet planet = Core.getRootManager().getManager(PlanetGravityManager.class).nearest(p.position);
+            pg.planetPos = planet.get(PositionComponent.class);
+            pg.planetVel = planet.get(VelocityComponent.class);
+        } else {
+            pg.planetPos = gc.planet.pc;
+            pg.planetVel = gc.planet.vc;
+        }
+        v.velocity = v.velocity.add(pg.planetPos.position.subtract(p.position).setLength(50 * Core.getDefaultTimer().getDeltaTime()));
     }
 
 }

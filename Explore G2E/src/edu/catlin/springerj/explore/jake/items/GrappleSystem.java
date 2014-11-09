@@ -50,14 +50,12 @@ public class GrappleSystem extends AbstractSystem {
                     //Try to find a planet
                     gc.planet = ccc.touching("Planet");
                 } else {//If you have a planet
+                    //Follow the planet
                     vc.velocity = gc.planet.vc.velocity;
-                    //if (toMe.lengthSquared() > 10000) {
-                        Vector2 impulse = gc.planet.pc.position.subtract(playerPos).setLength(2000 * Core.getDefaultTimer().getDeltaTime());
-                        gc.planet.applyImpulse(impulse.multiply(-1));
-                        gc.player.getComponent(CircleCollisionComponent.class).applyImpulse(impulse);
-                    //} else {
-                    //    sc.alpha = .5;
-                    //}
+                    //Pull planet and player together
+                    Vector2 impulse = gc.planet.pc.position.subtract(playerPos).setLength(2000 * Core.getDefaultTimer().getDeltaTime());
+                    gc.planet.applyImpulse(impulse.multiply(-1));
+                    gc.player.getComponent(CircleCollisionComponent.class).applyImpulse(impulse);
                 }
             }
         } else {
@@ -66,9 +64,7 @@ public class GrappleSystem extends AbstractSystem {
         }
         //If you're ready to be destroyed
         if (sc.alpha < 0) {
-            if (Core.getRootManager() != null) {
-                Core.getRootManager().remove(gc.grapple);
-            }
+            gc.destroyGrapple();
         }
     }
 
