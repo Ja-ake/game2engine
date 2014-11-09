@@ -16,9 +16,9 @@ import edu.catlin.springerj.g2e.movement.VelocityMovementSystem;
 import edu.catlin.springerj.g2e.thread.Task;
 import edu.catlin.springerj.g2e.utility.Logger;
 
-public class Bullet extends AbstractEntity {
+public class PlayerBullet extends AbstractEntity {
 
-	public Bullet(Vector2 position, Vector2 velocity) {
+	public PlayerBullet(Vector2 position, Vector2 velocity) {
 		add(new PositionComponent(position));
 		add(new VelocityComponent(velocity));
 		add(new LengthComponent());

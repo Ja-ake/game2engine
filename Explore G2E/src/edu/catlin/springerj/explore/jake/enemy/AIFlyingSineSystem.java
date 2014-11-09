@@ -1,6 +1,6 @@
 package edu.catlin.springerj.explore.jake.enemy;
 
-import edu.catlin.springerj.explore.jake.items.Bullet;
+import edu.catlin.springerj.explore.jake.items.EnemyBullet;
 import edu.catlin.springerj.explore.jake.items.BulletRechargeComponent;
 import edu.catlin.springerj.explore.planets.Planet;
 import edu.catlin.springerj.explore.jake.newjake.CircleCollisionComponent;
@@ -41,7 +41,7 @@ public class AIFlyingSineSystem extends AbstractSystem {
 					.collisionLine(pc.position, etc.getTargetPosition(),
 							"Planet")) {
 				Core.getRootManager()
-						.add(new Bullet(pc.position, etc.entity
+						.add(new EnemyBullet(pc.position, etc.entity
 								.get(PositionComponent.class).position
 								.subtract(pc.position)
 								.add(new Vector2(

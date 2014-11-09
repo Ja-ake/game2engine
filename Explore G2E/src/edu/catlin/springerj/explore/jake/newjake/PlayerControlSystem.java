@@ -2,7 +2,7 @@ package edu.catlin.springerj.explore.jake.newjake;
 
 import edu.catlin.springerj.explore.Keys;
 import edu.catlin.springerj.explore.MouseInput;
-import edu.catlin.springerj.explore.jake.items.Bullet;
+import edu.catlin.springerj.explore.jake.items.EnemyBullet;
 import edu.catlin.springerj.explore.jake.items.Grapple;
 import edu.catlin.springerj.explore.jake.items.GrappleComponent;
 import edu.catlin.springerj.explore.planets.PlanetGravityComponent;
@@ -95,7 +95,7 @@ public class PlayerControlSystem extends AbstractSystem {
         //Shooting
         if (Core.getRootManager().getManager(MouseInput.class).isReleased(MouseEvent.BUTTON_MB1)) {
             Vector2 velocity = Core.getRootManager().getManager(MouseInput.class).mousePos.subtract(pos.position).setLength(300);
-            Core.getRootManager().add(new Bullet(pos.position, velocity));
+            Core.getRootManager().add(new EnemyBullet(pos.position, velocity));
         }
     }
 }
