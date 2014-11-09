@@ -6,7 +6,6 @@ import java.io.File;
 import edu.catlin.springerj.explore.graphics.GreyStripedBackground;
 import edu.catlin.springerj.explore.collisions.CollisionManager;
 import edu.catlin.springerj.explore.enemy.Enemy;
-import edu.catlin.springerj.explore.enemy.Spawner;
 import edu.catlin.springerj.explore.graphics.TitleScreenButtons;
 import edu.catlin.springerj.explore.player.PlayerEntity;
 import edu.catlin.springerj.explore.planets.Planet;
@@ -30,14 +29,14 @@ public class Rory {
     public static void main(String[] args) {
         Core.initialize(new LWJGLManager());
 
-        Runnable tutorial = new Runnable() {
+        final Runnable tutorial = new Runnable() {
 
             @Override
             public void run() {
                 Core.getRootManager().add(new EventManager());
                 Core.getRootManager().add(new MouseInput());
                 Core.getRootManager().add(new Keys());
-                Core.getRootManager().add(new WebManager());
+                Core.getRootM`anager().add(new WebManager());
                 Core.getRootManager().add(new PlanetGravityManager());
                 Core.getRootManager().add(new CollisionManager());
 
@@ -60,9 +59,6 @@ public class Rory {
                             break;
                         case "slimeenemy":
                             Core.getRootManager().add(new Enemy(new Vector2(object.x + 32 / 2, -object.y - 32 / 2)));
-                            break;
-                        case "spawner":
-                            Core.getRootManager().add(new Spawner(new Vector2(object.x + 32 / 2, -object.y - 32 / 2)));
                             break;
                         default:
                             break;
@@ -121,7 +117,7 @@ public class Rory {
 
                 });
 
-                Core.getRootManager().add(new TitleScreenButtons());
+                Core.getRootManager().add(new TitleScreenButtons(tutorial));
 
                 Core.getRootManager().add(new Keys());
                 Core.getRootManager().add(new MouseInput());

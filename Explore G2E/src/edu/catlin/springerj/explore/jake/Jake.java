@@ -7,8 +7,8 @@ import edu.catlin.springerj.g2e.event.MouseInput;
 import edu.catlin.springerj.explore.enemy.Enemy;
 import edu.catlin.springerj.explore.graphics.GreyStripedBackground;
 import edu.catlin.springerj.explore.graphics.TitleScreenButtons;
+import edu.catlin.springerj.explore.graphics.particle.ParticleEmitter;
 import edu.catlin.springerj.explore.collisions.CollisionManager;
-import edu.catlin.springerj.explore.enemy.Spawner;
 import edu.catlin.springerj.explore.player.PlayerEntity;
 import edu.catlin.springerj.explore.planets.Planet;
 import edu.catlin.springerj.explore.planets.PlanetGravityManager;
@@ -31,16 +31,16 @@ public class Jake {
     public static void main(String[] args) {
         Core.initialize(new LWJGLManager());
 
-        Runnable tutorial = new Runnable() {
+        final Runnable tutorial = new Runnable() {
 
             @Override
             public void run() {
-                Core.getRootManager().add(new EventManager());
-                Core.getRootManager().add(new MouseInput());
-                Core.getRootManager().add(new Keys());
-                Core.getRootManager().add(new WebManager());
-                Core.getRootManager().add(new PlanetGravityManager());
-                Core.getRootManager().add(new CollisionManager());
+//                Core.getRootManager().add(new EventManager());
+//                Core.getRootManager().add(new MouseInput());
+//                Core.getRootManager().add(new Keys());
+//                Core.getRootManager().add(new WebManager());
+//                Core.getRootManager().add(new PlanetGravityManager());
+//                Core.getRootManager().add(new CollisionManager());
 
                 PlayerEntity p = new PlayerEntity(new Vector2(100, 0));
 
@@ -62,9 +62,6 @@ public class Jake {
                         case "slimeenemy":
                             Core.getRootManager().add(new Enemy(new Vector2(object.x + 32 / 2, -object.y - 32 / 2)));
                             break;
-                        case "spawner":
-                            Core.getRootManager().add(new Spawner(new Vector2(object.x + 32 / 2, -object.y - 32 / 2)));
-                            break;
                         default:
                             break;
                     }
@@ -80,8 +77,12 @@ public class Jake {
 
             @Override
             public void run() {
-                Core.getRootManager().add(new EventManager());
+            	Core.getRootManager().add(new EventManager());
+                Core.getRootManager().add(new MouseInput());
+                Core.getRootManager().add(new Keys());
                 Core.getRootManager().add(new WebManager());
+                Core.getRootManager().add(new PlanetGravityManager());
+                Core.getRootManager().add(new CollisionManager());
 
                 AbstractEntity ae = null;
                 Core.getRootManager().add(new InstantView(ae = new AbstractEntity() {
@@ -123,16 +124,13 @@ public class Jake {
 
                 });
 
-                Core.getRootManager().add(new TitleScreenButtons());
-
-                Core.getRootManager().add(new Keys());
-                Core.getRootManager().add(new MouseInput());
+                Core.getRootManager().add(new TitleScreenButtons(tutorial));
             }
         };
 
         ((LWJGLManager) Core.getRootManager()).addRoom("tutorial00", tutorial);
         ((LWJGLManager) Core.getRootManager()).addRoom("titlescreen", titlescreen);
-        ((LWJGLManager) Core.getRootManager()).setRoom("tutorial00");
+        ((LWJGLManager) Core.getRootManager()).setRoom("titlescreen");
         Core.run();
     }
 }

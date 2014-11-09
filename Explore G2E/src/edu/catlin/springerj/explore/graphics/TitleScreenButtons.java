@@ -10,9 +10,16 @@ import edu.catlin.springerj.g2e.lwjgl.SpriteComponent;
 import edu.catlin.springerj.g2e.lwjgl.draw.StaticImageRenderSystem;
 import edu.catlin.springerj.g2e.math.Vector2;
 import edu.catlin.springerj.g2e.movement.PositionComponent;
+import edu.catlin.springerj.g2e.thread.Task;
 
 public class TitleScreenButtons extends AbstractEntity implements EventListener<MouseEvent> {
 
+	private Runnable run;
+	
+	public TitleScreenButtons(Runnable r) {
+		run = r;
+	}
+	
 	@Override
 	public void initialize() {
 		add(new PositionComponent(new Vector2(-480.0d, -12.5d)));
@@ -31,8 +38,20 @@ public class TitleScreenButtons extends AbstractEntity implements EventListener<
 	public void onEvent(MouseEvent event) {
 		PositionComponent pc = get(PositionComponent.class);
 		if (event.action == MouseEvent.ACTION_RELEASE) {
-			if (pc.position.y == -12.5d) ((LWJGLManager) Core.getRootManager()).setRoom("tutorial00");
-			else System.exit(0);
+			if (pc.position.y == -12.5d) {
+				for (int i=0; i<Core.getRootManager().getEntities().size(); i++) {
+					Core.getRootManager().remove(Core.getRootManager().getEntities().get(i));
+				}
+				final TitleScreenButtons thus = this;
+				Core.task(new Task() {
+
+					@Override
+					public void run() {
+						thus.run.run();
+					}
+					
+				});
+			} else System.exit(0);
 		} else if (event.action == MouseEvent.ACTION_OTHER) {
 			if (pc.position.y == -12.5d) pc.position = new Vector2(pc.position.x, -107.0d);
 			else pc.position = new Vector2(pc.position.x, -12.5d);
