@@ -2,6 +2,7 @@ package edu.catlin.springerj.explore.rory;
 
 import edu.catlin.springerj.g2e.core.AbstractComponent;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
+import edu.catlin.springerj.g2e.core.Core;
 import edu.catlin.springerj.g2e.movement.PositionComponent;
 import edu.catlin.springerj.g2e.movement.VelocityComponent;
 
@@ -24,9 +25,19 @@ public class CircleCollisionComponent extends AbstractComponent {
     }
 
     public boolean touching(CircleCollisionComponent other) {
-        System.out.println(pc.position);
         //lengthSquared is faster than length
-        return (size + other.size) * (size + other.size) < pc.position.subtract(other.pc.position).lengthSquared();
+        return (size + other.size) * (size + other.size) > pc.position.subtract(other.pc.position).lengthSquared();
+    }
+
+    public boolean placeSolid() {
+        for (CircleCollisionComponent other : Core.getRootManager().getManager(CollisionManager.class).list) {
+            if (other != this) {
+                if (touching(other)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }

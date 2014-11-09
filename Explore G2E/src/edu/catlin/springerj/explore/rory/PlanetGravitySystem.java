@@ -8,22 +8,20 @@ import edu.catlin.springerj.g2e.movement.VelocityComponent;
 
 public class PlanetGravitySystem extends AbstractSystem {
 
-    private PositionComponent p;
-    private VelocityComponent v;
-    private PlanetGravityComponent pg;
+    private PositionComponent pos;
+    private VelocityComponent vel;
+    private PlanetComponent pc;
 
     @Override
     public void initialize(AbstractEntity e) {
-        p = e.get(PositionComponent.class);
-        v = e.get(VelocityComponent.class);
-        pg = e.get(PlanetGravityComponent.class);
+        pos = e.get(PositionComponent.class);
+        vel = e.get(VelocityComponent.class);
+        pc = e.get(PlanetComponent.class);
     }
 
     @Override
     public void update() {
-        Planet nearest = Core.getRootManager().getManager(PlanetGravityManager.class).nearest(p.position);
-        pg.planetPos = nearest.get(PositionComponent.class).position;
-        v.velocity = v.velocity.add(pg.planetPos.subtract(p.position).setLength(10 * Core.getDefaultTimer().getDeltaTime()));
+        vel.velocity = vel.velocity.add(pc.initialPos.subtract(pos.position).multiply(.5 * Core.getDefaultTimer().getDeltaTime())).multiply(.999);
     }
 
 }

@@ -5,6 +5,7 @@ import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.AbstractSystem;
 import edu.catlin.springerj.g2e.core.Core;
 import edu.catlin.springerj.g2e.lwjgl.SpriteComponent;
+import edu.catlin.springerj.g2e.math.Vector2;
 import edu.catlin.springerj.g2e.movement.PositionComponent;
 import edu.catlin.springerj.g2e.movement.RotationComponent;
 import edu.catlin.springerj.g2e.movement.VelocityComponent;
@@ -29,14 +30,20 @@ public class PlayerControlSystem extends AbstractSystem {
 
     @Override
     public void update() {
-        rot.rot = pg.planetPos.subtract(pos.position).direction() + Math.PI / 2;
-
+        //Rotate to face planet
+        Vector2 toPlanet = pg.planet.get(PositionComponent.class).position.subtract(pos.position);
+        rot.rot = toPlanet.direction() + Math.PI / 2;
+        //Left-right movement
         boolean left = Core.getRootManager().getManager(Keys.class).isDown(Keyboard.KEY_A);
         boolean right = Core.getRootManager().getManager(Keys.class).isDown(Keyboard.KEY_D);
         if (left && !right) {
-            vel.velocity = vel.velocity.add(pg.planetPos.subtract(pos.position).setLength(.1).normal());
+            vel.velocity = vel.velocity.add(toPlanet.normal().setLength(-.1));
         } else if (right && !left) {
-            vel.velocity = vel.velocity.add(pg.planetPos.subtract(pos.position).setLength(-.1).normal());
+            vel.velocity = vel.velocity.add(toPlanet.normal().setLength(.1));
         }
+        //Friction
+        Vector2 sideVel = toPlanet.normal().multiply(vel.velocity.subtract(pg.planet.get(VelocityComponent.class).velocity).dot(toPlanet.normal()) / toPlanet.lengthSquared());
+        vel.velocity = vel.velocity.add(sideVel.multiply(-.002));
+        //vel.velocity = vel.velocity.multiply(.999);
     }
 }
