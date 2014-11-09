@@ -1,4 +1,4 @@
-package edu.catlin.springerj.explore.rory;
+package edu.catlin.springerj.explore.planets;
 
 import edu.catlin.springerj.g2e.core.AbstractComponent;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
