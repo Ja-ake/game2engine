@@ -1,4 +1,4 @@
-package edu.catlin.springerj.explore.grapple.particle;
+package edu.catlin.springerj.explore.graphics.particle;
 
 import static org.lwjgl.opengl.GL11.*;
 

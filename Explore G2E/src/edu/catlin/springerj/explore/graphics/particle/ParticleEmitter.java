@@ -1,4 +1,4 @@
-package edu.catlin.springerj.explore.grapple.particle;
+package edu.catlin.springerj.explore.graphics.particle;
 
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.math.Vector2;

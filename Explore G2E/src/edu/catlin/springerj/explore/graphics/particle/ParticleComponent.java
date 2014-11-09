@@ -1,4 +1,4 @@
-package edu.catlin.springerj.explore.grapple.particle;
+package edu.catlin.springerj.explore.graphics.particle;
 
 import java.util.ArrayList;
 import java.util.List;

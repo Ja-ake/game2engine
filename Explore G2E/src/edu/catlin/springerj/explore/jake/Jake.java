@@ -6,7 +6,7 @@ import edu.catlin.springerj.explore.rory.Keys;
 import edu.catlin.springerj.explore.rory.MouseInput;
 import edu.catlin.springerj.explore.enemy.Enemy;
 import edu.catlin.springerj.explore.graphics.GreyStripedBackground;
-import edu.catlin.springerj.explore.grapple.particle.ParticleEmitter;
+import edu.catlin.springerj.explore.graphics.particle.ParticleEmitter;
 import edu.catlin.springerj.explore.collisions.CollisionManager;
 import edu.catlin.springerj.explore.player.PlayerEntity;
 import edu.catlin.springerj.explore.planets.Planet;
