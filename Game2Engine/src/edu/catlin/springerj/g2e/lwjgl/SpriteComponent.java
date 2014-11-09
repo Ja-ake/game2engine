@@ -15,6 +15,7 @@ public class SpriteComponent extends AbstractComponent {
     public double imageSpeed;
     public boolean visible;
     public double alpha;
+    public double red=1, green=1, blue=1;
 
     public SpriteComponent() {
         this("default");

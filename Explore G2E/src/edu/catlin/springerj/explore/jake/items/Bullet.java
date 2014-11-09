@@ -1,7 +1,12 @@
 package edu.catlin.springerj.explore.jake.items;
 
+import java.util.List;
+
+import edu.catlin.springerj.explore.jake.Player;
+import edu.catlin.springerj.explore.jake.newjake.PlayerEntity;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.Core;
+import edu.catlin.springerj.g2e.lwjgl.SpriteComponent;
 import edu.catlin.springerj.g2e.lwjgl.draw.Graphics;
 import edu.catlin.springerj.g2e.math.Vector2;
 import edu.catlin.springerj.g2e.movement.PositionComponent;
@@ -29,6 +34,21 @@ public class Bullet extends AbstractEntity {
 		Vector2 line = get(VelocityComponent.class).velocity.setLength(10.0d);
 		Graphics.drawLine(pos.x, pos.y, pos.x+line.x, pos.y+line.y, 1.0d, 0.3d, 0.3d, 1.0d);
 		get(LengthComponent.class).length += get(VelocityComponent.class).velocity.multiply(Core.getDefaultTimer().getDeltaTime()).length();
+	
+		List<AbstractEntity> entities = Core.getRootManager().getEntities();
+		for (int i=0; i<entities.size(); i++) {
+			AbstractEntity e = entities.get(i);
+			if (e instanceof PlayerEntity) {
+				PlayerEntity p = (PlayerEntity) e;
+				SpriteComponent sc = p.getComponent(SpriteComponent.class);
+				sc.red = 1.0d;
+				sc.green = 0.3d;
+				sc.blue = 0.3d;
+				System.out.println("hi");
+				
+				continue;
+			}
+		}
 	}
 
 }

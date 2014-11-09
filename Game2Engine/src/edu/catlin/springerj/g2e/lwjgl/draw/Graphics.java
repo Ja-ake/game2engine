@@ -43,7 +43,7 @@ public abstract class Graphics {
         glPopMatrix();
     }
 
-    public static void drawSprite(Texture s, double x, double y, double angle, double alpha) {
+    public static void drawSprite(Texture s, double x, double y, double angle, double r, double g, double b, double alpha) {
         glPushMatrix();
         glEnable(GL_TEXTURE_2D);
         s.bind();
@@ -52,7 +52,7 @@ public abstract class Graphics {
         glRotated((double) (angle * 180 / Math.PI), 0, 0, 1f);
         glTranslated(-s.getImageWidth() / 2, -s.getImageHeight() / 2, 0);
 
-        glColor4d(1, 1, 1, alpha);
+        glColor4d(r, g, b, alpha);
         glBegin(GL_QUADS);
         {
             glTexCoord2d(0, 0);
