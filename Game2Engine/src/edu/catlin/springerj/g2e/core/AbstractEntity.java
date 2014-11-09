@@ -43,13 +43,13 @@ public abstract class AbstractEntity extends ManagedObject {
 				components.add(c);
 				c.setManager(this.getManager());
 				final AbstractComponent fc = c;
-				Core.task(new Task() {
-					public void run() {
-						fc.initialize(thus);
-					}
-				});
+//				Core.task(new Task() {
+//					public void run() {
+//						fc.initialize(thus);
+//					}
+//				});
 				
-				//c.initialize(thus);
+				c.initialize(thus);
 			}
 		}
 
@@ -81,8 +81,9 @@ public abstract class AbstractEntity extends ManagedObject {
 //						fs.initialize(thus);
 //					}
 //				});
-				fs.initialize(thus);
 			}
+			
+			s.initialize(thus);
 		}
 
 		return r;

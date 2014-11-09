@@ -36,12 +36,12 @@ public class SpriteComponent extends AbstractComponent {
         alpha = 1.0d;
     }
     
-    public SpriteComponent(String name, int n, double a) {
+    public SpriteComponent(String name, int n, double speed) {
     	 setSprite(name, n);
          imageIndex = 0;
-         imageSpeed = 0;
+         imageSpeed = speed;
          visible = true;
-         alpha = a;
+         alpha = 1.0d;
     }
 
     @Override

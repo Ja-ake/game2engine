@@ -29,7 +29,6 @@ public class GrappleSystem extends AbstractSystem {
 
 	@Override
 	public void update() {
-		//System.out.println("Hi: " + rc.rot);
 		Graphics.drawLine(pc.position.x, pc.position.y, glc.start.x, glc.start.y, 0.0d, 0.0d, 0.0d, sc.alpha);
 	}
 
