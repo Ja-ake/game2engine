@@ -11,6 +11,7 @@ import edu.catlin.springerj.g2e.movement.PositionComponent;
 import edu.catlin.springerj.g2e.movement.RotationComponent;
 import edu.catlin.springerj.g2e.movement.VelocityComponent;
 import edu.catlin.springerj.g2e.movement.VelocityMovementSystem;
+import edu.catlin.springerj.g2e.utility.Logger;
 
 public class Grapple extends AbstractEntity {
 	
@@ -18,9 +19,9 @@ public class Grapple extends AbstractEntity {
 		add(new PositionComponent(position));
 		add(new VelocityComponent(velocity));
 		add(new FrictionComponent(1.0d));
-		add(new RotationComponent(0.0d));
+		add(new RotationComponent());
 		add(new SpriteComponent("sprite/grapplehead"));
-		add(new GrappleLengthComponent());
+		add(new GrappleLengthComponent(position));
 	}
 	
 	@Override
@@ -28,11 +29,12 @@ public class Grapple extends AbstractEntity {
 		add(new SpriteRenderSystem());
 		add(new FrictionSystem());
 		add(new VelocityMovementSystem());
+		add(new GrappleSystem());
 	}
 
 	@Override
 	public void update() {
-		if (getComponent(GrappleLengthComponent.class).length > 100.0d) this.getManager().remove(this);
+		if (getComponent(GrappleLengthComponent.class).length > 100.0d) getComponent(VelocityComponent.class).velocity = getComponent(VelocityComponent.class).velocity.setLength(0.00001);
 		getComponent(GrappleLengthComponent.class).length += getComponent(VelocityComponent.class).velocity.length() * Core.getDefaultTimer().getDeltaTime();
 	}
 }

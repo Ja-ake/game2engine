@@ -62,6 +62,7 @@ public class Jake {
 		}
 		
 		Core.getRootManager().add(new Grapple(new Vector2(0.0d, 0.0d), new Vector2(100.0d, 0.0d)));
+		Core.getRootManager().add(new Grapple(new Vector2(0.0d, -50.0d), new Vector2(100.0d, 0.0d)));
 		
 		//Core.getRootManager().add(new FilledCircle());
 		//Core.getRootManager().add(p);
