@@ -35,7 +35,7 @@ public class EnemyBullet extends AbstractEntity {
         if (p != null) {
             final SpriteComponent sc = p.getComponent(SpriteComponent.class);
             sc.setSprite("character_idle_left_red", 8);
-            p.get(CircleCollisionComponent.class).applyImpulse(get(VelocityComponent.class).velocity.setLength(10000));
+            p.get(CircleCollisionComponent.class).applyImpulse(get(VelocityComponent.class).velocity.setLength(1000));
             Core.getRootManager().remove(this);
             Core.task(new Task(true) {
                 private double time = 0;

@@ -21,7 +21,7 @@ public class Enemy extends AbstractEntity {
         add(new RotationComponent());
         add(new SpriteComponent("enemy_smoking_black", 5, 2));
         add(new BulletCooldownComponent(2.5));
-        add(new HealthComponent(5.0d));
+        add(new HealthComponent(50));
         add(new CircleCollisionComponent(10, true));
         //Systems
         add(new SpriteRenderSystem());

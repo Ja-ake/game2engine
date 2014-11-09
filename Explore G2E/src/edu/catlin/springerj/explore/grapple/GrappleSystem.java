@@ -41,7 +41,7 @@ public class GrappleSystem extends AbstractSystem {
         //If you're active
         if (sc.alpha == 1) {
             //If you should die
-            if (toMe.lengthSquared() > 100000 || Core.getRootManager().getManager(CollisionManager.class).collisionLine(playerPos, pc.position, "Planet")) {
+            if (toMe.lengthSquared() > 200000 || Core.getRootManager().getManager(CollisionManager.class).collisionLine(playerPos, pc.position, "Planet")) {
                 vc.velocity = new Vector2();
                 sc.alpha = .5;
             } else {
