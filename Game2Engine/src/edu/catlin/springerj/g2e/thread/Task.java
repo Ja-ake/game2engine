@@ -2,6 +2,7 @@ package edu.catlin.springerj.g2e.thread;
 
 public abstract class Task implements Runnable {
 	private boolean once;
+	boolean run = false;
 	private int id;
 	public abstract void run();
 	

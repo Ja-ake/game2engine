@@ -2,7 +2,7 @@ package edu.catlin.springerj.explore.jake.enemy;
 
 import edu.catlin.springerj.explore.jake.items.BulletRechargeComponent;
 import edu.catlin.springerj.explore.planets.Planet;
-import edu.catlin.springerj.explore.rory.CircleCollisionComponent;
+import edu.catlin.springerj.explore.jake.newjake.CircleCollisionComponent;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.AbstractSystem;
 import edu.catlin.springerj.g2e.core.Core;
@@ -40,7 +40,7 @@ public class AIFlyingSineSystem extends AbstractSystem {
 				if (e instanceof Planet) {
 					Planet p = (Planet) e;
 					double radius = p.get(CircleCollisionComponent.class).size;
-					Vector2 center = p.get(PositionComponent())
+					Vector2 center = p.get(PositionComponent.class).position;
 				}
 			}
 		}

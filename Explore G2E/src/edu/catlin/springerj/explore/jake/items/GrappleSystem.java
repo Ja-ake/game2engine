@@ -65,8 +65,8 @@ public class GrappleSystem extends AbstractSystem {
         }
         //If you're ready to be destroyed
         if (sc.alpha < 0) {
-            if (getManager() != null) {
-                getManager().remove(gc.grapple);
+            if (Core.getRootManager() != null) {
+            	Core.getRootManager().remove(gc.grapple);
             }
         }
     }
