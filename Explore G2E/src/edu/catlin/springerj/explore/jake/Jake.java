@@ -41,7 +41,7 @@ public class Jake {
                 	Core.getRootManager().add(p);
                 	break;
                 case "slimeenemy":
-                	Core.getRootManager().add(new Enemy(new Vector2(object.x+32/2, -object.y-32/2)));
+                	Core.getRootManager().add(new Enemy(new Vector2(object.x+32/2, -object.y-32/2), p));
                 	break;
                 default:
                     break;

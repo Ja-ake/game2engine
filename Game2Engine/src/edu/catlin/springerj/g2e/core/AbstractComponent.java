@@ -4,6 +4,8 @@ package edu.catlin.springerj.g2e.core;
  * Contains information for a given component.
  */
 public abstract class AbstractComponent extends ManagedObject {
+	int id;
+	
 	void background(boolean started) { }
 	public abstract void initialize(AbstractEntity e);
 }

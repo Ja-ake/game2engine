@@ -122,6 +122,16 @@ public abstract class AbstractManager extends ManagedObject {
     public AbstractManager remove(AbstractEntity ent) {
     	Core.getDefaultTaskThread().remove(ent.updatetask.getID());
     	entities.remove(ent);
+    	for (AbstractComponent ac : ent.components) {
+    		Core.getDefaultTaskThread().remove(ac.id);
+    	}
+    	
+    	for (AbstractSystem sc : ent.systems) {
+    		Core.getDefaultTaskThread().remove(sc.id);
+    	}
+    	
+    	ent.components.clear();
+    	ent.systems.clear();
     	return this;
     }
     
