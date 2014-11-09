@@ -2,10 +2,10 @@ package edu.catlin.springerj.explore.jake;
 
 import java.io.File;
 
-import edu.catlin.springerj.explore.Player;
 import edu.catlin.springerj.explore.jake.graphics.FilledCircle;
 import edu.catlin.springerj.explore.jake.graphics.GreyStripedBackground;
 import edu.catlin.springerj.explore.jake.items.Grapple;
+import edu.catlin.springerj.explore.rory.CollisionManager;
 import edu.catlin.springerj.explore.rory.Planet;
 import edu.catlin.springerj.g2e.core.Core;
 import edu.catlin.springerj.g2e.lwjgl.LWJGLManager;
@@ -21,7 +21,9 @@ import edu.catlin.springerj.g2e.utility.Logger;
 
 public class Jake {
 	public static void main(String[] args) {
-		Core.initialize(new LWJGLManager());
+		LWJGLManager lwjgl = new LWJGLManager();
+		lwjgl.add(new CollisionManager());
+		Core.initialize(lwjgl);
 		
 		Player p = new Player();
 		

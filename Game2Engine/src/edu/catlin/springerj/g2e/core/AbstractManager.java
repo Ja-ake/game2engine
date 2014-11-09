@@ -5,6 +5,7 @@ import java.util.List;
 
 import edu.catlin.springerj.g2e.exception.InvalidManagerException;
 import edu.catlin.springerj.g2e.thread.Task;
+import edu.catlin.springerj.g2e.utility.Logger;
 import edu.catlin.springerj.g2e.web.WebManager;
 
 /**
@@ -91,9 +92,10 @@ public abstract class AbstractManager extends ManagedObject {
     public AbstractManager add(AbstractEntity ent) {
         entities.add(ent);
         ent.setManager(this);
-        if (initialized) {
-            ent.initialize();
-        }
+        //if (initialized) {
+        ent.initialize();
+        //}
+        
 		final AbstractEntity et = ent;
 		ent.updatetask = new Task(true) {
 			@Override

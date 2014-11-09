@@ -29,6 +29,7 @@ public abstract class AbstractEntity extends ManagedObject {
 	public boolean add(AbstractComponent... cs) {
 		boolean r = true;
 
+		final AbstractEntity thus = this;
 		for (AbstractComponent c : cs) {
 			String cName = c.getClass().getName();
 			boolean contains = false;
@@ -41,6 +42,12 @@ public abstract class AbstractEntity extends ManagedObject {
 			if (!contains) {
 				components.add(c);
 				c.setManager(this.getManager());
+				final AbstractComponent fc = c;
+				Core.task(new Task() {
+					public void run() {
+						fc.initialize(thus);
+					}
+				});
 			}
 		}
 
@@ -72,7 +79,6 @@ public abstract class AbstractEntity extends ManagedObject {
 						fs.initialize(thus);
 					}
 				});
-				
 			}
 		}
 
