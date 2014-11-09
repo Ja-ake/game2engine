@@ -1,5 +1,7 @@
 package edu.catlin.springerj.explore.player;
 
+import edu.catlin.springerj.explore.bullets.BulletCooldownComponent;
+import edu.catlin.springerj.explore.bullets.BulletCooldownSystem;
 import edu.catlin.springerj.explore.planets.PlanetGravityComponent;
 import edu.catlin.springerj.explore.grapple.GrappleComponent;
 import edu.catlin.springerj.explore.collisions.CircleCollisionComponent;
@@ -27,12 +29,16 @@ public class PlayerEntity extends AbstractEntity {
         add(new PlanetGravityComponent());
         add(new GrappleComponent(this, null));
         add(new HealthComponent(100));
+        add(new PlayerWeaponComponent());
+        add(new BulletCooldownComponent(.5));
         //Systems
         add(new SpriteRenderSystem());
         add(new VelocityMovementSystem());
         add(new PlayerGravitySystem());
         add(new PlayerControlSystem());
         add(new CircleCollisionSystem());
+        add(new PlayerWeaponSystem());
+        add(new BulletCooldownSystem());
     }
 
     @Override

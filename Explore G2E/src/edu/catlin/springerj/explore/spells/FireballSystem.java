@@ -1,5 +1,6 @@
-package edu.catlin.springerj.explore.bullets;
+package edu.catlin.springerj.explore.spells;
 
+import edu.catlin.springerj.explore.bullets.BulletComponent;
 import edu.catlin.springerj.explore.collisions.CircleCollisionComponent;
 import edu.catlin.springerj.explore.collisions.CollisionManager;
 import edu.catlin.springerj.explore.enemy.Enemy;
@@ -17,7 +18,7 @@ public class FireballSystem extends AbstractSystem {
 
     private PositionComponent pos;
     private VelocityComponent vel;
-    private LengthComponent len;
+    private BulletComponent bc;
     private CircleCollisionComponent ccc;
     private AbstractEntity entity;
 
@@ -38,17 +39,17 @@ public class FireballSystem extends AbstractSystem {
     public void initialize(AbstractEntity e) {
         pos = e.get(PositionComponent.class);
         vel = e.get(VelocityComponent.class);
-        len = e.get(LengthComponent.class);
+        bc = e.get(BulletComponent.class);
         ccc = e.get(CircleCollisionComponent.class);
         entity = e;
     }
 
     @Override
     public void update() {
-        if (len.length > 1024 * 16) {
-            Core.getRootManager().remove(entity);
+        if (pos.position.subtract(bc.start).lengthSquared() > bc.range*bc.range) {
+            Core.getRootManager().remove(bc.entity);
         }
-
+        
         if (Core.getRootManager().getManager(CollisionManager.class).collisionPoint(pos.position, "Planet")) {
             Planet p = Core.getRootManager().getManager(CollisionManager.class).entityPoint(pos.position, Planet.class);
             p.get(CircleCollisionComponent.class).applyImpulse(vel.velocity.setLength(1000));

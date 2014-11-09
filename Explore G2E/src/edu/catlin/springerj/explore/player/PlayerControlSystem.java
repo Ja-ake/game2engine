@@ -1,9 +1,7 @@
 package edu.catlin.springerj.explore.player;
 
-import edu.catlin.springerj.explore.bullets.Fireball;
 import edu.catlin.springerj.explore.rory.Keys;
 import edu.catlin.springerj.explore.rory.MouseInput;
-import edu.catlin.springerj.explore.bullets.PlayerBullet;
 import edu.catlin.springerj.explore.grapple.Grapple;
 import edu.catlin.springerj.explore.grapple.GrappleComponent;
 import edu.catlin.springerj.explore.collisions.CircleCollisionComponent;
@@ -91,22 +89,11 @@ public class PlayerControlSystem extends AbstractSystem {
         //Slight friction
         vel.velocity = vel.velocity.multiply(.9999);
         //Grapple
-        if (Core.getRootManager().getManager(MouseInput.class).isReleased(MouseEvent.BUTTON_MB2)) {
+        if (Core.getRootManager().getManager(MouseInput.class).isPressed(MouseEvent.BUTTON_MB2)) {
             if (gc.grapple == null) {
                 Vector2 velocity = Core.getRootManager().getManager(MouseInput.class).mousePos.subtract(pos.position).setLength(100);
                 gc.grapple = new Grapple(player, velocity);
                 Core.getRootManager().add(gc.grapple);
-            }
-        }
-        //Shooting
-        if (Core.getRootManager().getManager(MouseInput.class).isReleased(MouseEvent.BUTTON_MB1)) {
-            double time = Core.getRootManager().getManager(MouseInput.class).getTimeR(MouseEvent.BUTTON_MB1);
-            if (time < 1) {
-                Vector2 velocity = Core.getRootManager().getManager(MouseInput.class).mousePos.subtract(pos.position).setLength(300);
-                Core.getRootManager().add(new PlayerBullet(pos.position, velocity));
-            } else {
-                Vector2 velocity = Core.getRootManager().getManager(MouseInput.class).mousePos.subtract(pos.position).setLength(200);
-                Core.getRootManager().add(new Fireball(pos.position, velocity));
             }
         }
         //Health
@@ -114,7 +101,7 @@ public class PlayerControlSystem extends AbstractSystem {
         Graphics.fillRect(pos.position.x - 14, pos.position.y - 30, 28, 4, 1, 0, 0);
         Graphics.fillRect(pos.position.x - 14, pos.position.y - 30, .28 * hc.currentHealth, 4, 0, 1, 0);
         if (hc.currentHealth == 0) {
-
+            //Restart game
         }
     }
 }

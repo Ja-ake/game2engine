@@ -20,7 +20,7 @@ public class EnemyBullet extends AbstractEntity {
         //Components
         add(new PositionComponent(position));
         add(new VelocityComponent(velocity));
-        add(new LengthComponent());
+        add(new BulletComponent());
         //Systems
         add(new VelocityMovementSystem());
         add(new BulletSystem());
