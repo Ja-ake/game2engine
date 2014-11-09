@@ -15,6 +15,7 @@ public class CircleCollisionComponent extends AbstractComponent {
     public String name;
     public PositionComponent pc;
     public VelocityComponent vc;
+    public AbstractEntity entity;
 
     public CircleCollisionComponent(double size, boolean solid) {
         this.size = size;
@@ -35,7 +36,7 @@ public class CircleCollisionComponent extends AbstractComponent {
         name = e.getClass().getSimpleName();
         pc = e.get(PositionComponent.class);
         vc = e.get(VelocityComponent.class);
-        //System.out.println(name);
+        entity = e;
     }
 
     public boolean intersects(CircleCollisionComponent other) {

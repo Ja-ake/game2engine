@@ -2,7 +2,7 @@ package edu.catlin.springerj.explore.player;
 
 import edu.catlin.springerj.explore.rory.Keys;
 import edu.catlin.springerj.explore.rory.MouseInput;
-import edu.catlin.springerj.explore.bullets.EnemyBullet;
+import edu.catlin.springerj.explore.bullets.PlayerBullet;
 import edu.catlin.springerj.explore.grapple.Grapple;
 import edu.catlin.springerj.explore.grapple.GrappleComponent;
 import edu.catlin.springerj.explore.collisions.CircleCollisionComponent;
@@ -96,7 +96,7 @@ public class PlayerControlSystem extends AbstractSystem {
         //Shooting
         if (Core.getRootManager().getManager(MouseInput.class).isReleased(MouseEvent.BUTTON_MB1)) {
             Vector2 velocity = Core.getRootManager().getManager(MouseInput.class).mousePos.subtract(pos.position).setLength(300);
-            Core.getRootManager().add(new EnemyBullet(pos.position, velocity));
+            Core.getRootManager().add(new PlayerBullet(pos.position, velocity));
         }
     }
 }

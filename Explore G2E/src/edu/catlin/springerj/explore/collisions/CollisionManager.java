@@ -32,16 +32,16 @@ public class CollisionManager extends AbstractManager {
         }
         return false;
     }
-    
+
     public List<CircleCollisionComponent> collisionLine(Vector2 p1, Vector2 p2) {
-    	List<CircleCollisionComponent> returnval = new ArrayList<CircleCollisionComponent>();
-    	for (CircleCollisionComponent ccc : Core.getRootManager().getManager(CollisionManager.class).list) {
-    		if (ccc.intersects(p1, p2)) {
-            	returnval.add(ccc);
+        List<CircleCollisionComponent> returnval = new ArrayList<CircleCollisionComponent>();
+        for (CircleCollisionComponent ccc : Core.getRootManager().getManager(CollisionManager.class).list) {
+            if (ccc.intersects(p1, p2)) {
+                returnval.add(ccc);
             }
         }
-    	
-    	return returnval;
+
+        return returnval;
     }
 
     public boolean collisionPoint(Vector2 point, String name) {
@@ -53,6 +53,17 @@ public class CollisionManager extends AbstractManager {
             }
         }
         return false;
+    }
+
+    public <E extends AbstractEntity> E entityPoint(Vector2 point, Class<E> c) {
+        for (CircleCollisionComponent ccc : Core.getRootManager().getManager(CollisionManager.class).list) {
+            if (c.isInstance(ccc.entity)) {
+                if (ccc.contains(point)) {
+                    return (E) ccc.entity;
+                }
+            }
+        }
+        return null;
     }
 
     @Override
