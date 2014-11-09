@@ -30,6 +30,12 @@ public class CircleCollisionComponent extends AbstractComponent {
     public boolean contains(Vector2 point) {
         return point.subtract(pc.position).lengthSquared() < size * size;
     }
+    
+    @Override
+    public void destroy() {
+        super.destroy();
+        Core.getRootManager().getManager(CollisionManager.class).list.remove(this);
+    }
 
     @Override
     public void initialize(AbstractEntity e) {

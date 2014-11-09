@@ -4,6 +4,7 @@ import edu.catlin.springerj.explore.collisions.CircleCollisionComponent;
 import edu.catlin.springerj.explore.collisions.CollisionManager;
 import edu.catlin.springerj.explore.enemy.Enemy;
 import edu.catlin.springerj.explore.enemy.HealthComponent;
+import edu.catlin.springerj.explore.enemy.Spawner;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.Core;
 import edu.catlin.springerj.g2e.math.Vector2;
@@ -32,7 +33,12 @@ public class PlayerBullet extends AbstractEntity {
         Enemy p = Core.getRootManager().getManager(CollisionManager.class).entityPoint(getComponent(PositionComponent.class).position, Enemy.class);
         if (p != null) {
             p.get(HealthComponent.class).damage(10);
-            p.get(CircleCollisionComponent.class).applyImpulse(get(VelocityComponent.class).velocity.setLength(10000));
+            p.get(CircleCollisionComponent.class).applyImpulse(get(VelocityComponent.class).velocity.setLength(1000));
+            Core.getRootManager().remove(this);
+        }
+        Spawner s = Core.getRootManager().getManager(CollisionManager.class).entityPoint(getComponent(PositionComponent.class).position, Spawner.class);
+        if (s != null) {
+            s.get(HealthComponent.class).damage(10);
             Core.getRootManager().remove(this);
         }
     }

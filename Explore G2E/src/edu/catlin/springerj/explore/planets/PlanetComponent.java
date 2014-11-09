@@ -14,7 +14,7 @@ public class PlanetComponent extends AbstractComponent {
 
     public PlanetComponent() {
         color1 = new Color4d(1, 1, 1);
-        color2 = new Color4d(0, 0, 0);
+        color2 = new Color4d(.1, .1, .1);
     }
 
     @Override

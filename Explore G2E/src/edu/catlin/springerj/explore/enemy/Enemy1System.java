@@ -26,14 +26,14 @@ public class Enemy1System extends AbstractSystem {
 
     @Override
     public void update() {
-        vc.velocity = vc.velocity.add(new Vector2(0.0d, .32 * Math.sin(Core.getDefaultTimer().getCurrentTime() * 1.6)));
-
         Vector2 target = Core.getRootManager().getEntity(PlayerEntity.class).getComponent(PositionComponent.class).position;
+        vc.velocity = vc.velocity.add(target.subtract(pc.position).setLength((Math.min(500, -100 + target.subtract(pc.position).length()/3)) * Core.getDefaultTimer().getDeltaTime())).multiply(.99);
+
         if (!Core.getRootManager().getManager(CollisionManager.class).collisionLine(pc.position, target, "Planet")) {
             if (brc.shoot()) {
                 //Shoot a bullet
                 Core.getRootManager().add(new EnemyBullet(pc.position, target.subtract(pc.position)
-                        .add(new Vector2(Math.random() * 75 - 37.5, Math.random() * 75 - 37.5))));
+                        .add(new Vector2(Math.random() * 75 - 37.5, Math.random() * 75 - 37.5)).setLength(300)));
             }
         }
     }

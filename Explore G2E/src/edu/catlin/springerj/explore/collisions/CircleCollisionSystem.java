@@ -28,27 +28,27 @@ public class CircleCollisionSystem extends AbstractSystem {
                 other.applyImpulse(axis.multiply(-impulse));
                 //Move them outside each other
                 ccc.pc.position = ccc.pc.position.add(axis.multiply(depth * ccc.invMass / (ccc.invMass + other.invMass)));
-                other.pc.position = other.pc.position.add(axis.multiply(depth * other.invMass / (ccc.invMass + other.invMass)));
+                other.pc.position = other.pc.position.add(axis.multiply(-depth * other.invMass / (ccc.invMass + other.invMass)));
                 //Calculate the friction
-                double normalSpeed = ccc.vc.velocity.subtract(other.vc.velocity).dot(axis.normal());
-                double frictionImpulse = 0;
-                double u = 0;//.2;
-                if (normalSpeed > 0) {
-                    if (normalSpeed > -impulse * u) {
-                        frictionImpulse = -impulse * u;
-                    } else {
-                        frictionImpulse = normalSpeed;
-                    }
-                } else if (normalSpeed < 0) {
-                    if (normalSpeed < impulse * u) {
-                        frictionImpulse = impulse * u;
-                    } else {
-                        frictionImpulse = -normalSpeed;
-                    }
-                }
-                //Apply the friction impulse
-                ccc.applyImpulse(axis.normal().multiply(frictionImpulse));
-                other.applyImpulse(axis.normal().multiply(-frictionImpulse));
+//                double normalSpeed = ccc.vc.velocity.subtract(other.vc.velocity).dot(axis.normal());
+//                double frictionImpulse = 0;
+//                double u = 0;//.2;
+//                if (normalSpeed > 0) {
+//                    if (normalSpeed > -impulse * u) {
+//                        frictionImpulse = -impulse * u;
+//                    } else {
+//                        frictionImpulse = normalSpeed;
+//                    }
+//                } else if (normalSpeed < 0) {
+//                    if (normalSpeed < impulse * u) {
+//                        frictionImpulse = impulse * u;
+//                    } else {
+//                        frictionImpulse = -normalSpeed;
+//                    }
+//                }
+//                //Apply the friction impulse
+//                ccc.applyImpulse(axis.normal().multiply(frictionImpulse));
+//                other.applyImpulse(axis.normal().multiply(-frictionImpulse));
             }
         }
     }

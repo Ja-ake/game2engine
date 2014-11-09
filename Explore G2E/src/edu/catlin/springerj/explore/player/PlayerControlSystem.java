@@ -6,12 +6,14 @@ import edu.catlin.springerj.explore.bullets.PlayerBullet;
 import edu.catlin.springerj.explore.grapple.Grapple;
 import edu.catlin.springerj.explore.grapple.GrappleComponent;
 import edu.catlin.springerj.explore.collisions.CircleCollisionComponent;
+import edu.catlin.springerj.explore.enemy.HealthComponent;
 import edu.catlin.springerj.explore.planets.PlanetGravityComponent;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.AbstractSystem;
 import edu.catlin.springerj.g2e.core.Core;
 import edu.catlin.springerj.g2e.event.MouseEvent;
 import edu.catlin.springerj.g2e.lwjgl.SpriteComponent;
+import edu.catlin.springerj.g2e.lwjgl.draw.Graphics;
 import edu.catlin.springerj.g2e.math.Vector2;
 import edu.catlin.springerj.g2e.movement.PositionComponent;
 import edu.catlin.springerj.g2e.movement.RotationComponent;
@@ -27,6 +29,7 @@ public class PlayerControlSystem extends AbstractSystem {
     private CircleCollisionComponent ccc;
     private PlanetGravityComponent pg;
     private GrappleComponent gc;
+    private HealthComponent hc;
     private PlayerEntity player;
 
     @Override
@@ -38,6 +41,7 @@ public class PlayerControlSystem extends AbstractSystem {
         ccc = e.get(CircleCollisionComponent.class);
         pg = e.get(PlanetGravityComponent.class);
         gc = e.get(GrappleComponent.class);
+        hc = e.get(HealthComponent.class);
         player = (PlayerEntity) e;
     }
 
@@ -97,6 +101,13 @@ public class PlayerControlSystem extends AbstractSystem {
         if (Core.getRootManager().getManager(MouseInput.class).isReleased(MouseEvent.BUTTON_MB1)) {
             Vector2 velocity = Core.getRootManager().getManager(MouseInput.class).mousePos.subtract(pos.position).setLength(300);
             Core.getRootManager().add(new PlayerBullet(pos.position, velocity));
+        }
+        //Health
+        Graphics.fillRect(pos.position.x - 16, pos.position.y - 32, 32, 8, 0, 0, 0);
+        Graphics.fillRect(pos.position.x - 14, pos.position.y - 30, 28, 4, 1, 0, 0);
+        Graphics.fillRect(pos.position.x - 14, pos.position.y - 30, .28 * hc.currentHealth, 4, 0, 1, 0);
+        if (hc.currentHealth == 0) {
+
         }
     }
 }

@@ -2,6 +2,7 @@ package edu.catlin.springerj.explore.bullets;
 
 import edu.catlin.springerj.explore.collisions.CircleCollisionComponent;
 import edu.catlin.springerj.explore.collisions.CollisionManager;
+import edu.catlin.springerj.explore.enemy.HealthComponent;
 import edu.catlin.springerj.explore.player.PlayerEntity;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.Core;
@@ -33,6 +34,7 @@ public class EnemyBullet extends AbstractEntity {
     public void update() {
         PlayerEntity p = Core.getRootManager().getManager(CollisionManager.class).entityPoint(getComponent(PositionComponent.class).position, PlayerEntity.class);
         if (p != null) {
+            p.get(HealthComponent.class).damage(5);
             final SpriteComponent sc = p.getComponent(SpriteComponent.class);
             sc.setSprite("character_idle_left_red", 8);
             p.get(CircleCollisionComponent.class).applyImpulse(get(VelocityComponent.class).velocity.setLength(1000));
