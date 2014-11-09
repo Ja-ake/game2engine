@@ -28,15 +28,19 @@ import edu.catlin.springerj.g2e.web.WebManager;
 
 public class Jake {
 	public static void main(String[] args) {
-        Core.initialize(new LWJGLManager().add(new PlanetGravityManager()).add(new CollisionManager()));
-        Core.getRootManager().add(new EventManager());
-        Core.getRootManager().add(new WebManager());
-        Core.getRootManager().add(new Keys());
-        Core.getRootManager().add(new MouseInput());
+        Core.initialize(new LWJGLManager());
+        
         Runnable tutorial = new Runnable() {
 
 			@Override
 			public void run() {
+				Core.getRootManager().add(new EventManager());
+		        Core.getRootManager().add(new MouseInput());
+		        Core.getRootManager().add(new Keys());
+		        Core.getRootManager().add(new WebManager());
+		        Core.getRootManager().add(new PlanetGravityManager());
+		        Core.getRootManager().add(new CollisionManager());
+				
 				PlayerEntity p = new PlayerEntity(new Vector2(100, 0));
 
 		        Core.getRootManager().add(new View(p));
@@ -61,7 +65,10 @@ public class Jake {
 		                default:
 		                    break;
 		            }
-		        }   
+		        }
+		        
+		        
+		        //Core.getRootManager().add(new MouseInput());
 			}
         };
         
@@ -69,6 +76,8 @@ public class Jake {
 
 			@Override
 			public void run() {
+				Core.getRootManager().add(new EventManager());
+		        Core.getRootManager().add(new WebManager());
 				
 				AbstractEntity ae = null;
 		        Core.getRootManager().add(new InstantView(ae = new AbstractEntity() {
@@ -112,6 +121,9 @@ public class Jake {
 		        });
 		        
 		        Core.getRootManager().add(new TitleScreenButtons());
+		        
+		        Core.getRootManager().add(new Keys());
+		        Core.getRootManager().add(new MouseInput());
 			}
         };
         

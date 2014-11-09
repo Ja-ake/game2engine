@@ -56,6 +56,7 @@ public class PlayerWeaponSystem extends AbstractSystem {
         }
         if (wc.auto) {
             if (Core.getRootManager().getManager(MouseInput.class).isDown(MouseEvent.BUTTON_MB1)) {
+            	
                 if (bcc.shoot()) {
                     fire1(wc.weapon);
                 }

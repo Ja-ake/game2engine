@@ -1,9 +1,11 @@
 package edu.catlin.springerj.explore.rory;
 
 import edu.catlin.springerj.g2e.core.AbstractManager;
+import edu.catlin.springerj.g2e.core.Core;
 import edu.catlin.springerj.g2e.event.EventListener;
 import edu.catlin.springerj.g2e.event.EventManager;
 import edu.catlin.springerj.g2e.event.KeyboardEvent;
+
 import java.util.ArrayList;
 
 public class Keys extends AbstractManager implements EventListener<KeyboardEvent> {
@@ -14,7 +16,7 @@ public class Keys extends AbstractManager implements EventListener<KeyboardEvent
 
     @Override
     public void initialize() {
-        getManager().getManager(EventManager.class).register(this);
+        Core.getRootManager().getManager(EventManager.class).register(this);
     }
 
     public boolean isDown(int key) {

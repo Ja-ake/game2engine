@@ -142,6 +142,7 @@ public abstract class AbstractManager extends ManagedObject {
 		this.start();
 		for (AbstractManager am : this.managers)
 			am.removeAll();
+		managers.clear();
 		return this;
 	}
 

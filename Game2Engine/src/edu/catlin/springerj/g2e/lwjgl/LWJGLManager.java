@@ -48,6 +48,7 @@ public class LWJGLManager extends AbstractManager {
 	public void setRoom(String name) {
 		Core.getDefaultTaskThread().clear();
 		this.removeAll();
+		
 		rooms.get(name).run();
 	}
 }
