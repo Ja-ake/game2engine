@@ -11,21 +11,26 @@ public class CircleCollisionComponent extends AbstractComponent {
 
     public double size;
     public double invMass;
+    public boolean solid;
+    public String name;
     public PositionComponent pc;
     public VelocityComponent vc;
 
-    public CircleCollisionComponent(double size) {
+    public CircleCollisionComponent(double size, boolean solid) {
         this.size = size;
         invMass = 1 / (size * size);
+        this.solid = solid;
     }
 
     @Override
     public void initialize(AbstractEntity e) {
+        name = e.getClass().getSimpleName();
         pc = e.get(PositionComponent.class);
         vc = e.get(VelocityComponent.class);
+        //System.out.println(name);
     }
 
-    public boolean touching(CircleCollisionComponent other) {
+    public boolean intersects(CircleCollisionComponent other) {
         //lengthSquared is faster than length
         return (size + other.size) * (size + other.size) > pc.position.subtract(other.pc.position).lengthSquared();
     }
@@ -35,14 +40,29 @@ public class CircleCollisionComponent extends AbstractComponent {
         pc.position = pos;
         for (CircleCollisionComponent other : Core.getRootManager().getManager(CollisionManager.class).list) {
             if (other != this) {
-                if (touching(other)) {
-                    pc.position = old;
-                    return true;
+                if (other.solid) {
+                    if (intersects(other)) {
+                        pc.position = old;
+                        return true;
+                    }
                 }
             }
         }
         pc.position = old;
         return false;
+    }
+
+    public CircleCollisionComponent touching(String name) {
+        for (CircleCollisionComponent other : Core.getRootManager().getManager(CollisionManager.class).list) {
+            if (other != this) {
+                if (name.equals(other.name)) {
+                    if (intersects(other)) {
+                        return other;
+                    }
+                }
+            }
+        }
+        return null;
     }
 
 }

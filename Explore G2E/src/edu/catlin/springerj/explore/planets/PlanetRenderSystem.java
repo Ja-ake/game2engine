@@ -1,6 +1,6 @@
 package edu.catlin.springerj.explore.planets;
 
-import edu.catlin.springerj.explore.rory.CircleCollisionComponent;
+import edu.catlin.springerj.explore.jake.newjake.CircleCollisionComponent;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.AbstractSystem;
 import edu.catlin.springerj.g2e.lwjgl.draw.Graphics;

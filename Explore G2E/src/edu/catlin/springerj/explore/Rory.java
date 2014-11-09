@@ -2,10 +2,10 @@ package edu.catlin.springerj.explore;
 
 import java.io.File;
 import edu.catlin.springerj.explore.jake.graphics.GreyStripedBackground;
-import edu.catlin.springerj.explore.rory.CollisionManager;
+import edu.catlin.springerj.explore.jake.newjake.CollisionManager;
+import edu.catlin.springerj.explore.jake.newjake.PlayerEntity;
 import edu.catlin.springerj.explore.planets.Planet;
 import edu.catlin.springerj.explore.planets.PlanetGravityManager;
-import edu.catlin.springerj.explore.rory.PlayerEntity;
 import edu.catlin.springerj.g2e.core.Core;
 import edu.catlin.springerj.g2e.lwjgl.LWJGLManager;
 import edu.catlin.springerj.g2e.lwjgl.view.View;

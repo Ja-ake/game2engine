@@ -2,9 +2,13 @@ package edu.catlin.springerj.explore.jake.newjake;
 
 import edu.catlin.springerj.explore.planets.PlanetGravityComponent;
 import edu.catlin.springerj.explore.Keys;
+import edu.catlin.springerj.explore.MouseInput;
+import edu.catlin.springerj.explore.jake.items.Bullet;
+import edu.catlin.springerj.explore.jake.items.Grapple;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.AbstractSystem;
 import edu.catlin.springerj.g2e.core.Core;
+import edu.catlin.springerj.g2e.event.MouseEvent;
 import edu.catlin.springerj.g2e.lwjgl.SpriteComponent;
 import edu.catlin.springerj.g2e.math.Vector2;
 import edu.catlin.springerj.g2e.movement.PositionComponent;
@@ -20,6 +24,7 @@ public class PlayerControlSystem extends AbstractSystem {
     public SpriteComponent spr;
     public PlanetGravityComponent pg;
     private CircleCollisionComponent ccc;
+    private PlayerEntity player;
 
     @Override
     public void initialize(AbstractEntity e) {
@@ -29,6 +34,7 @@ public class PlayerControlSystem extends AbstractSystem {
         spr = e.get(SpriteComponent.class);
         pg = e.get(PlanetGravityComponent.class);
         ccc = e.get(CircleCollisionComponent.class);
+        player = (PlayerEntity) e;
     }
 
     @Override
@@ -67,6 +73,17 @@ public class PlayerControlSystem extends AbstractSystem {
                 vel.velocity = vel.velocity.add(toPlanet);
             }
         }
+        //Slight friction
         vel.velocity = vel.velocity.multiply(.9999);
+        //Grapple
+        if (Core.getRootManager().getManager(MouseInput.class).isReleased(MouseEvent.BUTTON_MB2)) {
+            Vector2 velocity = Core.getRootManager().getManager(MouseInput.class).mousePos.subtract(pos.position).setLength(100);
+            Core.getRootManager().add(new Grapple(player, velocity));
+        }
+        //Shooting
+        if (Core.getRootManager().getManager(MouseInput.class).isReleased(MouseEvent.BUTTON_MB1)) {
+            Vector2 velocity = Core.getRootManager().getManager(MouseInput.class).mousePos.subtract(pos.position).setLength(300);
+            Core.getRootManager().add(new Bullet(pos.position, velocity));
+        }
     }
 }
