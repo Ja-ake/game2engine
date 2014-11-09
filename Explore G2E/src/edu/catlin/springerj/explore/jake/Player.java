@@ -27,7 +27,7 @@ public class Player extends AbstractEntity {
 	public Player(double x, double y) {
 		add(new PositionComponent(new Vector2(x, y)));
 		add(new RotationComponent(0.0d));
-		add(new SpriteComponent("sprite\\character_walking", 8));
+		add(new SpriteComponent("sprite\\character_walking_right", 8));
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class Player extends AbstractEntity {
 	
 	public void onEvent(KeyboardEvent event) {
 		if (event.pressed) {
-			this.getComponent(SpriteComponent.class).setSprite("sprite\\character_walking");
+			this.getComponent(SpriteComponent.class).setSprite("sprite\\character_walking_right", 8);
 			if (event.key == Keyboard.KEY_W) {
 				this.getComponent(PositionComponent.class).position = this
 						.getComponent(PositionComponent.class).position
@@ -81,7 +81,7 @@ public class Player extends AbstractEntity {
 						.add(new Vector2(25.0d, 0.0d));
 			}
 		} else {
-			this.getComponent(SpriteComponent.class).setSprite("sprite\\character_standing");
+			this.getComponent(SpriteComponent.class).setSprite("sprite\\character_idle_left", 8);
 		}
 	}
 	
