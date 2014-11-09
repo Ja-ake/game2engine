@@ -9,14 +9,14 @@ import edu.catlin.springerj.g2e.movement.VelocityComponent;
 
 public class GrappleSystem extends AbstractSystem {
 
-	private GrappleLengthComponent glc;
+	private LengthComponent glc;
 	private PositionComponent pc;
 	private RotationComponent rc;
 	private VelocityComponent vc;
 	
 	@Override
 	public void initialize(AbstractEntity e) {
-		glc = e.get(GrappleLengthComponent.class);
+		glc = e.get(LengthComponent.class);
 		pc = e.get(PositionComponent.class);
 		rc = e.get(RotationComponent.class);
 		vc = e.get(VelocityComponent.class);

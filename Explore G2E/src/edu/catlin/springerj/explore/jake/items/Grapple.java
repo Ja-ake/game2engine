@@ -21,7 +21,7 @@ public class Grapple extends AbstractEntity {
 		add(new FrictionComponent(1.0d));
 		add(new RotationComponent());
 		add(new SpriteComponent("sprite/grapplehead"));
-		add(new GrappleLengthComponent(position));
+		add(new LengthComponent(position));
 	}
 	
 	@Override
@@ -34,7 +34,7 @@ public class Grapple extends AbstractEntity {
 
 	@Override
 	public void update() {
-		if (getComponent(GrappleLengthComponent.class).length > 100.0d) getComponent(VelocityComponent.class).velocity = getComponent(VelocityComponent.class).velocity.setLength(0.00001);
-		getComponent(GrappleLengthComponent.class).length += getComponent(VelocityComponent.class).velocity.length() * Core.getDefaultTimer().getDeltaTime();
+		if (getComponent(LengthComponent.class).length > 100.0d) getComponent(VelocityComponent.class).velocity = getComponent(VelocityComponent.class).velocity.setLength(0.00001);
+		getComponent(LengthComponent.class).length += getComponent(VelocityComponent.class).velocity.length() * Core.getDefaultTimer().getDeltaTime();
 	}
 }
