@@ -6,7 +6,7 @@ import edu.catlin.springerj.g2e.movement.PositionComponent;
 
 public class ParticleEmitter extends AbstractEntity {
 	
-	public ParticleEmitter(Vector2 position, Vector2 velocity, int particlenumber) {
+	public ParticleEmitter(Vector2 position, Vector2 velocity, int particlenumber, double life, double r, double g, double b, boolean blend) {
 		ParticleComponent pac;
 		PositionComponent pc;
 		
@@ -14,9 +14,10 @@ public class ParticleEmitter extends AbstractEntity {
 		add(pac = new ParticleComponent());
 		
 		for (int i=0; i<particlenumber; i++) {
-			pac.particles.add(new Particle(position.add(new Vector2(Math.random()*10.0d, Math.random()*10.0d)),
-											velocity.add(new Vector2(Math.random()*Math.max(velocity.length(), 10.0d), Math.random()*Math.max(velocity.length(), 10.0d))),
-											Math.random()*5.0d, 0.0d, 0.0d, 0.0d));
+			double colorrand = Math.random() - 0.25d;
+			pac.particles.add(new Particle(position.add(new Vector2(Math.random()*1.0d, Math.random()*1.0d)),
+											velocity.add(new Vector2(Math.random()*Math.max(velocity.length()/1.25, 1.0d), Math.random()*Math.max(velocity.length()/1.25, 1.0d))),
+											Math.random()*life, r-colorrand, g-colorrand, b-colorrand, blend));
 		}
 	}
 	

@@ -44,7 +44,7 @@ public class BulletSystem extends AbstractSystem {
             Planet p = Core.getRootManager().getManager(CollisionManager.class).entityPoint(pos.position, Planet.class);
             p.get(CircleCollisionComponent.class).applyImpulse(vel.velocity.setLength(1000));
             Core.getRootManager().remove(entity);
-            Core.getRootManager().add(new ParticleEmitter(pos.position, vel.velocity.setLength(-10), 10));
+            Core.getRootManager().add(new ParticleEmitter(pos.position, vel.velocity.setLength(-50), 10, 0.8d, 1.0d, 0.0d, 0.0d, true));
         }
     }
 

@@ -21,6 +21,12 @@ public class ParticleRenderSystem extends AbstractSystem {
 		glBegin(GL_POINTS);
 		{
 			for (Particle p : pc.particles) {
+				if (p.blend) {
+					glEnable(GL_BLEND);
+					glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+				} else {
+					glDisable(GL_BLEND);
+				}
 				glColor4d(p.red, p.green, p.blue, p.alpha);
 				glVertex3d(p.position.x, p.position.y, 0.0d);
 			}

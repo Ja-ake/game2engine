@@ -16,5 +16,8 @@
    <ellipse/>
   </object>
   <object type="slimeenemy" x="264" y="90" width="33" height="32"/>
+  <object type="spawner" x="733" y="105" width="40" height="40">
+   <ellipse/>
+  </object>
  </objectgroup>
 </map>

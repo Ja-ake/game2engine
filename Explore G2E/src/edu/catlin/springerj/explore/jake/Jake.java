@@ -49,8 +49,6 @@ public class Jake {
             }
         }
         
-        Core.getRootManager().add(new ParticleEmitter(new Vector2(0.0d, 0.0d), new Vector2(10.0d, 10.0d), 100));
-        
         Core.getRootManager().add(new Keys()).add(new MouseInput());
 
         Core.run();
