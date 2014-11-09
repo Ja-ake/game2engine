@@ -99,7 +99,7 @@ public class Player extends AbstractEntity {
 				WindowComponent wc = ((LWJGLManager) Core.getRootManager()).getWindow().getComponent(WindowComponent.class);
 				Vector2 velocity = new Vector2((wc.centerx-(wc.width/2))+event.x-playerPosition.x, 
 						(wc.centery-(wc.height/2))+event.y-playerPosition.y);
-				Core.getRootManager().add(new Grapple(playerPosition, velocity.setLength(100.0d)));
+				//Core.getRootManager().add(new Grapple(playerPosition, velocity.setLength(100.0d)));
 			}
 		}
 	}

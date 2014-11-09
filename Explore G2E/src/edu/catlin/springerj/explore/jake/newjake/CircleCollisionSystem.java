@@ -10,7 +10,7 @@ public class CircleCollisionSystem extends AbstractSystem {
     private CircleCollisionComponent ccc;
 
     public void collide(CircleCollisionComponent other) {
-        if (ccc.touching(other)) {
+        if (ccc.intersects(other)) {
             //System.out.println("collision: " + ccc.pc.position + other.pc.position);
             double dist = ccc.pc.position.subtract(other.pc.position).length();
             //Get the collison axis
@@ -60,13 +60,15 @@ public class CircleCollisionSystem extends AbstractSystem {
 
     @Override
     public void update() {
-        //if (ccc.pc != null) {
-        for (CircleCollisionComponent other : Core.getRootManager().getManager(CollisionManager.class).list) {
-            if (other != ccc) {
-                collide(other);
+        if (ccc.solid) {
+            for (CircleCollisionComponent other : Core.getRootManager().getManager(CollisionManager.class).list) {
+                if (other != ccc) {
+                    if (other.solid) {
+                        collide(other);
+                    }
+                }
             }
         }
-        //}
     }
 
 }

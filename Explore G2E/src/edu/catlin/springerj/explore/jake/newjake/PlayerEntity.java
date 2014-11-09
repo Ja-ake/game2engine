@@ -21,7 +21,7 @@ public class PlayerEntity extends AbstractEntity {
         add(new SpriteComponent("character_idle_right", 8));
         get(SpriteComponent.class).imageSpeed = 2;
         add(new PlanetGravityComponent());
-        add(new CircleCollisionComponent(12));
+        add(new CircleCollisionComponent(12, true));
         add(new FrictionComponent());
         //Systems
         add(new SpriteRenderSystem());

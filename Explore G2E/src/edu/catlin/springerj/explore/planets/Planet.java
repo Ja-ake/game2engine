@@ -1,7 +1,7 @@
 package edu.catlin.springerj.explore.planets;
 
-import edu.catlin.springerj.explore.rory.CircleCollisionComponent;
-import edu.catlin.springerj.explore.rory.CircleCollisionSystem;
+import edu.catlin.springerj.explore.jake.newjake.CircleCollisionComponent;
+import edu.catlin.springerj.explore.jake.newjake.CircleCollisionSystem;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.math.Vector2;
 import edu.catlin.springerj.g2e.movement.PositionComponent;
@@ -14,7 +14,7 @@ public class Planet extends AbstractEntity {
         //Components
         add(new PositionComponent(pos));
         add(new VelocityComponent());
-        add(new CircleCollisionComponent(size));
+        add(new CircleCollisionComponent(size, true));
         add(new PlanetComponent());
         //Systems
         add(new VelocityMovementSystem());
