@@ -11,23 +11,16 @@ public class PlanetGravityManager extends AbstractManager {
 
     private ArrayList<Planet> planetList = new ArrayList();
 
-//    @Override
-//    public AbstractManager add(AbstractEntity e) {
-//        if (e instanceof Planet) {
-//            planetList.add((Planet) e);
-//        }
-//        return this;
-//    }
-
-    public AbstractManager autoAdd(AbstractEntity ent) {
-    	System.out.println("Planet");
-        if (ent instanceof Planet) planetList.add((Planet) ent);
+    @Override
+    public AbstractManager autoAdd(AbstractEntity e) {
+        if (e instanceof Planet) {
+            planetList.add((Planet) e);
+        }
         return this;
     }
-    
+
     @Override
     public void initialize() {
-        System.out.println("hi2");
     }
 
     public Planet nearest(Vector2 pos) {

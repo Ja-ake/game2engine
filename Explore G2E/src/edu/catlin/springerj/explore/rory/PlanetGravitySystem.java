@@ -10,18 +10,20 @@ public class PlanetGravitySystem extends AbstractSystem {
 
     private PositionComponent p;
     private VelocityComponent v;
+    private PlanetGravityComponent pg;
 
     @Override
     public void initialize(AbstractEntity e) {
         p = e.get(PositionComponent.class);
         v = e.get(VelocityComponent.class);
+        pg = e.get(PlanetGravityComponent.class);
     }
 
     @Override
     public void update() {
         Planet nearest = Core.getRootManager().getManager(PlanetGravityManager.class).nearest(p.position);
-        System.out.println(nearest);
-        v.velocity = v.velocity.add(nearest.get(PositionComponent.class).position.subtract(p.position).setLength(10 * Core.getDefaultTimer().getDeltaTime()));
+        pg.planetPos = nearest.get(PositionComponent.class).position;
+        v.velocity = v.velocity.add(pg.planetPos.subtract(p.position).setLength(10 * Core.getDefaultTimer().getDeltaTime()));
     }
 
 }
