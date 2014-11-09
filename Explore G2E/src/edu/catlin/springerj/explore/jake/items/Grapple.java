@@ -20,7 +20,7 @@ public class Grapple extends AbstractEntity {
 		add(new VelocityComponent(velocity));
 		add(new FrictionComponent(1.0d));
 		add(new RotationComponent());
-		add(new SpriteComponent("sprite/grapplehead"));
+		add(new SpriteComponent("grapplehead"));
 		add(new LengthComponent(position));
 	}
 	

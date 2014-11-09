@@ -12,7 +12,7 @@ public class GunComponent extends AbstractComponent {
 	
 	public double reloadTime;
 	public int type;
-	private double currentReloadTime;
+	public double currentReloadTime;
 	public AbstractEntity holder;
 	
 	public GunComponent(AbstractEntity holder) {

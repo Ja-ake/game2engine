@@ -2,6 +2,7 @@ package edu.catlin.springerj.explore.jake;
 
 import org.lwjgl.input.Keyboard;
 
+import edu.catlin.springerj.explore.jake.items.Bullet;
 import edu.catlin.springerj.explore.jake.items.Grapple;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.Core;
@@ -27,7 +28,7 @@ public class Player extends AbstractEntity {
 	public Player(double x, double y) {
 		add(new PositionComponent(new Vector2(x, y)));
 		add(new RotationComponent(0.0d));
-		add(new SpriteComponent("sprite\\character_walking_right", 8));
+		add(new SpriteComponent("character_walking_right", 8));
 	}
 
 	@Override
@@ -62,7 +63,7 @@ public class Player extends AbstractEntity {
 	
 	public void onEvent(KeyboardEvent event) {
 		if (event.pressed) {
-			this.getComponent(SpriteComponent.class).setSprite("sprite\\character_walking_right", 8);
+			this.getComponent(SpriteComponent.class).setSprite("character_walking_right", 8);
 			if (event.key == Keyboard.KEY_W) {
 				this.getComponent(PositionComponent.class).position = this
 						.getComponent(PositionComponent.class).position
@@ -81,13 +82,19 @@ public class Player extends AbstractEntity {
 						.add(new Vector2(25.0d, 0.0d));
 			}
 		} else {
-			this.getComponent(SpriteComponent.class).setSprite("sprite\\character_idle_left", 8);
+			this.getComponent(SpriteComponent.class).setSprite("character_idle_left", 8);
 		}
 	}
 	
 	public void onEvent(MouseEvent event) {
 		if (event.action == MouseEvent.ACTION_PRESS) {
-			if (event.button == MouseEvent.BUTTON_MB2) {
+			if (event.button == MouseEvent.BUTTON_MB1) {
+				Vector2 playerPosition = this.getComponent(PositionComponent.class).position;
+				WindowComponent wc = ((LWJGLManager) Core.getRootManager()).getWindow().getComponent(WindowComponent.class);
+				Vector2 velocity = new Vector2((wc.centerx-(wc.width/2))+event.x-playerPosition.x, 
+						(wc.centery-(wc.height/2))+event.y-playerPosition.y);
+				Core.getRootManager().add(new Bullet(playerPosition, velocity.setLength(300.0d)));
+			} else if (event.button == MouseEvent.BUTTON_MB2) {
 				Vector2 playerPosition = this.getComponent(PositionComponent.class).position;
 				WindowComponent wc = ((LWJGLManager) Core.getRootManager()).getWindow().getComponent(WindowComponent.class);
 				Vector2 velocity = new Vector2((wc.centerx-(wc.width/2))+event.x-playerPosition.x, 
