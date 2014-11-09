@@ -28,7 +28,7 @@ public class SpriteRenderSystem extends AbstractSystem {
         }
         
         deltatime += Core.getDefaultTimer().getDeltaTime();
-        if (deltatime > 0.1d) {
+        if (deltatime > 0.25d) {
         	deltatime = 0;
         	sprite.imageIndex++;
         	sprite.imageIndex %= sprite.animationCount();

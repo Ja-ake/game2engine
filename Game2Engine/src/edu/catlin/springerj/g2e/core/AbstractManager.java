@@ -103,13 +103,15 @@ public abstract class AbstractManager extends ManagedObject {
         });
 
         for (AbstractManager m : managers) {
-            m.addWithoutRunning(ent);
+        	System.out.println(m.getClass());
+            m.autoAdd(ent);
         }
 
         return this;
     }
-
-    public AbstractManager addWithoutRunning(AbstractEntity ent) {
+    
+    public AbstractManager autoAdd(AbstractEntity ent) {
+    	System.out.println("Abstract");
         entities.add(ent);
         return this;
     }

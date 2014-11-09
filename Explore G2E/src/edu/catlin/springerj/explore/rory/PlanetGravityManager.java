@@ -4,21 +4,27 @@ import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.AbstractManager;
 import edu.catlin.springerj.g2e.math.Vector2;
 import edu.catlin.springerj.g2e.movement.PositionComponent;
+
 import java.util.ArrayList;
 
 public class PlanetGravityManager extends AbstractManager {
 
     private ArrayList<Planet> planetList = new ArrayList();
 
-    @Override
-    public AbstractManager add(AbstractEntity e) {
-        System.out.println("hi");
-        if (e instanceof Planet) {
-            planetList.add((Planet) e);
-        }
+//    @Override
+//    public AbstractManager add(AbstractEntity e) {
+//        if (e instanceof Planet) {
+//            planetList.add((Planet) e);
+//        }
+//        return this;
+//    }
+
+    public AbstractManager autoAdd(AbstractEntity ent) {
+    	System.out.println("Planet");
+        if (ent instanceof Planet) planetList.add((Planet) ent);
         return this;
     }
-
+    
     @Override
     public void initialize() {
         System.out.println("hi2");

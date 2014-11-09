@@ -39,6 +39,7 @@ public class Player extends AbstractEntity implements
 	@Override
 	public void onEvent(KeyboardEvent event) {
 		if (event.pressed) {
+			this.getComponent(SpriteComponent.class).setSprite("sprite\\character_walking");
 			if (event.key == Keyboard.KEY_W) {
 				this.getComponent(PositionComponent.class).position = this
 						.getComponent(PositionComponent.class).position
@@ -57,7 +58,7 @@ public class Player extends AbstractEntity implements
 						.add(new Vector2(25.0d, 0.0d));
 			}
 		} else {
-
+			this.getComponent(SpriteComponent.class).setSprite("sprite\\character_standing");
 		}
 	}
 }

@@ -131,8 +131,7 @@ public class TiledXMLParser {
 				}
 			}
 		}
-		
-		System.out.println("");
+
 		Logger.println("Map has finished loading!");
 	}
 	
