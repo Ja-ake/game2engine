@@ -19,9 +19,8 @@ public class PlanetGravitySystem extends AbstractSystem {
 
     @Override
     public void update() {
-        System.out.println(getRootManager());
-        System.out.println(getRootManager().getManager(PlanetGravityManager.class));
-        Planet nearest = getRootManager().getManager(PlanetGravityManager.class).nearest(p.position);
+        Planet nearest = Core.getRootManager().getManager(PlanetGravityManager.class).nearest(p.position);
+        System.out.println(nearest);
         v.velocity = v.velocity.add(nearest.get(PositionComponent.class).position.subtract(p.position).setLength(10 * Core.getDefaultTimer().getDeltaTime()));
     }
 

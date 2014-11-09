@@ -12,6 +12,7 @@ public class PlanetGravityManager extends AbstractManager {
 
     @Override
     public AbstractManager add(AbstractEntity e) {
+        System.out.println("hi");
         if (e instanceof Planet) {
             planetList.add((Planet) e);
         }
@@ -20,6 +21,7 @@ public class PlanetGravityManager extends AbstractManager {
 
     @Override
     public void initialize() {
+        System.out.println("hi2");
     }
 
     public Planet nearest(Vector2 pos) {
