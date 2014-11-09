@@ -29,7 +29,7 @@ public class TargetedViewSystem extends AbstractSystem implements EventListener<
 		ws = ((LWJGLManager) this.getRootManager()).getWindow().getSystem(WindowSystem.class);
 		wc = ((LWJGLManager) this.getRootManager()).getWindow().getComponent(WindowComponent.class);
 		
-		this.getRootManager().getManager(EventManager.class).register(this);
+		//this.getRootManager().getManager(EventManager.class).register(this);
 	}
 
 	@Override

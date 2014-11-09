@@ -6,6 +6,7 @@ import java.util.Map;
 
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.AbstractManager;
+import edu.catlin.springerj.g2e.core.Core;
 import edu.catlin.springerj.g2e.event.EventManager;
 import edu.catlin.springerj.g2e.web.WebManager;
 
@@ -49,10 +50,8 @@ public class LWJGLManager extends AbstractManager {
 	}
 	
 	public void setRoom(String name) {
-		for (int i=0; i<entities.size(); i++) {
-			this.remove(entities.get(i)); i--;
-		}
-		
+		Core.getDefaultTaskThread().clear();
+		this.removeAll();
 		rooms.get(name).run();
 	}
 }

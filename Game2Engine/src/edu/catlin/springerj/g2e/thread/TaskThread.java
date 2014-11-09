@@ -44,4 +44,9 @@ public class TaskThread extends Thread {
 			}
 		}
 	}
+	
+	public void clear() {
+		noncontinuousTasks.clear();
+		continuousTasks.clear();
+	}
 }
