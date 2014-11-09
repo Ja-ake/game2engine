@@ -46,7 +46,7 @@ public abstract class AbstractManager extends ManagedObject {
         final AbstractManager thus = this;
         Core.task(new Task() {
             public void run() {
-				//for (AbstractManager m : managers) m.initialize();
+                //for (AbstractManager m : managers) m.initialize();
                 //for (AbstractEntity e : entities) e.initialize();
                 thus.background(false);
             }
@@ -93,7 +93,7 @@ public abstract class AbstractManager extends ManagedObject {
         entities.add(ent);
         ent.setManager(this);
         final AbstractEntity et = ent;
-        
+
 //        Core.task(new Task(false) {
 //			@Override
 //			public void run() {
@@ -103,13 +103,13 @@ public abstract class AbstractManager extends ManagedObject {
 //        });
         et.initialize();
         //System.out.println("otheri");
-		
-		ent.updatetask = new Task(true) {
-			@Override
-			public void run() {
-				et.update();
-			}
-		};
+
+        ent.updatetask = new Task(true) {
+            @Override
+            public void run() {
+                et.update();
+            }
+        };
         Core.task(ent.updatetask);
 
         for (AbstractManager m : managers) {
@@ -118,35 +118,32 @@ public abstract class AbstractManager extends ManagedObject {
 
         return this;
     }
-    
-    public AbstractManager remove(AbstractEntity ent) {
-    	Core.getDefaultTaskThread().remove(ent.updatetask.getID());
-    	entities.remove(ent);
-    	for (AbstractComponent ac : ent.components) {
-    		Core.getDefaultTaskThread().remove(ac.id);
-    	}
-    	
-    	
-    	
-    	for (AbstractSystem sc : ent.systems) {
-    		Core.getDefaultTaskThread().remove(sc.id);
-    	}
-    	
-    	final AbstractEntity en = ent;
-    	Core.task(new Task() {
 
-			@Override
-			public void run() {
-				en.components.clear();
-		    	en.systems.clear();
-			}
-    		
-    	});
-    	
-    	
-    	return this;
+    public AbstractManager remove(AbstractEntity ent) {
+        Core.getDefaultTaskThread().remove(ent.updatetask.getID());
+        entities.remove(ent);
+        for (AbstractComponent ac : ent.components) {
+            //Core.getDefaultTaskThread().remove(ac.id);
+        }
+
+        for (AbstractSystem sc : ent.systems) {
+            Core.getDefaultTaskThread().remove(sc.id);
+        }
+
+        final AbstractEntity en = ent;
+        Core.task(new Task() {
+
+            @Override
+            public void run() {
+                //en.components.clear();
+                en.systems.clear();
+            }
+
+        });
+
+        return this;
     }
-    
+
     public AbstractManager autoAdd(AbstractEntity ent) {
         entities.add(ent);
         return this;
