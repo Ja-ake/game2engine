@@ -29,9 +29,11 @@ public class TaskThread extends Thread {
 		}
 	}
 
-	public void add(Task t) {
+	public Task add(Task t) {
 		if (t.once()) noncontinuousTasks.add(t);
 		else continuousTasks.add(t);
+		
+		return t;
 	}
 	
 	public void remove(int id) {

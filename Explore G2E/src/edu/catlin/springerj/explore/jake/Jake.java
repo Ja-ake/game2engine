@@ -5,6 +5,7 @@ import java.io.File;
 import edu.catlin.springerj.explore.Player;
 import edu.catlin.springerj.explore.jake.graphics.FilledCircle;
 import edu.catlin.springerj.explore.jake.graphics.GreyStripedBackground;
+import edu.catlin.springerj.explore.jake.items.Grapple;
 import edu.catlin.springerj.explore.rory.Planet;
 import edu.catlin.springerj.g2e.core.Core;
 import edu.catlin.springerj.g2e.lwjgl.LWJGLManager;
@@ -57,6 +58,8 @@ public class Jake {
 				break;
 			}
 		}
+		
+		Core.getRootManager().add(new Grapple(new Vector2(0.0d, 0.0d), new Vector2(100.0d, 0.0d)));
 		
 		//Core.getRootManager().add(new FilledCircle());
 		//Core.getRootManager().add(p);
