@@ -19,7 +19,6 @@ public class CircleCollisionComponent extends AbstractComponent {
 
     @Override
     public void initialize(AbstractEntity e) {
-        System.out.println("iuherpiguheprbiuhwpeiuhgpwieughpwiueg");
         pc = e.get(PositionComponent.class);
         vc = e.get(VelocityComponent.class);
     }

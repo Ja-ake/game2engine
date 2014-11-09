@@ -34,10 +34,11 @@ public class CircleCollisionSystem extends AbstractSystem {
 
     @Override
     public void update() {
-        for (CircleCollisionComponent other : Core.getRootManager().getManager(CollisionManager.class).list) {
-            if (other != ccc) {
-                System.out.println("hi");
-                collide(other);
+        if (ccc.pc != null) {
+            for (CircleCollisionComponent other : Core.getRootManager().getManager(CollisionManager.class).list) {
+                if (other != ccc) {
+                    collide(other);
+                }
             }
         }
     }
