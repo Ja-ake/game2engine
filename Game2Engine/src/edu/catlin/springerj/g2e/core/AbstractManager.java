@@ -162,4 +162,14 @@ public abstract class AbstractManager extends ManagedObject {
     public List<AbstractEntity> getEntities() {
         return entities;
     }
+
+    public <T extends AbstractEntity> T getEntity(Class<T> type) {
+        for (AbstractEntity m : entities) {
+            if (m.getClass().equals(type)) {
+                return (T) m;
+            }
+        }
+
+        throw new RuntimeException("Invalid entity type.");
+    }
 }
