@@ -1,5 +1,6 @@
-package edu.catlin.springerj.explore.rory;
+package edu.catlin.springerj.explore.planets;
 
+import edu.catlin.springerj.explore.rory.CircleCollisionComponent;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.AbstractManager;
 import edu.catlin.springerj.g2e.math.Vector2;
@@ -29,8 +30,8 @@ public class PlanetGravityManager extends AbstractManager {
             if (min == null) {
                 min = p;
             } else {
-                double g1 = min.get(PositionComponent.class).position.subtract(pos).lengthSquared() / min.get(CircleCollisionComponent.class).invMass;
-                double g2 = p.get(PositionComponent.class).position.subtract(pos).lengthSquared() / p.get(CircleCollisionComponent.class).invMass;
+                double g1 = min.get(PositionComponent.class).position.subtract(pos).lengthSquared() * min.get(CircleCollisionComponent.class).invMass;
+                double g2 = p.get(PositionComponent.class).position.subtract(pos).lengthSquared() * p.get(CircleCollisionComponent.class).invMass;
                 if (g2 < g1) {
                     min = p;
                 }

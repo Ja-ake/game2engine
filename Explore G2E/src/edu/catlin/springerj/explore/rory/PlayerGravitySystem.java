@@ -1,5 +1,7 @@
 package edu.catlin.springerj.explore.rory;
 
+import edu.catlin.springerj.explore.planets.PlanetGravityComponent;
+import edu.catlin.springerj.explore.planets.PlanetGravityManager;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.AbstractSystem;
 import edu.catlin.springerj.g2e.core.Core;
@@ -22,7 +24,7 @@ public class PlayerGravitySystem extends AbstractSystem {
     @Override
     public void update() {
         pg.planet = Core.getRootManager().getManager(PlanetGravityManager.class).nearest(p.position);
-        v.velocity = v.velocity.add(pg.planet.get(PositionComponent.class).position.subtract(p.position).setLength(100 * Core.getDefaultTimer().getDeltaTime()));
+        v.velocity = v.velocity.add(pg.planet.get(PositionComponent.class).position.subtract(p.position).setLength(50 * Core.getDefaultTimer().getDeltaTime()));
     }
 
 }

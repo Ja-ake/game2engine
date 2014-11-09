@@ -1,5 +1,6 @@
 package edu.catlin.springerj.explore.rory;
 
+import edu.catlin.springerj.explore.planets.PlanetGravityComponent;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.lwjgl.SpriteComponent;
 import edu.catlin.springerj.g2e.lwjgl.SpriteRenderSystem;

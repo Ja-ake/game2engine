@@ -1,5 +1,6 @@
 package edu.catlin.springerj.explore.rory;
 
+import edu.catlin.springerj.explore.planets.PlanetGravityComponent;
 import edu.catlin.springerj.explore.Keys;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.AbstractSystem;
@@ -18,6 +19,7 @@ public class PlayerControlSystem extends AbstractSystem {
     public RotationComponent rot;
     public SpriteComponent spr;
     public PlanetGravityComponent pg;
+    private CircleCollisionComponent ccc;
 
     @Override
     public void initialize(AbstractEntity e) {
@@ -26,24 +28,37 @@ public class PlayerControlSystem extends AbstractSystem {
         rot = e.get(RotationComponent.class);
         spr = e.get(SpriteComponent.class);
         pg = e.get(PlanetGravityComponent.class);
+        ccc = e.get(CircleCollisionComponent.class);
     }
 
     @Override
     public void update() {
+        Vector2 toPlanet = pg.planet.get(PositionComponent.class).position.subtract(pos.position).normalize();
+        Vector2 relativeVel = vel.velocity.subtract(pg.planet.get(VelocityComponent.class).velocity);
         //Rotate to face planet
-        Vector2 toPlanet = pg.planet.get(PositionComponent.class).position.subtract(pos.position);
         rot.rot = toPlanet.direction() + Math.PI / 2;
-        //Left-right movement
-        boolean left = Core.getRootManager().getManager(Keys.class).isDown(Keyboard.KEY_A);
-        boolean right = Core.getRootManager().getManager(Keys.class).isDown(Keyboard.KEY_D);
-        if (left && !right) {
-            vel.velocity = vel.velocity.add(toPlanet.normal().setLength(-.1));
-        } else if (right && !left) {
-            vel.velocity = vel.velocity.add(toPlanet.normal().setLength(.1));
+        //If you're on a planet
+        if (ccc.placeSolid(pos.position.add(toPlanet))) {
+            //Left-right movement
+            boolean left = Core.getRootManager().getManager(Keys.class).isDown(Keyboard.KEY_A);
+            boolean right = Core.getRootManager().getManager(Keys.class).isDown(Keyboard.KEY_D);
+            if (left && !right) {
+                vel.velocity = vel.velocity.add(toPlanet.normal().multiply(-.5));
+            } else if (right && !left) {
+                vel.velocity = vel.velocity.add(toPlanet.normal().multiply(.5));
+            }
+            //Friction
+            Vector2 sideVel = toPlanet.normal().multiply(relativeVel.dot(toPlanet.normal()));
+            vel.velocity = vel.velocity.add(sideVel.multiply(-.004));
+            //Jumping
+            boolean jump = Core.getRootManager().getManager(Keys.class).isDown(Keyboard.KEY_W);
+            if (jump) {
+                vel.velocity = toPlanet.normal().multiply(relativeVel.dot(toPlanet.normal())).add(toPlanet.multiply(-100));
+            } else {
+                //Stick to planet
+                vel.velocity = vel.velocity.add(toPlanet);
+            }
         }
-        //Friction
-        Vector2 sideVel = toPlanet.normal().multiply(vel.velocity.subtract(pg.planet.get(VelocityComponent.class).velocity).dot(toPlanet.normal()) / toPlanet.lengthSquared());
-        vel.velocity = vel.velocity.add(sideVel.multiply(-.002));
-        //vel.velocity = vel.velocity.multiply(.999);
+        vel.velocity = vel.velocity.multiply(.9999);
     }
 }
