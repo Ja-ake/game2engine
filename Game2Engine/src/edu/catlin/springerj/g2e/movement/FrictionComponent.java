@@ -13,7 +13,7 @@ public class FrictionComponent extends AbstractComponent {
     }
 
     public FrictionComponent() {
-        friction = 0.05f;
+        friction = 10;
     }
 
     public FrictionComponent(double f) {
