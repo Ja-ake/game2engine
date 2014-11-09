@@ -35,6 +35,12 @@ public abstract class Core {
 	}
 	
 	public static void run() {
+//		threads.get(0).add(new Task(true) {
+//			public void run() {
+//				Core.getDefaultTimer().update();
+//			}
+//		});
+		
 		while (!closeRequested) {
 			for (TaskThread t : tostart) {
 				if (!t.isAlive()) {
@@ -50,11 +56,7 @@ public abstract class Core {
 				}
 			}
 			
-			threads.get(0).add(new Task(true) {
-				public void run() {
-					Core.getDefaultTimer().update();
-				}
-			});
+			Core.getDefaultTimer().update();
 			threads.get(0).run();
 		}
 	}

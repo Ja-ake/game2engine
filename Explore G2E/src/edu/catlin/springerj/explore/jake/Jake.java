@@ -14,6 +14,7 @@ import edu.catlin.springerj.explore.planets.Planet;
 import edu.catlin.springerj.explore.planets.PlanetGravityManager;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.Core;
+import edu.catlin.springerj.g2e.event.EventManager;
 import edu.catlin.springerj.g2e.lwjgl.LWJGLManager;
 import edu.catlin.springerj.g2e.lwjgl.SpriteComponent;
 import edu.catlin.springerj.g2e.lwjgl.draw.StaticImageRenderSystem;
@@ -23,10 +24,13 @@ import edu.catlin.springerj.g2e.math.Vector2;
 import edu.catlin.springerj.g2e.movement.PositionComponent;
 import edu.catlin.springerj.g2e.tiled.TiledObject;
 import edu.catlin.springerj.g2e.tiled.TiledXMLParser;
+import edu.catlin.springerj.g2e.web.WebManager;
 
 public class Jake {
 	public static void main(String[] args) {
         Core.initialize(new LWJGLManager().add(new PlanetGravityManager()).add(new CollisionManager()));
+        Core.getRootManager().add(new EventManager());
+        Core.getRootManager().add(new WebManager());
         Runnable tutorial = new Runnable() {
 
 			@Override
@@ -57,7 +61,8 @@ public class Jake {
 		            }
 		        }
 		        
-		        Core.getRootManager().add(new Keys()).add(new MouseInput());
+		        Core.getRootManager().add(new Keys());
+		        Core.getRootManager().add(new MouseInput());
 			}
         };
         
@@ -114,7 +119,7 @@ public class Jake {
         
         ((LWJGLManager) Core.getRootManager()).addRoom("tutorial00", tutorial);
         ((LWJGLManager) Core.getRootManager()).addRoom("titlescreen", titlescreen);
-        ((LWJGLManager) Core.getRootManager()).setRoom("titlescreen");
+        ((LWJGLManager) Core.getRootManager()).setRoom("tutorial00");
         Core.run();
 	}
 }

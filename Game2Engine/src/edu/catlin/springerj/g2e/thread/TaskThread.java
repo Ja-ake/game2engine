@@ -16,27 +16,28 @@ public class TaskThread extends Thread {
 	}
 
 	public int ssa = 0;
-	public void run() {
-		while (true) {			
+	public synchronized void run() {
+		//while (true) {			
 			for (int i = 0; i < noncontinuousTasks.size(); i++) {
 				noncontinuousTasks.remove().run();
 			}
 			
-			for (int i = 0; i < continuousTasks.size(); i++) {
-				Task t = continuousTasks.get(i);
-				t.run();
+			for (int i = 0; i < continuousTasks.size(); i++) { 
+				continuousTasks.get(i).run();
 			}
-		}
+			
+			//System.out.println("ContinuousTasks: " + continuousTasks.size());
+		//}
 	}
 
-	public Task add(Task t) {
+	public synchronized Task add(Task t) {
 		if (t.once()) noncontinuousTasks.add(t);
 		else continuousTasks.add(t);
 		
 		return t;
 	}
 	
-	public void remove(int id) {
+	public synchronized void remove(int id) {
 		for (int i=0; i<continuousTasks.size(); i++) { 
 			if (continuousTasks.get(i).getID() == id) {
 				continuousTasks.remove(i);
@@ -45,7 +46,7 @@ public class TaskThread extends Thread {
 		}
 	}
 	
-	public void clear() {
+	public synchronized void clear() {
 		noncontinuousTasks.clear();
 		continuousTasks.clear();
 	}

@@ -125,6 +125,8 @@ public class EventManager extends AbstractManager {
 		super.removeAll();
 		listeners.clear();
 		queue.clear();
+		
+		System.out.println(listeners.size());
 		return this;
 	}
 }

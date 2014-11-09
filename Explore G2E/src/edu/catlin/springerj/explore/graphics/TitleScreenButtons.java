@@ -25,7 +25,6 @@ public class TitleScreenButtons extends AbstractEntity implements EventListener<
 
 	@Override
 	public void update() {
-		
 	}
 
 	@Override

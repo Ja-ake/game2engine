@@ -76,12 +76,6 @@ public abstract class AbstractEntity extends ManagedObject {
 			if (!contains) {
 				systems.add(s);
 				s.setManager(this.getManager());
-				final AbstractSystem fs = s;
-//				Core.task(new Task() {
-//					public void run() {
-//						fs.initialize(thus);
-//					}
-//				});
 			}
 			
 			s.initialize(thus);
