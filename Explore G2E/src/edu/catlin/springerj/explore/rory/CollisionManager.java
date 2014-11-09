@@ -10,7 +10,7 @@ public class CollisionManager extends AbstractManager {
     public ArrayList<CircleCollisionComponent> list = new ArrayList();
 
     @Override
-    public AbstractManager add(AbstractEntity e) {
+    public AbstractManager autoAdd(AbstractEntity e) {
         try {
             list.add(e.get(CircleCollisionComponent.class));
         } catch (InvalidComponentException ex) {

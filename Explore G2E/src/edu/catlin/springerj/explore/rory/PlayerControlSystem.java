@@ -34,9 +34,9 @@ public class PlayerControlSystem extends AbstractSystem {
         boolean left = Core.getRootManager().getManager(Keys.class).isDown(Keyboard.KEY_A);
         boolean right = Core.getRootManager().getManager(Keys.class).isDown(Keyboard.KEY_D);
         if (left && !right) {
-            vel.velocity.add(pg.planetPos.subtract(pos.position).normalize().normal());
-        } else if (left && !right) {
-            vel.velocity.add(pg.planetPos.subtract(pos.position).normalize().normal().reverse());
+            vel.velocity = vel.velocity.add(pg.planetPos.subtract(pos.position).setLength(.1).normal());
+        } else if (right && !left) {
+            vel.velocity = vel.velocity.add(pg.planetPos.subtract(pos.position).setLength(-.1).normal());
         }
     }
 }

@@ -29,8 +29,8 @@ public class PlanetGravityManager extends AbstractManager {
             if (min == null) {
                 min = p;
             } else {
-                double g1 = min.get(PositionComponent.class).position.subtract(pos).lengthSquared() / min.get(CircleCollisionComponent.class).mass;
-                double g2 = p.get(PositionComponent.class).position.subtract(pos).lengthSquared() / p.get(CircleCollisionComponent.class).mass;
+                double g1 = min.get(PositionComponent.class).position.subtract(pos).lengthSquared() / min.get(CircleCollisionComponent.class).invMass;
+                double g2 = p.get(PositionComponent.class).position.subtract(pos).lengthSquared() / p.get(CircleCollisionComponent.class).invMass;
                 if (g2 < g1) {
                     min = p;
                 }

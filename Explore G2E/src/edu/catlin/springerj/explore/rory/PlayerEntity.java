@@ -18,11 +18,13 @@ public class PlayerEntity extends AbstractEntity {
         add(new RotationComponent());
         add(new SpriteComponent("sprite\\character_walking", 8));
         add(new PlanetGravityComponent());
+        add(new CircleCollisionComponent(16));
         //Systems
         add(new SpriteRenderSystem());
         add(new VelocityMovementSystem());
         add(new PlanetGravitySystem());
         add(new PlayerControlSystem());
+        add(new CircleCollisionSystem());
     }
 
     @Override
