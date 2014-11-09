@@ -23,6 +23,6 @@ public class Timer {
 	}
 	
 	public double getDeltaTime() {
-		return deltaseconds; 
+		return Math.min(deltaseconds, 1.0d); 
 	}
 }

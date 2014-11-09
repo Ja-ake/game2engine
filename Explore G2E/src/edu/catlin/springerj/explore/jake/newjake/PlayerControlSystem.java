@@ -48,16 +48,17 @@ public class PlayerControlSystem extends AbstractSystem {
             //Left-right movement
             boolean left = Core.getRootManager().getManager(Keys.class).isDown(Keyboard.KEY_A);
             boolean right = Core.getRootManager().getManager(Keys.class).isDown(Keyboard.KEY_D);
-            if (left && !right) {
+            boolean red = spr.name.equals("character_idle_left_red");
+            if (left && !right && !red) {
                 vel.velocity = vel.velocity.add(toPlanet.normal().multiply(-.4));
                 spr.setSprite("character_walking_left", 8);
-            } else if (right && !left) {
+            } else if (right && !left && !red) {
                 vel.velocity = vel.velocity.add(toPlanet.normal().multiply(.4));
                 spr.setSprite("character_walking_right", 8);
             } else {
-                if (relativeVel.dot(toPlanet.normal()) < 0) {
+                if (relativeVel.dot(toPlanet.normal()) < 0 && !red) {
                     spr.setSprite("character_idle_left", 8);
-                } else if (relativeVel.dot(toPlanet.normal()) > 0) {
+                } else if (relativeVel.dot(toPlanet.normal()) > 0 && !red) {
                     spr.setSprite("character_idle_right", 8);
                 }
             }

@@ -21,7 +21,7 @@ public class Enemy extends AbstractEntity {
 		add(new RotationComponent());
 		add(new SpriteComponent("enemy_smoking_black", 5, 2.0d));
 		add(new EntityTargetComponent(e));
-		add(new BulletRechargeComponent(2.0d));
+		add(new BulletRechargeComponent(5.0d));
 	}
 	
 	@Override
