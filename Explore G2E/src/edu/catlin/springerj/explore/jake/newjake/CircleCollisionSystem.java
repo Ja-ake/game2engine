@@ -24,8 +24,8 @@ public class CircleCollisionSystem extends AbstractSystem {
                 //Calculate the impulse
                 double impulse = -1 * vel.dot(axis) / (ccc.invMass + other.invMass);
                 //Apply impulse
-                ccc.vc.velocity = ccc.vc.velocity.add(axis.multiply(impulse * ccc.invMass));
-                other.vc.velocity = other.vc.velocity.subtract(axis.multiply(impulse * other.invMass));
+                ccc.applyImpulse(axis.multiply(impulse));
+                other.applyImpulse(axis.multiply(-impulse));
                 //Move them outside each other
                 ccc.pc.position = ccc.pc.position.add(axis.multiply(depth * ccc.invMass / (ccc.invMass + other.invMass)));
                 other.pc.position = other.pc.position.add(axis.multiply(depth * other.invMass / (ccc.invMass + other.invMass)));
@@ -47,8 +47,8 @@ public class CircleCollisionSystem extends AbstractSystem {
                     }
                 }
                 //Apply the friction impulse
-                ccc.vc.velocity = ccc.vc.velocity.add(axis.normal().multiply(frictionImpulse * ccc.invMass));
-                other.vc.velocity = other.vc.velocity.subtract(axis.normal().multiply(frictionImpulse * other.invMass));
+                ccc.applyImpulse(axis.normal().multiply(frictionImpulse));
+                other.applyImpulse(axis.normal().multiply(-frictionImpulse));
             }
         }
     }

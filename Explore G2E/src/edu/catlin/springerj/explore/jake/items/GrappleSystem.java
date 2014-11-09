@@ -32,7 +32,6 @@ public class GrappleSystem extends AbstractSystem {
 
     @Override
     public void update() {
-        System.out.println(sc.alpha);
         Vector2 playerPos = gc.player.getComponent(PositionComponent.class).position;
         //Graphics
         rc.rot = pc.position.subtract(playerPos).direction() - Math.PI / 2;
@@ -48,11 +47,10 @@ public class GrappleSystem extends AbstractSystem {
                     CircleCollisionComponent planet = ccc.touching("Planet");
                     if (planet != null) {
                         vc.velocity = planet.vc.velocity;
-                        Vector2 disp = planet.pc.position.subtract(playerPos).setLength(2000 * Core.getDefaultTimer().getDeltaTime());
-                        if (planet.pc.position.subtract(playerPos).lengthSquared() > 10000) {
-                            planet.vc.velocity = planet.vc.velocity.subtract(disp.multiply(planet.invMass));
-                            gc.player.getComponent(VelocityComponent.class).velocity
-                                    = gc.player.getComponent(VelocityComponent.class).velocity.add(disp.multiply(gc.player.getComponent(CircleCollisionComponent.class).invMass));
+                        if (pc.position.subtract(playerPos).lengthSquared() > 10000) {
+                            Vector2 impulse = planet.pc.position.subtract(playerPos).setLength(2000 * Core.getDefaultTimer().getDeltaTime());
+                            planet.applyImpulse(impulse.multiply(-1));
+                            gc.player.getComponent(CircleCollisionComponent.class).applyImpulse(impulse);
                         } else {
                             sc.alpha = .5;
                         }
@@ -66,7 +64,7 @@ public class GrappleSystem extends AbstractSystem {
         //If you're ready to be destroyed
         if (sc.alpha < 0) {
             if (Core.getRootManager() != null) {
-            	Core.getRootManager().remove(gc.grapple);
+                Core.getRootManager().remove(gc.grapple);
             }
         }
     }

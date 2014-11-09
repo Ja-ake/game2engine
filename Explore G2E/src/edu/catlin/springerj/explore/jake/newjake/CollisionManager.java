@@ -20,20 +20,22 @@ public class CollisionManager extends AbstractManager {
         }
         return this;
     }
-    
-    public boolean collisionLine(Vector2 p1, Vector2 p2, String name) {
-    	for (CircleCollisionComponent other : Core.getRootManager().getManager(CollisionManager.class).list) {
-            if (name.equals(other.name)) {
 
+    public boolean collisionLine(Vector2 p1, Vector2 p2, String name) {
+        for (CircleCollisionComponent ccc : Core.getRootManager().getManager(CollisionManager.class).list) {
+            if (name.equals(ccc.name)) {
+                if (ccc.intersects(p1, p2)) {
+                    return true;
+                }
             }
         }
-    	return false;
+        return false;
     }
-    
+
     public boolean collisionPoint(Vector2 point, String name) {
-    	for (CircleCollisionComponent other : Core.getRootManager().getManager(CollisionManager.class).list) {
-            if (name.equals(other.name)) {
-                if (other.contains(point)) {
+        for (CircleCollisionComponent ccc : Core.getRootManager().getManager(CollisionManager.class).list) {
+            if (name.equals(ccc.name)) {
+                if (ccc.contains(point)) {
                     return true;
                 }
             }

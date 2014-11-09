@@ -21,9 +21,13 @@ public class CircleCollisionComponent extends AbstractComponent {
         invMass = 1 / (size * size);
         this.solid = solid;
     }
-    
+
+    public void applyImpulse(Vector2 impulse) {
+        vc.velocity = vc.velocity.add(impulse.multiply(invMass));
+    }
+
     public boolean contains(Vector2 point) {
-    	return point.subtract(pc.position).lengthSquared() < size * size;
+        return point.subtract(pc.position).lengthSquared() < size * size;
     }
 
     @Override
@@ -40,9 +44,19 @@ public class CircleCollisionComponent extends AbstractComponent {
     }
 
     public boolean intersects(Vector2 p1, Vector2 p2) {
-    	
+        if (contains(p1) || contains(p2)) {
+            return true;
+        }
+        Vector2 axis = p2.subtract(p1).normal();
+        double center = pc.position.dot(axis);
+        double r1 = p1.dot(axis);
+        double r2 = p2.dot(axis);
+        if ((r1 > center && r2 > center) || (r1 < center && r2 < center)) {
+            return false;
+        }
+        return size > pc.position.subtract(p1).dot(axis.normal());
     }
-    
+
     public boolean placeSolid(Vector2 pos) {
         Vector2 old = pc.position;
         pc.position = pos;
