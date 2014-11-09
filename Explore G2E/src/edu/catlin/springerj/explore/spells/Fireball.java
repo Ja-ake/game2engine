@@ -20,7 +20,7 @@ public class Fireball extends AbstractEntity {
         add(new BulletComponent());
         add(new SpriteComponent("fireball"));
         add(new RotationComponent());
-        add(new CircleCollisionComponent(16, false));
+        add(new CircleCollisionComponent(32, false));
         //Systems
         add(new VelocityMovementSystem());
         add(new FireballSystem());

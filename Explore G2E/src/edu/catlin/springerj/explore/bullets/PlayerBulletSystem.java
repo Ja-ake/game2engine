@@ -5,6 +5,7 @@ import edu.catlin.springerj.explore.collisions.CollisionManager;
 import edu.catlin.springerj.explore.enemy.Enemy;
 import edu.catlin.springerj.explore.enemy.HealthComponent;
 import edu.catlin.springerj.explore.enemy.Spawner;
+import edu.catlin.springerj.explore.graphics.particle.ParticleEmitter;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.AbstractSystem;
 import edu.catlin.springerj.g2e.core.Core;
@@ -18,6 +19,14 @@ public class PlayerBulletSystem extends AbstractSystem {
     private VelocityComponent vel;
     private BulletComponent bc;
     private PlayerBulletComponent pbc;
+
+    @Override
+    public void destroy() {
+        super.destroy();
+        if (pbc.type == 2) {
+            Core.getRootManager().add(new ParticleEmitter(pos.position, vel.velocity.setLength(-20), 10, 1, new Color4d(.2, .2, 0), true));
+        }
+    }
 
     @Override
     public void initialize(AbstractEntity e) {
@@ -46,7 +55,9 @@ public class PlayerBulletSystem extends AbstractSystem {
         Enemy p = Core.getRootManager().getManager(CollisionManager.class).entityPoint(pos.position, Enemy.class);
         if (p != null) {
             p.get(HealthComponent.class).damage(10);
-            p.get(CircleCollisionComponent.class).applyImpulse(vel.velocity.setLength(1000));
+            if (pbc.type == 3) {
+                p.get(CircleCollisionComponent.class).applyImpulse(vel.velocity.setLength(5000));
+            }
             Core.getRootManager().remove(bc.entity);
         }
         Spawner s = Core.getRootManager().getManager(CollisionManager.class).entityPoint(pos.position, Spawner.class);

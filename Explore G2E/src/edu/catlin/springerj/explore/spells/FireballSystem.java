@@ -26,10 +26,10 @@ public class FireballSystem extends AbstractSystem {
     @Override
     public void destroy() {
         super.destroy();
-        Core.getRootManager().add(new ParticleEmitter(pos.position, vel.velocity.setLength(-20), 100, 5, new Color4d(.8, .15, .05), true));
+        Core.getRootManager().add(new ParticleEmitter(pos.position, vel.velocity.setLength(-20), 500, 5, new Color4d(.8, .15, .05), true));
         for (CircleCollisionComponent other : ccc.touchingList("Enemy")) {
             other.entity.get(HealthComponent.class).damage(10);
-            other.applyImpulse(other.pc.position.subtract(pos.position).setLength(1000));
+            other.applyImpulse(other.pc.position.subtract(pos.position).setLength(5000));
         }
         for (CircleCollisionComponent other : ccc.touchingList("Spawner")) {
             other.entity.get(HealthComponent.class).damage(10);

@@ -1,7 +1,7 @@
 package edu.catlin.springerj.explore.player;
 
-import edu.catlin.springerj.explore.rory.Keys;
-import edu.catlin.springerj.explore.rory.MouseInput;
+import edu.catlin.springerj.g2e.event.Keys;
+import edu.catlin.springerj.g2e.event.MouseInput;
 import edu.catlin.springerj.explore.grapple.Grapple;
 import edu.catlin.springerj.explore.grapple.GrappleComponent;
 import edu.catlin.springerj.explore.collisions.CircleCollisionComponent;
