@@ -6,6 +6,7 @@ import edu.catlin.springerj.explore.rory.Keys;
 import edu.catlin.springerj.explore.rory.MouseInput;
 import edu.catlin.springerj.explore.enemy.Enemy;
 import edu.catlin.springerj.explore.graphics.GreyStripedBackground;
+import edu.catlin.springerj.explore.grapple.particle.ParticleEmitter;
 import edu.catlin.springerj.explore.collisions.CollisionManager;
 import edu.catlin.springerj.explore.player.PlayerEntity;
 import edu.catlin.springerj.explore.planets.Planet;
@@ -47,6 +48,8 @@ public class Jake {
                     break;
             }
         }
+        
+        Core.getRootManager().add(new ParticleEmitter(new Vector2(0.0d, 0.0d), new Vector2(10.0d, 10.0d), 100));
         
         Core.getRootManager().add(new Keys()).add(new MouseInput());
 
