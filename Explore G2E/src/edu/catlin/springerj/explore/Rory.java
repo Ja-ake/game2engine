@@ -16,13 +16,14 @@ import edu.catlin.springerj.g2e.tiled.TiledXMLParser;
 public class Rory {
 
     public static void main(String[] args) {
-        Core.initialize(new LWJGLManager().add(new PlanetGravityManager()).add(new CollisionManager()).add(new Keys()));
+        Core.initialize(new LWJGLManager().add(new PlanetGravityManager()).add(new CollisionManager()));
 
         PlayerEntity p = new PlayerEntity(new Vector2(100, 0));
 
         Core.getRootManager().add(new View(p));
         Core.getRootManager().add(new GreyStripedBackground());
         Core.getRootManager().add(p);
+        Core.getRootManager().add(new Keys()).add(new MouseInput());
 
         TiledXMLParser tmx = new TiledXMLParser(new File(Core.getResourceFolder() + "map\\tutorial-00.tmx"));
         tmx.parse();
