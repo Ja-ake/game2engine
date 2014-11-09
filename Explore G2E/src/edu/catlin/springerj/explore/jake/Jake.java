@@ -48,10 +48,10 @@ public class Jake {
 		while((object = tmx.nextObject()) != null) {
 			switch (object.type) {
 			case "planet":
-				Core.getRootManager().add(new Planet(new Vector2(object.x, -object.y), object.width/2));
+				Core.getRootManager().add(new Planet(new Vector2(object.x+object.width/2, -object.y-object.width/2), object.width/2));
 				break;
 			case "player":
-				p.getComponent(PositionComponent.class).position = new Vector2(object.x, -object.y);
+				p.getComponent(PositionComponent.class).position = new Vector2(object.x+32.0f/2, -object.y-32.0f/2);
 				Core.getRootManager().add(p);
 			default:
 				break;

@@ -11,6 +11,8 @@ public abstract class AbstractEntity extends ManagedObject {
 	public abstract void initialize();
 	public abstract void update();
 
+	Task updatetask;
+	
 	List<AbstractComponent> components;
 	List<AbstractSystem> systems;
 

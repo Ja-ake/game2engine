@@ -110,8 +110,13 @@ public abstract class AbstractManager extends ManagedObject {
         return this;
     }
     
+    public AbstractManager remove(AbstractEntity ent) {
+    	Core.getDefaultTaskThread().remove(ent.updatetask.getID());
+    	entities.remove(ent);
+    	return this;
+    }
+    
     public AbstractManager autoAdd(AbstractEntity ent) {
-    	System.out.println("Abstract");
         entities.add(ent);
         return this;
     }

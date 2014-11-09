@@ -33,4 +33,20 @@ public class TaskThread extends Thread {
 		if (t.once()) noncontinuousTasks.add(t);
 		else continuousTasks.add(t);
 	}
+	
+	public void remove(int id) {
+		for (int i=0; i<continuousTasks.size(); i++) { 
+			if (continuousTasks.get(i).getID() == id) {
+				continuousTasks.remove(i);
+				return;
+			}
+		}
+		
+		for (int i=0; i<noncontinuousTasks.size(); i++) { 
+			if (noncontinuousTasks.get(i).getID() == id) {
+				noncontinuousTasks.remove(i);
+				return;
+			}
+		}
+	}
 }
