@@ -1,16 +1,11 @@
 package engine;
 
-import components.PhysicsComponent;
-import components.PositionComponent;
-import entities.Box;
-import entities.Player;
-import entities.GameManager;
 import java.util.ArrayList;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
-import physics.Edge;
+import managers.RoomComponent;
 
 public abstract class Main {
 
@@ -25,8 +20,9 @@ public abstract class Main {
         }
     }
 
-    public static ArrayList<Updatable> updatables = new ArrayList();
-    public static int speed = 60;
+    public static ArrayList<ArrayList<AbstractSystem>> systems;
+    private static int layers = 3;
+    private static int speed = 60;
     public static double stepSize = 1. / 60;
     public static GameManager gameManager;
 
@@ -36,30 +32,17 @@ public abstract class Main {
         Display.destroy();
     }
 
-    public static <E extends Updatable> E get(Class<E> c) {
-        for (Updatable u : updatables) {
-            if (c.isInstance(u)) {
-                return (E) u;
-            }
-        }
-        return null;
-    }
-
     public static void init() throws LWJGLException {
+        systems = new ArrayList();
+        for (int i = 0; i < layers; i++) {
+            systems.add(new ArrayList());
+        }
         gameManager = new GameManager();
         Keyboard.create();
         Mouse.create();
 
-        new Player();
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                new Box(new Vector2(200 + 32 * i, 200 + 32 * j));
-            }
-        }
-        //Room box
-        new PhysicsComponent(new PositionComponent(new Vector2(640, 0)), new Edge(new Vector2(640, 0), new Vector2()));
-        new PhysicsComponent(new PositionComponent(new Vector2()), new Edge(new Vector2(), new Vector2(0, 640)));
-        new PhysicsComponent(new PositionComponent(new Vector2(640, 640)), new Edge(new Vector2(640, 640), new Vector2(640, 0)));
+        //Load room 1
+        gameManager.get(RoomComponent.class).load("tutorial-00");
     }
 
     public static void run() {
@@ -68,8 +51,10 @@ public abstract class Main {
             Keys.update();
             MouseInput.update();
             //Logic
-            for (int i = 0; i < updatables.size(); i++) {
-                updatables.get(i).update();
+            for (ArrayList<AbstractSystem> list : systems) {
+                for (int i = 0; i < list.size(); i++) {
+                    list.get(i).update();
+                }
             }
             //Graphics
             Display.update();

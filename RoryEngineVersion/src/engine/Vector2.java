@@ -24,7 +24,7 @@ public class Vector2 {
     }
 
     public double direction() {
-        return Util.pointDirection(0, 0, x, y);
+        return Math.atan2(y, x);
     }
 
     public double dot(Vector2 other) {

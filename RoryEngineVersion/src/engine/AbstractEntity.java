@@ -2,6 +2,7 @@ package engine;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import managers.RoomComponent;
 
 public abstract class AbstractEntity {
 
@@ -11,6 +12,9 @@ public abstract class AbstractEntity {
     public AbstractEntity() {
         componentList = new ArrayList();
         systemList = new ArrayList();
+        if (!(this instanceof GameManager)) {
+            Main.gameManager.get(RoomComponent.class).list.add(this);
+        }
     }
 
     protected <E extends AbstractComponent> E add(E c) {
@@ -38,6 +42,7 @@ public abstract class AbstractEntity {
         for (AbstractSystem s : systemList) {
             s.destroy();
         }
+        Main.gameManager.get(RoomComponent.class).list.remove(this);
     }
 
     public <E extends AbstractComponent> E get(Class<E> e) {

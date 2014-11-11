@@ -1,13 +1,18 @@
 package engine;
 
-public abstract class AbstractSystem implements Updatable {
+public abstract class AbstractSystem {
 
     public AbstractSystem() {
-        Main.updatables.add(this);
+        Main.systems.get(getLayer()).add(this);
     }
 
     public void destroy() {
-        Main.updatables.remove(this);
+        Main.systems.get(getLayer()).remove(this);
+    }
+    
+    public int getLayer() {
+        return 0;
     }
 
+    public abstract void update();
 }
