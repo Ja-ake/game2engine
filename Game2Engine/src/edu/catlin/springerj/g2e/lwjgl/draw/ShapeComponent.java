@@ -2,13 +2,13 @@ package edu.catlin.springerj.g2e.lwjgl.draw;
 
 import edu.catlin.springerj.g2e.core.AbstractComponent;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
-import edu.catlin.springerj.g2e.math.Color4d;
+import edu.catlin.springerj.g2e.math.Color4;
 import edu.catlin.springerj.g2e.math.Vector2;
 
 public class ShapeComponent extends AbstractComponent {
 
     public Vector2[] verticies;
-    public Color4d color;
+    public Color4 color;
 
     @Override
     public void initialize(AbstractEntity e) {
@@ -29,10 +29,10 @@ public class ShapeComponent extends AbstractComponent {
             verticies[i] = new Vector2(vert[i].x, vert[i].y);
         }
 
-        color = new Color4d(0.0f, 0.0f, 0.0f);
+        color = new Color4(0.0f, 0.0f, 0.0f);
     }
 
-    public ShapeComponent(Vector2[] vert, Color4d c) {
+    public ShapeComponent(Vector2[] vert, Color4 c) {
         if (vert == null) {
             throw new RuntimeException("A shape must have at least three verticies!");
         }
@@ -46,6 +46,6 @@ public class ShapeComponent extends AbstractComponent {
             verticies[i] = new Vector2(vert[i].x, vert[i].y);
         }
 
-        color = new Color4d(c.r, c.g, c.b, c.a);
+        color = new Color4(c.r, c.g, c.b, c.a);
     }
 }

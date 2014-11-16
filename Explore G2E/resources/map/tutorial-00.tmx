@@ -28,9 +28,6 @@
   <object type="spawner" x="444" y="979" width="31" height="31">
    <ellipse/>
   </object>
-  <object type="spawner" x="1105" y="405" width="32" height="32">
-   <ellipse/>
-  </object>
   <object type="slimeenemy" x="434" y="295" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="Living">
@@ -38,7 +35,7 @@
    <ellipse/>
   </object>
   <object type="slimeenemy" x="328" y="341" width="33" height="32"/>
-  <object type="spawner" x="656" y="92" width="40" height="40">
+  <object type="spawner" x="648" y="97" width="54" height="45">
    <ellipse/>
   </object>
  </objectgroup>

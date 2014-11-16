@@ -27,7 +27,7 @@ public class Enemy1System extends AbstractSystem {
     @Override
     public void update() {
     	try{
-        Vector2 target = Core.getRootManager().getEntity(PlayerEntity.class).getComponent(PositionComponent.class).position;
+        Vector2 target = Core.getRootManager().getEntities(PlayerEntity.class).get(0).getComponent(PositionComponent.class).position;
         vc.velocity = vc.velocity.add(target.subtract(pc.position).setLength((Math.min(500, -100 + target.subtract(pc.position).length()/3)) * Core.getDefaultTimer().getDeltaTime())).multiply(.99);
 
         if (!Core.getRootManager().getManager(CollisionManager.class).collisionLine(pc.position, target, "Planet")) {

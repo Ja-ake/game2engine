@@ -1,13 +1,13 @@
 package edu.catlin.springerj.explore.graphics.particle;
 
 import edu.catlin.springerj.g2e.core.AbstractEntity;
-import edu.catlin.springerj.g2e.math.Color4d;
+import edu.catlin.springerj.g2e.math.Color4;
 import edu.catlin.springerj.g2e.math.Vector2;
 import edu.catlin.springerj.g2e.movement.PositionComponent;
 
 public class ParticleEmitter extends AbstractEntity {
     
-    public ParticleEmitter(Vector2 position, Vector2 velocity, int particlenumber, double life, Color4d color, boolean blend) {
+    public ParticleEmitter(Vector2 position, Vector2 velocity, int particlenumber, double life, Color4 color, boolean blend) {
         ParticleComponent pac;
         PositionComponent pc;
         

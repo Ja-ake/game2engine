@@ -1,7 +1,5 @@
 package edu.catlin.springerj.explore.player;
 
-import edu.catlin.springerj.g2e.event.Keys;
-import edu.catlin.springerj.g2e.event.MouseInput;
 import edu.catlin.springerj.explore.grapple.Grapple;
 import edu.catlin.springerj.explore.grapple.GrappleComponent;
 import edu.catlin.springerj.explore.jake.Jake;
@@ -58,44 +56,44 @@ public class PlayerControlSystem extends AbstractSystem {
 			// If you're on a planet
 			if (ccc.placeSolid(pos.position.add(toPlanet))) {
 				// Left-right movement
-				boolean left = Core.getRootManager().getManager(Keys.class)
-						.isDown(Keyboard.KEY_A);
-				boolean right = Core.getRootManager().getManager(Keys.class)
-						.isDown(Keyboard.KEY_D);
-				boolean red = spr.name.equals("character_idle_left_red");
-				if (left && !right && !red) {
-					vel.velocity = vel.velocity.add(toPlanet.normal().multiply(
-							-.4));
-					spr.setSprite("character_walking_left", 8);
-				} else if (right && !left && !red) {
-					vel.velocity = vel.velocity.add(toPlanet.normal().multiply(
-							.4));
-					spr.setSprite("character_walking_right", 8);
-				} else {
-					if (relativeVel.dot(toPlanet.normal()) < 0 && !red) {
-						spr.setSprite("character_idle_left", 8);
-					} else if (relativeVel.dot(toPlanet.normal()) > 0 && !red) {
-						spr.setSprite("character_idle_right", 8);
-					}
-				}
+//				boolean left = Core.getRootManager().getManager(Keys.class)
+//						.isDown(Keyboard.KEY_A);
+//				boolean right = Core.getRootManager().getManager(Keys.class)
+//						.isDown(Keyboard.KEY_D);
+//				boolean red = spr.name.equals("character_idle_left_red");
+//				if (left && !right && !red) {
+//					vel.velocity = vel.velocity.add(toPlanet.normal().multiply(
+//							-.4));
+//					spr.setSprite("character_walking_left", 8);
+//				} else if (right && !left && !red) {
+//					vel.velocity = vel.velocity.add(toPlanet.normal().multiply(
+//							.4));
+//					spr.setSprite("character_walking_right", 8);
+//				} else {
+//					if (relativeVel.dot(toPlanet.normal()) < 0 && !red) {
+//						spr.setSprite("character_idle_left", 8);
+//					} else if (relativeVel.dot(toPlanet.normal()) > 0 && !red) {
+//						spr.setSprite("character_idle_right", 8);
+//					}
+//				}
 				// Friction
 				Vector2 sideVel = toPlanet.normal().multiply(
 						relativeVel.dot(toPlanet.normal()));
 				vel.velocity = vel.velocity.add(sideVel.multiply(-.004));
 				// Jumping
-				boolean jump = Core.getRootManager().getManager(Keys.class)
-						.isDown(Keyboard.KEY_W)
-						|| Core.getRootManager().getManager(Keys.class)
-								.isDown(Keyboard.KEY_SPACE);
-				if (jump) {
-					vel.velocity = toPlanet.normal()
-							.multiply(relativeVel.dot(toPlanet.normal()))
-							.add(toPlanet.multiply(-100));
-				} else {
-					// Stick to planet
-					vel.velocity = vel.velocity.add(toPlanet);
-				}
-				// Possible destroy grapple
+//				boolean jump = Core.getRootManager().getManager(Keys.class)
+//						.isDown(Keyboard.KEY_W)
+//						|| Core.getRootManager().getManager(Keys.class)
+//								.isDown(Keyboard.KEY_SPACE);
+//				if (jump) {
+//					vel.velocity = toPlanet.normal()
+//							.multiply(relativeVel.dot(toPlanet.normal()))
+//							.add(toPlanet.multiply(-100));
+//				} else {
+//					// Stick to planet
+//					vel.velocity = vel.velocity.add(toPlanet);
+//				}
+//				// Possible destroy grapple
 				if (gc.planet != null && pg.planetPos == gc.planet.pc) {
 					gc.destroyGrapple();
 					// gc.grapple.get(SpriteComponent.class).alpha = .5;
@@ -104,16 +102,16 @@ public class PlayerControlSystem extends AbstractSystem {
 			// Slight friction
 			vel.velocity = vel.velocity.multiply(.9999);
 			// Grapple
-			if (Core.getRootManager().getManager(MouseInput.class)
-					.isPressed(MouseEvent.BUTTON_MB2)) {
-				if (gc.grapple == null) {
-					Vector2 velocity = Core.getRootManager().getManager(
-							MouseInput.class).mousePos.subtract(pos.position)
-							.setLength(100);
-					gc.grapple = new Grapple(player, velocity);
-					Core.getRootManager().add(gc.grapple);
-				}
-			}
+//			if (Core.getRootManager().getManager(MouseInput.class)
+//					.isPressed(MouseEvent.BUTTON_MB2)) {
+//				if (gc.grapple == null) {
+//					Vector2 velocity = Core.getRootManager().getManager(
+//							MouseInput.class).mousePos.subtract(pos.position)
+//							.setLength(100);
+//					gc.grapple = new Grapple(player, velocity);
+//					Core.getRootManager().add(gc.grapple);
+//				}
+//			}
 			// Health
 			if (hc.currentHealth == 0) {
 				for (int i = 0; i < Core.getRootManager().getEntities().size(); i++) {

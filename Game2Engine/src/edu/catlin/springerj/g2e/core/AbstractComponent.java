@@ -1,12 +1,9 @@
 package edu.catlin.springerj.g2e.core;
 
-/**
- * Contains information for a given component.
- */
+import edu.catlin.springerj.g2e.thread.Task;
+
 public abstract class AbstractComponent extends ManagedObject {
-	int id; 
+	Task task;
 	
-	void background(boolean started) { }
 	public abstract void initialize(AbstractEntity e);
-	public void destroy() {destroyed = true;} boolean destroyed = false;
 }

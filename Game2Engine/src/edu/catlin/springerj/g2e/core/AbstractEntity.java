@@ -3,14 +3,15 @@ package edu.catlin.springerj.g2e.core;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.catlin.springerj.g2e.core.AbstractComponent;
 import edu.catlin.springerj.g2e.exception.InvalidComponentException;
 import edu.catlin.springerj.g2e.exception.InvalidSystemException;
 import edu.catlin.springerj.g2e.thread.Task;
+import edu.catlin.springerj.g2e.thread.TaskThread;
 
 public abstract class AbstractEntity extends ManagedObject {
 	public abstract void initialize();
 	public abstract void update();
-	public void destroy() {destroyed = true;} boolean destroyed = false;
 
 	Task updatetask;
 	
@@ -22,66 +23,76 @@ public abstract class AbstractEntity extends ManagedObject {
 		systems = new ArrayList<AbstractSystem>();
 	}
 	
-	void background(boolean started) { try { if (started) for (int i=0; i<systems.size(); i++) systems.get(i).update(); } catch(Exception e) { return; } }
-
 	/**
 	 * Adds a list of components to the entity.
 	 */
-	public boolean add(AbstractComponent... cs) {
-		boolean r = true;
-
+	public AbstractEntity add(AbstractComponent... cs) {
 		final AbstractEntity thus = this;
 		for (AbstractComponent c : cs) {
 			String cName = c.getClass().getName();
 			boolean contains = false;
+			
+			// check contents
 			for (AbstractComponent check : components) {
 				if (check.getClass().getName() == cName) {
 					contains = true;
-					r = false;
 				}
 			}
+			
 			if (!contains) {
 				components.add(c);
 				c.setManager(this.getManager());
-				final AbstractComponent fc = c;
-//				Core.task(new Task() {
-//					public void run() {
-//						fc.initialize(thus);
-//					}
-//				});
 				
-				c.initialize(thus);
+				final AbstractComponent fc = c;
+				Core.task(new Task(Task.PRIORITY_HIGH) {
+					public void run() {
+						fc.initialize(thus);
+					}
+				}, TaskThread.TYPE_NONCONTINUOUS);
 			}
 		}
-
-		return r;
+		
+		return this;
 	}
 
 	/**
 	 * Adds a list of systems to the entity.
 	 */
-	public boolean add(AbstractSystem... ss) {
-		boolean r = true;
-
+	public AbstractEntity add(AbstractSystem... ss) {
 		final AbstractEntity thus = this;
 		for (AbstractSystem s : ss) {
 			String cName = s.getClass().getName();
 			boolean contains = false;
+			
+			// check contents
 			for (AbstractSystem check : systems) {
 				if (check.getClass().getName() == cName) {
 					contains = true;
-					r = false;
 				}
 			}
+			
 			if (!contains) {
 				systems.add(s);
 				s.setManager(this.getManager());
+				
+				
+				final AbstractSystem fs = s;
+				Core.task(new Task(Task.PRIORITY_ABOVE_NORMAL) {
+					public void run() {
+						fs.initialize(thus);
+					}
+				}, TaskThread.TYPE_NONCONTINUOUS);
+				
+				s.task = 
+				Core.task(new Task(Task.PRIORITY_ABOVE_NORMAL) {
+					public void run() {
+						fs.update();
+					}
+				}, TaskThread.TYPE_CONTINUOUS);
 			}
-			
-			s.initialize(thus);
 		}
 
-		return r;
+		return this;
 	}
 	
 	public <E extends AbstractComponent>E getComponent(Class<E> cc) {

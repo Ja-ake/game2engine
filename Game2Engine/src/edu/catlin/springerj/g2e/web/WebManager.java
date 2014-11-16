@@ -19,11 +19,10 @@ public class WebManager extends AbstractManager {
 	
 	@Override
 	public void initialize() {
-		initialized = false;
 	}
 
 	@Override
-	public void run() {
+	public void update() {
 		
 	}
 	
@@ -71,20 +70,9 @@ public class WebManager extends AbstractManager {
 	}
 	
 	public void register(WebEntity group) {
-		web.add(group);
-		group.setManager(this);
-		
 		AbstractManager prev = this, next;
 		for (next = prev.getManager(); next != null; next = prev.getManager()) prev = next; // get top-level manager
 		for (AbstractEntity e : prev.getEntities()) group.autojoin(e); 
-		
-		final AbstractEntity et = group;
-		Core.task(new Task(true) {
-			@Override
-			public void run() {
-				et.update();
-			}
-		});
 	}
 	
 	public void remove(WebEntity group) {

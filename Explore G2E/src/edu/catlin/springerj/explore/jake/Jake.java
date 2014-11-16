@@ -2,8 +2,6 @@ package edu.catlin.springerj.explore.jake;
 
 import java.io.File;
 
-import edu.catlin.springerj.g2e.event.Keys;
-import edu.catlin.springerj.g2e.event.MouseInput;
 import edu.catlin.springerj.explore.enemy.Enemy;
 import edu.catlin.springerj.explore.enemy.Spawner;
 import edu.catlin.springerj.explore.graphics.GreyStripedBackground;
@@ -33,12 +31,12 @@ public class Jake {
 
         @Override
         public void run() {
-//            Core.getRootManager().add(new EventManager());
+            Core.getRootManager().add(new EventManager());
 //            Core.getRootManager().add(new MouseInput());
 //            Core.getRootManager().add(new Keys());
-//            Core.getRootManager().add(new WebManager());
-//            Core.getRootManager().add(new PlanetGravityManager());
-//            Core.getRootManager().add(new CollisionManager());
+            Core.getRootManager().add(new WebManager());
+            Core.getRootManager().add(new PlanetGravityManager());
+            Core.getRootManager().add(new CollisionManager());
 
             PlayerEntity p = new PlayerEntity(new Vector2(100, 0));
 
@@ -82,8 +80,6 @@ public class Jake {
             @Override
             public void run() {
             	Core.getRootManager().add(new EventManager());
-                Core.getRootManager().add(new MouseInput());
-                Core.getRootManager().add(new Keys());
                 Core.getRootManager().add(new WebManager());
                 Core.getRootManager().add(new PlanetGravityManager());
                 Core.getRootManager().add(new CollisionManager());

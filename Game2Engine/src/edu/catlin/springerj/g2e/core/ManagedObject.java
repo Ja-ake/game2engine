@@ -13,10 +13,10 @@ abstract class ManagedObject {
 	}
 	
 	public AbstractManager getRootManager() {
+		if (manager == null) throw new RuntimeException("Does not have a manager.");
+		
 		AbstractManager prev = manager, next = manager;
 		for (prev = manager; next != null; next = prev.getManager()) prev = next;
 		return prev;
 	}
-	
-	abstract void background(boolean started);
 }

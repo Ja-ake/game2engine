@@ -1,23 +1,22 @@
-distance to line from point
+first step:
+initialize root-manager
+initialize sub-managers
+initialize root-manager entities
+initialize root-manager entity components
+initialize root-manager entity systems
 
-line = y-c = m(x-d)
-point = (a,b)
+subsequent steps:
+initialize new managers
+initialize new entities
+initialize new components
+initialize new systems
+update root-manager
+update sub-managers
+update entities
+update systems
 
-short: y-b = (-1/m)(x-a)
-dist:
-y = m(x-d) + c
-y = (-1/m)(x-a) + b
-
-m(x-d) + c = (-1/m)(x-a) + b
-mx-md + c = -(x-a)/m + b
-mx + x/m = b - c + md + a/m
-x(m+1/m) = b - c + md + a/m
-x = (b - c + md + a/m)/(m + 1/m)
-y = m((b - c + md + a/m)/(m + 1/m) - d) + c
-y = m((b - c + md + a/m)/(m(1 + 1/m^2)) - d) + c
-y = (b - c + md + a/m)/(1 + 1/m^2) - md + c
-
-x = (b - c + md + a/m)/(m + 1/m)
-y = (b - c + md + a/m)/(1 + 1/m^2) - md + c
-
-dist = sqrt((x-a)^2 + (y-b)^2)
+											core ->
+											root-manager ->
+					entities ->											sub-managers ->
+		systems ->			components ->					entities ->					sub-managers ->
+		code				data							...							...

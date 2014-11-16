@@ -34,7 +34,7 @@ public class TargetedViewSystem extends AbstractSystem implements EventListener<
 
 	@Override
 	public void update() {
-		pc.position = pc.position.add(etc.getTargetPosition().subtract(pc.position).multiply(0.9*Core.getDefaultTimer().getDeltaTime()));
+		pc.position = pc.position.add(etc.getTargetPosition().subtract(pc.position));//.multiply(.9*Core.getDefaultTimer().getDeltaTime()));
 		ws.setViewport(-wc.width*zc.zoom/2+pc.position.x, wc.width*zc.zoom/2+pc.position.x, -wc.height*zc.zoom/2+pc.position.y, wc.height*zc.zoom/2+pc.position.y);
 	}
 

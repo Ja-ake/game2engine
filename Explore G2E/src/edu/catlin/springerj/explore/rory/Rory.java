@@ -1,7 +1,5 @@
 package edu.catlin.springerj.explore.rory;
 
-import edu.catlin.springerj.g2e.event.Keys;
-import edu.catlin.springerj.g2e.event.MouseInput;
 import java.io.File;
 import edu.catlin.springerj.explore.graphics.GreyStripedBackground;
 import edu.catlin.springerj.explore.collisions.CollisionManager;
@@ -34,8 +32,8 @@ public class Rory {
             @Override
             public void run() {
                 Core.getRootManager().add(new EventManager());
-                Core.getRootManager().add(new MouseInput());
-                Core.getRootManager().add(new Keys());
+//                Core.getRootManager().add(new MouseInput());
+//                Core.getRootManager().add(new Keys());
                 Core.getRootManager().add(new WebManager());
                 Core.getRootManager().add(new PlanetGravityManager());
                 Core.getRootManager().add(new CollisionManager());
@@ -119,8 +117,8 @@ public class Rory {
 
                 Core.getRootManager().add(new TitleScreenButtons(tutorial));
 
-                Core.getRootManager().add(new Keys());
-                Core.getRootManager().add(new MouseInput());
+//                Core.getRootManager().add(new Keys());
+//                Core.getRootManager().add(new MouseInput());
             }
         };
 

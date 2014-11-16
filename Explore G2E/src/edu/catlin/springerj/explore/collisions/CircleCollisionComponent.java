@@ -33,12 +33,6 @@ public class CircleCollisionComponent extends AbstractComponent {
     }
 
     @Override
-    public void destroy() {
-        super.destroy();
-        Core.getRootManager().getManager(CollisionManager.class).list.remove(this);
-    }
-
-    @Override
     public void initialize(AbstractEntity e) {
         name = e.getClass().getSimpleName();
         pc = e.get(PositionComponent.class);

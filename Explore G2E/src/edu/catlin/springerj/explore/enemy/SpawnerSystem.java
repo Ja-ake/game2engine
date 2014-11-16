@@ -27,14 +27,17 @@ public class SpawnerSystem extends AbstractSystem {
 
     @Override
     public void update() {
-        rot.rot += Core.getDefaultTimer().getDeltaTime() * (6 - hc.currentHealth / 100);
-        Vector2 player = Core.getRootManager().getEntity(PlayerEntity.class).getComponent(PositionComponent.class).position;
+        try {
+    	rot.rot += Core.getDefaultTimer().getDeltaTime() * (6 - hc.currentHealth / 100);
+        Vector2 player = Core.getRootManager().getEntities(PlayerEntity.class).get(0).getComponent(PositionComponent.class).position;
         if (player.subtract(pos.position).lengthSquared() < 1000000) {
             if (!Core.getRootManager().getManager(CollisionManager.class).collisionLine(pos.position, player, "Planet")) {
                 if (bcc.shoot()) {
                     Core.getRootManager().add(new Enemy(pos.position.add(new Vector2(Math.random() - .5, Math.random() - .5))));
                 }
             }
+        }} catch (Exception e) {
+        	return;
         }
     }
 

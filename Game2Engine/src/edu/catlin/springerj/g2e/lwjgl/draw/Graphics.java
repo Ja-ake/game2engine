@@ -2,15 +2,15 @@ package edu.catlin.springerj.g2e.lwjgl.draw;
 
 import edu.catlin.springerj.g2e.lwjgl.util.FontContainer;
 import edu.catlin.springerj.g2e.lwjgl.util.Texture;
-import edu.catlin.springerj.g2e.math.Color4d;
+import edu.catlin.springerj.g2e.math.Color4;
 import static org.lwjgl.opengl.GL11.*;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.opengl.TextureImpl;
 
 public abstract class Graphics {
 
-    public static void drawCircle(double x, double y, double size, Color4d c) {
-        double detail = 50;
+    public static void drawCircle(double x, double y, double size, Color4 c) {
+        double detail = 64;
         glPushMatrix();
         glDisable(GL_TEXTURE_2D);
         glColor4d(c.r, c.g, c.b, c.a);
@@ -26,10 +26,10 @@ public abstract class Graphics {
     }
 
     public static void drawLine(double x1, double y1, double x2, double y2) {
-        drawLine(x1, y1, x2, y2, new Color4d(0, 0, 0));
+        drawLine(x1, y1, x2, y2, new Color4(0, 0, 0));
     }
 
-    public static void drawLine(double x1, double y1, double x2, double y2, Color4d c) {
+    public static void drawLine(double x1, double y1, double x2, double y2, Color4 c) {
         glPushMatrix();
         glDisable(GL_TEXTURE_2D);
         glLineWidth(2);

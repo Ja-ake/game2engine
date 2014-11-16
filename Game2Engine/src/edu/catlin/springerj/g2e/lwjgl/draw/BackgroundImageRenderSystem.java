@@ -10,6 +10,7 @@ import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.AbstractSystem;
 import edu.catlin.springerj.g2e.lwjgl.LWJGLManager;
 import edu.catlin.springerj.g2e.lwjgl.WindowComponent;
+import edu.catlin.springerj.g2e.utility.Logger;
 
 public class BackgroundImageRenderSystem extends AbstractSystem {
 	private ImageComponent ic;

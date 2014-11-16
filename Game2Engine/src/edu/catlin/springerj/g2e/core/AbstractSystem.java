@@ -1,12 +1,10 @@
 package edu.catlin.springerj.g2e.core;
 
+import edu.catlin.springerj.g2e.thread.Task;
 
 public abstract class AbstractSystem extends ManagedObject {
-	int id;
+	Task task;
 	
 	public abstract void initialize(AbstractEntity e);
 	public abstract void update();
-	
-	void background(boolean started) { }
-	public void destroy() {destroyed = true;} boolean destroyed = false;
 }

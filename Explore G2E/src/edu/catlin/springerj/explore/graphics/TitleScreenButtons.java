@@ -11,6 +11,7 @@ import edu.catlin.springerj.g2e.lwjgl.draw.StaticImageRenderSystem;
 import edu.catlin.springerj.g2e.math.Vector2;
 import edu.catlin.springerj.g2e.movement.PositionComponent;
 import edu.catlin.springerj.g2e.thread.Task;
+import edu.catlin.springerj.g2e.thread.TaskThread;
 
 public class TitleScreenButtons extends AbstractEntity implements EventListener<MouseEvent> {
 
@@ -44,14 +45,14 @@ public class TitleScreenButtons extends AbstractEntity implements EventListener<
 					Core.getRootManager().remove(Core.getRootManager().getEntities().get(i));
 				}
 				final TitleScreenButtons thus = this;
-				Core.task(new Task() {
+				Core.task(new Task(Task.PRIORITY_VERY_LOW) {
 
 					@Override
 					public void run() {
 						thus.run.run();
 					}
 					
-				});
+				}, TaskThread.TYPE_NONCONTINUOUS);
 			} else System.exit(0);
 		} else if (event.action == MouseEvent.ACTION_OTHER) {
 			if (pc.position.y == -12.5d) pc.position = new Vector2(pc.position.x, -107.0d);

@@ -47,8 +47,11 @@ public class PlayerEntity extends AbstractEntity {
     public void initialize() {
     }
 
+    int i=0;
     @Override
     public void update() {
+    	i++;
+    	if (i>2000) this.getManager().remove(this);
     }
 
 }

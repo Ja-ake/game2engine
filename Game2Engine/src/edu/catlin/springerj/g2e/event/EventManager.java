@@ -44,11 +44,7 @@ public class EventManager extends AbstractManager {
     }
 
     @Override
-    public void run() {
-        //Rory added these
-        MouseInput.update();
-        Keys.update();
-        //Rory edit over
+    public void update() {
         while (Keyboard.next()) {
             fire(new KeyboardEvent(Keyboard.getEventKey(), Keyboard.getEventKeyState()));
         }
@@ -129,8 +125,8 @@ public class EventManager extends AbstractManager {
     }
 
     @Override
-    public AbstractManager removeAll() {
-        super.removeAll();
+    public AbstractManager clear() {
+        super.clear();
         listeners.clear();
         queue.clear();
 

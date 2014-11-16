@@ -32,7 +32,7 @@ public class LWJGLManager extends AbstractManager {
 	}
 	
 	@Override
-	public void run() {
+	public void update() {
 		window.update();
 		windowSystem.update();
 	}
@@ -47,7 +47,7 @@ public class LWJGLManager extends AbstractManager {
 	
 	public void setRoom(String name) {
 		Core.getDefaultTaskThread().clear();
-		this.removeAll();
+		this.clear();
 		
 		rooms.get(name).run();
 	}

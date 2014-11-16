@@ -14,8 +14,10 @@ public class CollisionManager extends AbstractManager {
     public ArrayList<CircleCollisionComponent> list = new ArrayList();
 
     @Override
-    public AbstractManager autoAdd(AbstractEntity e) {
-        try {
+    public AbstractManager add(AbstractEntity... es) {
+    	super.add(es);
+    	AbstractEntity e = es[0];
+    	try {
             list.add(e.get(CircleCollisionComponent.class));
         } catch (InvalidComponentException ex) {
         }
@@ -71,7 +73,7 @@ public class CollisionManager extends AbstractManager {
     }
 
     @Override
-    public void run() {
+    public void update() {
     }
 
 }

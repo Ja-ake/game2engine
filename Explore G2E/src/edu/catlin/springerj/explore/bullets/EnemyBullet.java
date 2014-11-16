@@ -13,6 +13,7 @@ import edu.catlin.springerj.g2e.movement.PositionComponent;
 import edu.catlin.springerj.g2e.movement.VelocityComponent;
 import edu.catlin.springerj.g2e.movement.VelocityMovementSystem;
 import edu.catlin.springerj.g2e.thread.Task;
+import edu.catlin.springerj.g2e.thread.TaskThread;
 
 public class EnemyBullet extends AbstractEntity {
 
@@ -39,7 +40,7 @@ public class EnemyBullet extends AbstractEntity {
             sc.setSprite("character_idle_left_red", 8);
             p.get(CircleCollisionComponent.class).applyImpulse(get(VelocityComponent.class).velocity.setLength(1000));
             Core.getRootManager().remove(this);
-            Core.task(new Task(true) {
+            Core.task(new Task(Task.PRIORITY_NORMAL) {
                 private double time = 0;
 
                 @Override
@@ -50,7 +51,7 @@ public class EnemyBullet extends AbstractEntity {
                         Core.getDefaultTaskThread().remove(this.getID());
                     }
                 }
-            });
+            }, TaskThread.TYPE_CONTINUOUS);
         }
     }
 }

@@ -13,7 +13,9 @@ public class PlanetGravityManager extends AbstractManager {
     private ArrayList<Planet> planetList = new ArrayList();
 
     @Override
-    public AbstractManager autoAdd(AbstractEntity e) {
+    public AbstractManager add(AbstractEntity... es) {
+    	super.add(es);
+    	AbstractEntity e = es[0];
         if (e instanceof Planet) {
             planetList.add((Planet) e);
         }
@@ -41,7 +43,7 @@ public class PlanetGravityManager extends AbstractManager {
     }
 
     @Override
-    public void run() {
+    public void update() {
     }
 
 }

@@ -7,7 +7,7 @@ import edu.catlin.springerj.g2e.core.AbstractSystem;
 import edu.catlin.springerj.g2e.core.Core;
 import edu.catlin.springerj.g2e.lwjgl.draw.Graphics;
 import edu.catlin.springerj.g2e.lwjgl.SpriteComponent;
-import edu.catlin.springerj.g2e.math.Color4d;
+import edu.catlin.springerj.g2e.math.Color4;
 import edu.catlin.springerj.g2e.math.Vector2;
 import edu.catlin.springerj.g2e.movement.PositionComponent;
 import edu.catlin.springerj.g2e.movement.RotationComponent;
@@ -38,7 +38,7 @@ public class GrappleSystem extends AbstractSystem {
         Vector2 toMe = pc.position.subtract(playerPos);
         //Graphics
         rc.rot = toMe.direction() - Math.PI / 2;
-        Graphics.drawLine(pc.position.x, pc.position.y, playerPos.x, playerPos.y, new Color4d(0, 0, 0, sc.alpha));
+        Graphics.drawLine(pc.position.x, pc.position.y, playerPos.x, playerPos.y, new Color4(0, 0, 0, sc.alpha));
         //If you're active
         if (sc.alpha == 1) {
             //If you should die

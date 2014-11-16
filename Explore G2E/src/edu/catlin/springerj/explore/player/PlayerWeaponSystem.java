@@ -3,8 +3,6 @@ package edu.catlin.springerj.explore.player;
 import edu.catlin.springerj.explore.bullets.BulletCooldownComponent;
 import edu.catlin.springerj.explore.spells.Fireball;
 import edu.catlin.springerj.explore.bullets.PlayerBullet;
-import edu.catlin.springerj.g2e.event.Keys;
-import edu.catlin.springerj.g2e.event.MouseInput;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.AbstractSystem;
 import edu.catlin.springerj.g2e.core.Core;
@@ -20,15 +18,15 @@ public class PlayerWeaponSystem extends AbstractSystem {
     private BulletCooldownComponent bcc;
 
     public void fire1(int weapon) {
-        Vector2 velocity = Core.getRootManager().getManager(MouseInput.class).mousePos.subtract(pos.position).setLength(300);
-        Core.getRootManager().add(new PlayerBullet(pos.position, velocity, weapon));
+//        Vector2 velocity = Core.getRootManager().getManager(MouseInput.class).mousePos.subtract(pos.position).setLength(300);
+//        Core.getRootManager().add(new PlayerBullet(pos.position, velocity, weapon));
     }
 
     public void fire2(int weapon) {
         switch (weapon) {
             case 0:
-                Vector2 velocity = Core.getRootManager().getManager(MouseInput.class).mousePos.subtract(pos.position).setLength(200);
-                Core.getRootManager().add(new Fireball(pos.position, velocity));
+//                Vector2 velocity = Core.getRootManager().getManager(MouseInput.class).mousePos.subtract(pos.position).setLength(200);
+//                Core.getRootManager().add(new Fireball(pos.position, velocity));
                 break;
             case 1:
                 break;
@@ -48,32 +46,32 @@ public class PlayerWeaponSystem extends AbstractSystem {
 
     @Override
     public void update() {
-        if (Core.getRootManager().getManager(Keys.class).isPressed(Keyboard.KEY_Q)) {
-            wc.next();
-        }
-        if (Core.getRootManager().getManager(Keys.class).isPressed(Keyboard.KEY_M)) {
-            wc.auto = !wc.auto;
-        }
-        if (wc.auto) {
-            if (Core.getRootManager().getManager(MouseInput.class).isDown(MouseEvent.BUTTON_MB1)) {
-            	
-                if (bcc.shoot()) {
-                    fire1(wc.weapon);
-                }
-            }
-        } else {
-            if (Core.getRootManager().getManager(MouseInput.class).isReleased(MouseEvent.BUTTON_MB1)) {
-                if (bcc.shoot()) {
-                    double time = Core.getRootManager().getManager(MouseInput.class).getTimeR(MouseEvent.BUTTON_MB1);
-                    if (time < 1) {
-                        fire1(wc.weapon);
-                    } else {
-                        fire2(wc.weapon);
-                    }
-                }
-
-            }
-        }
+//        if (Core.getRootManager().getManager(Keys.class).isPressed(Keyboard.KEY_Q)) {
+//            wc.next();
+//        }
+//        if (Core.getRootManager().getManager(Keys.class).isPressed(Keyboard.KEY_M)) {
+//            wc.auto = !wc.auto;
+//        }
+//        if (wc.auto) {
+//            if (Core.getRootManager().getManager(MouseInput.class).isDown(MouseEvent.BUTTON_MB1)) {
+//            	
+//                if (bcc.shoot()) {
+//                    fire1(wc.weapon);
+//                }
+//            }
+//        } else {
+//            if (Core.getRootManager().getManager(MouseInput.class).isReleased(MouseEvent.BUTTON_MB1)) {
+//                if (bcc.shoot()) {
+//                    double time = Core.getRootManager().getManager(MouseInput.class).getTimeR(MouseEvent.BUTTON_MB1);
+//                    if (time < 1) {
+//                        fire1(wc.weapon);
+//                    } else {
+//                        fire2(wc.weapon);
+//                    }
+//                }
+//
+//            }
+//        }
     }
 
 }

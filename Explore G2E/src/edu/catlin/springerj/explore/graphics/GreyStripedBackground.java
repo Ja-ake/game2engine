@@ -33,7 +33,6 @@ public class GreyStripedBackground extends AbstractEntity {
 
 	@Override
 	public void update() {
-		
 	}
 
 }
