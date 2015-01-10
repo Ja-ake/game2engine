@@ -3,7 +3,7 @@ package edu.catlin.springerj.explore.enemy;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.AbstractSystem;
 import edu.catlin.springerj.g2e.lwjgl.draw.Graphics;
-import edu.catlin.springerj.g2e.movement.PositionComponent;
+import edu.catlin.springerj.g2e.physics.PositionComponent;
 
 public class HealthbarSystem extends AbstractSystem {
 

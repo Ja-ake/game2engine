@@ -8,11 +8,6 @@ public class WindowComponent extends AbstractComponent {
 	public double centerx = 0, centery = 0;
 	public String title;
 
-	@Override
-	public void initialize(AbstractEntity e) {
-		
-	}
-	
 	/**
 	 * Creates a window of the default size.
 	 */
@@ -38,5 +33,10 @@ public class WindowComponent extends AbstractComponent {
 		width = w;
 		height = h;
 		title = t;
+	}
+
+	@Override
+	public void initialize(AbstractEntity e) {
+
 	}
 }

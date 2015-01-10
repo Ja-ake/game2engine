@@ -5,7 +5,7 @@ import edu.catlin.springerj.g2e.lwjgl.draw.ImageComponent;
 import edu.catlin.springerj.g2e.lwjgl.draw.ImageRenderSystem;
 import edu.catlin.springerj.g2e.lwjgl.util.Texture;
 import edu.catlin.springerj.g2e.math.Vector2;
-import edu.catlin.springerj.g2e.movement.PositionComponent;
+import edu.catlin.springerj.g2e.physics.PositionComponent;
 
 public class Tile extends AbstractEntity {
 	

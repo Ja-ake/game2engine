@@ -5,12 +5,12 @@ import org.newdawn.slick.Color;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.AbstractSystem;
 import edu.catlin.springerj.g2e.lwjgl.util.FontContainer;
-import edu.catlin.springerj.g2e.movement.PositionComponent;
+import edu.catlin.springerj.g2e.physics.PositionComponent;
 
 public class DrawTextSystem extends AbstractSystem {
 	private TextComponent tc;
 	private PositionComponent pc;
-	
+
 	@Override
 	public void initialize(AbstractEntity ent) {
 		tc = ent.getComponent(TextComponent.class);

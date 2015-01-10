@@ -8,7 +8,8 @@ import edu.catlin.springerj.g2e.core.AbstractSystem;
 import edu.catlin.springerj.g2e.core.Core;
 import edu.catlin.springerj.g2e.event.MouseEvent;
 import edu.catlin.springerj.g2e.math.Vector2;
-import edu.catlin.springerj.g2e.movement.PositionComponent;
+import edu.catlin.springerj.g2e.physics.PositionComponent;
+
 import org.lwjgl.input.Keyboard;
 
 public class PlayerWeaponSystem extends AbstractSystem {

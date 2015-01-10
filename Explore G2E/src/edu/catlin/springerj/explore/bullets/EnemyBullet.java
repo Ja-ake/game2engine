@@ -9,9 +9,9 @@ import edu.catlin.springerj.g2e.core.Core;
 import edu.catlin.springerj.g2e.lwjgl.SpriteComponent;
 import edu.catlin.springerj.g2e.lwjgl.draw.Graphics;
 import edu.catlin.springerj.g2e.math.Vector2;
-import edu.catlin.springerj.g2e.movement.PositionComponent;
-import edu.catlin.springerj.g2e.movement.VelocityComponent;
-import edu.catlin.springerj.g2e.movement.VelocityMovementSystem;
+import edu.catlin.springerj.g2e.physics.PositionComponent;
+import edu.catlin.springerj.g2e.physics.VelocityComponent;
+import edu.catlin.springerj.g2e.physics.VelocitySystem;
 import edu.catlin.springerj.g2e.thread.Task;
 import edu.catlin.springerj.g2e.thread.TaskThread;
 
@@ -23,7 +23,7 @@ public class EnemyBullet extends AbstractEntity {
         add(new VelocityComponent(velocity));
         add(new BulletComponent());
         //Systems
-        add(new VelocityMovementSystem());
+        add(new VelocitySystem());
         add(new BulletSystem());
     }
 

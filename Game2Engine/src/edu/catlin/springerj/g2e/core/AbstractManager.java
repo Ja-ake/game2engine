@@ -15,63 +15,21 @@ import edu.catlin.springerj.g2e.web.WebManager;
  */
 public abstract class AbstractManager extends ManagedObject {
 
-	public abstract void initialize();
-
-	public abstract void update();
-
 	protected List<AbstractManager> managers;
+
 	protected List<AbstractEntity> entities;
+
+	protected int priority;
 
 	public AbstractManager() {
 		managers = new ArrayList<AbstractManager>();
 		entities = new ArrayList<AbstractEntity>();
+		priority = Task.PRIORITY_VERY_HIGH;
 	}
 
-	public void start() {
-		final AbstractManager thus = this;
-
-		// start initialize task
-		Core.task(new Task(Task.PRIORITY_VERY_HIGH) {
-			@Override
-			public void run() {
-				thus.initialize();
-			}
-		}, TaskThread.TYPE_NONCONTINUOUS);
-
-		// start update task
-		Core.task(new Task(Task.PRIORITY_VERY_HIGH) {
-			@Override
-			public void run() {
-				thus.update();
-			}
-		}, TaskThread.TYPE_CONTINUOUS);
-	}
-
-	public AbstractManager add(AbstractManager... mans) {
-		for (AbstractManager man : mans) {	
-			if (managers.contains(man)) throw new InvalidManagerException("Manager has already been created.");
-			managers.add(man);
-			man.setManager(this);
-	
-			final AbstractManager fman = man;
-	
-			// start initialize task
-			Core.task(new Task(Task.PRIORITY_VERY_HIGH) {
-				@Override
-				public void run() {
-					fman.initialize();
-				}
-			}, TaskThread.TYPE_NONCONTINUOUS);
-	
-			// start update task
-			Core.task(new Task(Task.PRIORITY_VERY_HIGH) {
-				@Override
-				public void run() {
-					fman.update();
-				}
-			}, TaskThread.TYPE_CONTINUOUS);
-		}
-		return this;
+	public AbstractManager(int p) {
+		this();
+		priority = p;
 	}
 
 	public AbstractManager add(AbstractEntity... ents) {
@@ -80,11 +38,11 @@ public abstract class AbstractManager extends ManagedObject {
 		}
 		return this;
 	}
-	
+
 	public AbstractManager add(AbstractEntity ent) {
 		entities.add(ent);
 		ent.setManager(this);
-		
+
 		final AbstractEntity fent = ent;
 
 		// start initialize task
@@ -103,22 +61,85 @@ public abstract class AbstractManager extends ManagedObject {
 			}
 		}, TaskThread.TYPE_CONTINUOUS);
 
-		for (int i=0; i<managers.size(); i++) managers.get(i).add(fent);
+		for (int i = 0; i < managers.size(); i++)
+			managers.get(i).add(fent);
 		return this;
 	}
 
+	public AbstractManager add(AbstractManager... mans) {
+		for (AbstractManager man : mans) {
+			if (managers.contains(man)) throw new InvalidManagerException("Manager has already been created.");
+			managers.add(man);
+			man.setManager(this);
+
+			final AbstractManager fman = man;
+
+			// start initialize task
+			Core.task(new Task(man.priority) {
+				@Override
+				public void run() {
+					fman.initialize();
+				}
+			}, TaskThread.TYPE_NONCONTINUOUS);
+
+			// start update task
+			Core.task(new Task(man.priority) {
+				@Override
+				public void run() {
+					fman.update();
+				}
+			}, TaskThread.TYPE_CONTINUOUS);
+		}
+		return this;
+	}
+
+	public AbstractManager clear() {
+		for (int i = 0; i < entities.size(); i++)
+			remove(entities.get(i--));
+		for (AbstractManager am : this.managers)
+			am.clear();
+		return this;
+	}
+
+	public List<AbstractEntity> getEntities() {
+		return entities;
+	}
+
+	public List<AbstractEntity> getEntities(Class type) {
+		List<AbstractEntity> entitiesoftypet = new ArrayList<AbstractEntity>();
+		for (AbstractEntity e : entities) {
+			if (e.getClass().equals(type)) {
+				entitiesoftypet.add(e);
+			}
+		}
+
+		throw new RuntimeException("Invalid entity type.");
+	}
+
+	public <T extends AbstractManager> T getManager(Class<T> type) {
+		for (AbstractManager m : managers) {
+			if (m.getClass().equals(type)) { return (T) m; }
+		}
+
+		throw new RuntimeException("Invalid manager type.");
+	}
+
+	public abstract void initialize();
+
 	public AbstractManager remove(AbstractEntity ent) {
 		final AbstractEntity fent = ent;
-		
+
 		Core.getDefaultTaskThread().remove(ent.updatetask.getID());
 		for (AbstractComponent ac : fent.components) {
-			if (ac.task != null) Core.getDefaultTaskThread().remove(ac.task.getID()); ac.task = null;
+			if (ac.task != null) Core.getDefaultTaskThread().remove(ac.task.getID());
+			ac.task = null;
 		}
 
 		for (AbstractSystem sc : fent.systems) {
-			if (sc.task != null) Core.getDefaultTaskThread().remove(sc.task.getID()); sc.task = null;
+			if (sc.task != null) Core.getDefaultTaskThread().remove(sc.task.getID());
+			sc.task = null;
 		}
-		
+
 		Core.task(new Task(Task.PRIORITY_VERY_LOW) {
 			@Override
 			public void run() {
@@ -131,30 +152,25 @@ public abstract class AbstractManager extends ManagedObject {
 		return this;
 	}
 
-	public AbstractManager clear() {
-		for (int i = 0; i < entities.size(); i++) remove(entities.get(i--));
-		for (AbstractManager am : this.managers) am.clear();
-		return this;
+	public void start() {
+		final AbstractManager thus = this;
+
+		// start initialize task
+		Core.task(new Task(priority) {
+			@Override
+			public void run() {
+				thus.initialize();
+			}
+		}, TaskThread.TYPE_NONCONTINUOUS);
+
+		// start update task
+		Core.task(new Task(priority) {
+			@Override
+			public void run() {
+				thus.update();
+			}
+		}, TaskThread.TYPE_CONTINUOUS);
 	}
 
-	public <T extends AbstractManager> T getManager(Class<T> type) {
-		for (AbstractManager m : managers) {
-			if (m.getClass().equals(type)) { return (T) m; }
-		}
-
-		throw new RuntimeException("Invalid manager type.");
-	}
-
-	public List<AbstractEntity> getEntities() {
-		return entities;
-	}
-
-	public List<AbstractEntity> getEntities(Class type) {
-		List<AbstractEntity> entitiesoftypet = new ArrayList<AbstractEntity>();
-		for (AbstractEntity e : entities) {
-			if (e.getClass().equals(type)) { entitiesoftypet.add(e); }
-		}
-
-		throw new RuntimeException("Invalid entity type.");
-	}
+	public abstract void update();
 }

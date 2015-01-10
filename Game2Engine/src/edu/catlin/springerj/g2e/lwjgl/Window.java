@@ -7,14 +7,14 @@ public class Window extends AbstractEntity {
 		add(new WindowComponent("Game", 1200, 800));
 		add(new WindowSystem());
 	}
-	
+
 	@Override
 	public void initialize() {
-		
+
 	}
-	
+
 	@Override
 	public void update() {
-		
+
 	}
 }

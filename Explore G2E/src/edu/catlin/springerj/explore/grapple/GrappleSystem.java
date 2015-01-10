@@ -9,9 +9,9 @@ import edu.catlin.springerj.g2e.lwjgl.draw.Graphics;
 import edu.catlin.springerj.g2e.lwjgl.SpriteComponent;
 import edu.catlin.springerj.g2e.math.Color4;
 import edu.catlin.springerj.g2e.math.Vector2;
-import edu.catlin.springerj.g2e.movement.PositionComponent;
-import edu.catlin.springerj.g2e.movement.RotationComponent;
-import edu.catlin.springerj.g2e.movement.VelocityComponent;
+import edu.catlin.springerj.g2e.physics.PositionComponent;
+import edu.catlin.springerj.g2e.physics.RotationComponent;
+import edu.catlin.springerj.g2e.physics.VelocityComponent;
 
 public class GrappleSystem extends AbstractSystem {
 
@@ -37,7 +37,7 @@ public class GrappleSystem extends AbstractSystem {
         Vector2 playerPos = gc.player.getComponent(PositionComponent.class).position;
         Vector2 toMe = pc.position.subtract(playerPos);
         //Graphics
-        rc.rot = toMe.direction() - Math.PI / 2;
+        rc.rotation = toMe.direction() - Math.PI / 2;
         Graphics.drawLine(pc.position.x, pc.position.y, playerPos.x, playerPos.y, new Color4(0, 0, 0, sc.alpha));
         //If you're active
         if (sc.alpha == 1) {

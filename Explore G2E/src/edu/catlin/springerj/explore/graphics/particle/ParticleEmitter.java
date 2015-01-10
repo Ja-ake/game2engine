@@ -3,7 +3,7 @@ package edu.catlin.springerj.explore.graphics.particle;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.math.Color4;
 import edu.catlin.springerj.g2e.math.Vector2;
-import edu.catlin.springerj.g2e.movement.PositionComponent;
+import edu.catlin.springerj.g2e.physics.PositionComponent;
 
 public class ParticleEmitter extends AbstractEntity {
     

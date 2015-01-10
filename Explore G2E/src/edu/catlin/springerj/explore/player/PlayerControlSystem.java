@@ -13,9 +13,9 @@ import edu.catlin.springerj.g2e.event.MouseEvent;
 import edu.catlin.springerj.g2e.lwjgl.SpriteComponent;
 import edu.catlin.springerj.g2e.lwjgl.draw.Graphics;
 import edu.catlin.springerj.g2e.math.Vector2;
-import edu.catlin.springerj.g2e.movement.PositionComponent;
-import edu.catlin.springerj.g2e.movement.RotationComponent;
-import edu.catlin.springerj.g2e.movement.VelocityComponent;
+import edu.catlin.springerj.g2e.physics.PositionComponent;
+import edu.catlin.springerj.g2e.physics.RotationComponent;
+import edu.catlin.springerj.g2e.physics.VelocityComponent;
 import edu.catlin.springerj.g2e.thread.Task;
 
 import org.lwjgl.input.Keyboard;
@@ -52,7 +52,7 @@ public class PlayerControlSystem extends AbstractSystem {
 					.normalize();
 			Vector2 relativeVel = vel.velocity.subtract(pg.planetVel.velocity);
 			// Rotate to face planet
-			rot.rot = toPlanet.direction() + Math.PI / 2;
+			rot.rotation = toPlanet.direction() + Math.PI / 2;
 			// If you're on a planet
 			if (ccc.placeSolid(pos.position.add(toPlanet))) {
 				// Left-right movement

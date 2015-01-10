@@ -12,10 +12,10 @@ import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.lwjgl.SpriteComponent;
 import edu.catlin.springerj.g2e.lwjgl.SpriteRenderSystem;
 import edu.catlin.springerj.g2e.math.Vector2;
-import edu.catlin.springerj.g2e.movement.PositionComponent;
-import edu.catlin.springerj.g2e.movement.RotationComponent;
-import edu.catlin.springerj.g2e.movement.VelocityComponent;
-import edu.catlin.springerj.g2e.movement.VelocityMovementSystem;
+import edu.catlin.springerj.g2e.physics.PositionComponent;
+import edu.catlin.springerj.g2e.physics.RotationComponent;
+import edu.catlin.springerj.g2e.physics.VelocityComponent;
+import edu.catlin.springerj.g2e.physics.VelocitySystem;
 
 public class PlayerEntity extends AbstractEntity {
 
@@ -34,7 +34,7 @@ public class PlayerEntity extends AbstractEntity {
         add(new BulletCooldownComponent(.5));
         //Systems
         add(new SpriteRenderSystem());
-        add(new VelocityMovementSystem());
+        add(new VelocitySystem());
         add(new PlayerGravitySystem());
         add(new PlayerControlSystem());
         add(new CircleCollisionSystem());

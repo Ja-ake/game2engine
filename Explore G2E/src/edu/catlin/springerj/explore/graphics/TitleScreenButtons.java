@@ -9,7 +9,7 @@ import edu.catlin.springerj.g2e.lwjgl.LWJGLManager;
 import edu.catlin.springerj.g2e.lwjgl.SpriteComponent;
 import edu.catlin.springerj.g2e.lwjgl.draw.StaticImageRenderSystem;
 import edu.catlin.springerj.g2e.math.Vector2;
-import edu.catlin.springerj.g2e.movement.PositionComponent;
+import edu.catlin.springerj.g2e.physics.PositionComponent;
 import edu.catlin.springerj.g2e.thread.Task;
 import edu.catlin.springerj.g2e.thread.TaskThread;
 

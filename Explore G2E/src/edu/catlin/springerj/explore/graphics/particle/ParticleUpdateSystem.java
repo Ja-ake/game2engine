@@ -3,7 +3,7 @@ package edu.catlin.springerj.explore.graphics.particle;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.AbstractSystem;
 import edu.catlin.springerj.g2e.core.Core;
-import edu.catlin.springerj.g2e.movement.PositionComponent;
+import edu.catlin.springerj.g2e.physics.PositionComponent;
 
 public class ParticleUpdateSystem extends AbstractSystem {
 

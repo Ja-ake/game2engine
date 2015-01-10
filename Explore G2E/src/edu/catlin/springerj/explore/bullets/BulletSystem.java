@@ -9,8 +9,8 @@ import edu.catlin.springerj.g2e.core.AbstractSystem;
 import edu.catlin.springerj.g2e.core.Core;
 import edu.catlin.springerj.g2e.lwjgl.draw.Graphics;
 import edu.catlin.springerj.g2e.math.Vector2;
-import edu.catlin.springerj.g2e.movement.PositionComponent;
-import edu.catlin.springerj.g2e.movement.VelocityComponent;
+import edu.catlin.springerj.g2e.physics.PositionComponent;
+import edu.catlin.springerj.g2e.physics.VelocityComponent;
 
 public class BulletSystem extends AbstractSystem {
 

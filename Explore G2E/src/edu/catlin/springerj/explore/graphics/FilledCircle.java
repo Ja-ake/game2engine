@@ -2,7 +2,7 @@ package edu.catlin.springerj.explore.graphics;
 
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.math.Vector2;
-import edu.catlin.springerj.g2e.movement.PositionComponent;
+import edu.catlin.springerj.g2e.physics.PositionComponent;
 
 public class FilledCircle extends AbstractEntity {
 

@@ -7,45 +7,37 @@ import edu.catlin.springerj.g2e.math.Vector2;
 
 public class ShapeComponent extends AbstractComponent {
 
-    public Vector2[] verticies;
-    public Color4 color;
+	public Vector2[] verticies;
+	public Color4 color;
 
-    @Override
-    public void initialize(AbstractEntity e) {
+	public ShapeComponent(Vector2[] vert) {
+		if (vert == null) { throw new RuntimeException("A shape must have at least three verticies!"); }
+		if (vert.length < 3) { throw new RuntimeException("A shape must have at least three verticies!"); }
 
-    }
+		verticies = new Vector2[vert.length];
 
-    public ShapeComponent(Vector2[] vert) {
-        if (vert == null) {
-            throw new RuntimeException("A shape must have at least three verticies!");
-        }
-        if (vert.length < 3) {
-            throw new RuntimeException("A shape must have at least three verticies!");
-        }
+		for (int i = 0; i < vert.length; i++) {
+			verticies[i] = new Vector2(vert[i].x, vert[i].y);
+		}
 
-        verticies = new Vector2[vert.length];
+		color = new Color4(0.0f, 0.0f, 0.0f);
+	}
 
-        for (int i = 0; i < vert.length; i++) {
-            verticies[i] = new Vector2(vert[i].x, vert[i].y);
-        }
+	public ShapeComponent(Vector2[] vert, Color4 c) {
+		if (vert == null) { throw new RuntimeException("A shape must have at least three verticies!"); }
+		if (vert.length < 3) { throw new RuntimeException("A shape must have at least three verticies!"); }
 
-        color = new Color4(0.0f, 0.0f, 0.0f);
-    }
+		verticies = new Vector2[vert.length];
 
-    public ShapeComponent(Vector2[] vert, Color4 c) {
-        if (vert == null) {
-            throw new RuntimeException("A shape must have at least three verticies!");
-        }
-        if (vert.length < 3) {
-            throw new RuntimeException("A shape must have at least three verticies!");
-        }
+		for (int i = 0; i < vert.length; i++) {
+			verticies[i] = new Vector2(vert[i].x, vert[i].y);
+		}
 
-        verticies = new Vector2[vert.length];
+		color = new Color4(c.r, c.g, c.b, c.a);
+	}
 
-        for (int i = 0; i < vert.length; i++) {
-            verticies[i] = new Vector2(vert[i].x, vert[i].y);
-        }
+	@Override
+	public void initialize(AbstractEntity e) {
 
-        color = new Color4(c.r, c.g, c.b, c.a);
-    }
+	}
 }

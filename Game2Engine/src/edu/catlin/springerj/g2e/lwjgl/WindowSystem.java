@@ -15,7 +15,7 @@ import edu.catlin.springerj.g2e.utility.Logger;
 
 public class WindowSystem extends AbstractSystem {
 	WindowComponent wc;
-	
+
 	@Override
 	public void initialize(AbstractEntity e) {
 		wc = e.getComponent(WindowComponent.class);
@@ -33,37 +33,25 @@ public class WindowSystem extends AbstractSystem {
 				ex.printStackTrace();
 			}
 		}
-		
-		setViewport(-wc.width/2, wc.width/2, -wc.height/2, wc.height/2);
-		//glOrtho(-wc.width/2, wc.width/2, -wc.height/2, wc.height/2, -1, 1);
-		
+
+		setViewport(-wc.width / 2, wc.width / 2, -wc.height / 2, wc.height / 2);
+		// glOrtho(-wc.width/2, wc.width/2, -wc.height/2, wc.height/2, -1, 1);
+
 		glDisable(GL_DEPTH_TEST);
 		glDisable(GL_LIGHTING);
-		
+
 		glEnable(GL_BLEND);
 		glEnable(GL_COLOR);
 		glEnable(GL_ALPHA);
-		
+
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		
+
 		update();
 	}
-	
-	@Override
-	public void update() {
-		Core.setCloseRequested(Display.isCloseRequested());
-		
-		Display.update();
-		glClear(GL_COLOR_BUFFER_BIT);
-		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-	}
-	
+
 	public void setDisplayMode(int width, int height, boolean fullscreen) {
 		// return if requested DisplayMode is already set
-		if ((Display.getDisplayMode().getWidth() == width) && (Display.getDisplayMode().getHeight() == height)
-				&& (Display.isFullscreen() == fullscreen)) {
-			return;
-		}
+		if ((Display.getDisplayMode().getWidth() == width) && (Display.getDisplayMode().getHeight() == height) && (Display.isFullscreen() == fullscreen)) { return; }
 		try {
 			DisplayMode targetDisplayMode = null;
 			if (fullscreen) {
@@ -72,15 +60,13 @@ public class WindowSystem extends AbstractSystem {
 				for (DisplayMode current : modes) {
 					if ((current.getWidth() == width) && (current.getHeight() == height)) {
 						if ((targetDisplayMode == null) || (current.getFrequency() >= freq)) {
-							if ((targetDisplayMode == null)
-									|| (current.getBitsPerPixel() > targetDisplayMode.getBitsPerPixel())) {
+							if ((targetDisplayMode == null) || (current.getBitsPerPixel() > targetDisplayMode.getBitsPerPixel())) {
 								targetDisplayMode = current;
 								freq = targetDisplayMode.getFrequency();
 							}
 						}
 
-						if ((current.getBitsPerPixel() == Display.getDesktopDisplayMode().getBitsPerPixel())
-								&& (current.getFrequency() == Display.getDesktopDisplayMode().getFrequency())) {
+						if ((current.getBitsPerPixel() == Display.getDesktopDisplayMode().getBitsPerPixel()) && (current.getFrequency() == Display.getDesktopDisplayMode().getFrequency())) {
 							targetDisplayMode = current;
 							break;
 						}
@@ -99,13 +85,22 @@ public class WindowSystem extends AbstractSystem {
 			System.out.println("Unable to setup mode " + width + "x" + height + " fullscreen=" + fullscreen + e);
 		}
 	}
-	
+
 	public void setViewport(double x0, double x1, double y0, double y1) {
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		glOrtho(x0, x1, y0, y1, -1, 1);
 		glMatrixMode(GL_MODELVIEW);
-		wc.centerx = (x0+x1)/2;
-		wc.centery = (y0+y1)/2;
+		wc.centerx = (x0 + x1) / 2;
+		wc.centery = (y0 + y1) / 2;
+	}
+
+	@Override
+	public void update() {
+		Core.setCloseRequested(Display.isCloseRequested());
+
+		Display.update();
+		glClear(GL_COLOR_BUFFER_BIT);
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	}
 }

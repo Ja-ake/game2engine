@@ -4,9 +4,9 @@ import edu.catlin.springerj.explore.collisions.CircleCollisionComponent;
 import edu.catlin.springerj.explore.collisions.CircleCollisionSystem;
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.math.Vector2;
-import edu.catlin.springerj.g2e.movement.PositionComponent;
-import edu.catlin.springerj.g2e.movement.VelocityComponent;
-import edu.catlin.springerj.g2e.movement.VelocityMovementSystem;
+import edu.catlin.springerj.g2e.physics.PositionComponent;
+import edu.catlin.springerj.g2e.physics.VelocityComponent;
+import edu.catlin.springerj.g2e.physics.VelocitySystem;
 
 public class Planet extends AbstractEntity {
 
@@ -17,7 +17,7 @@ public class Planet extends AbstractEntity {
         add(new CircleCollisionComponent(size, true));
         add(new PlanetComponent());
         //Systems
-        add(new VelocityMovementSystem());
+        add(new VelocitySystem());
         add(new CircleCollisionSystem());
         add(new PlanetRenderSystem());
         add(new PlanetGravitySystem());

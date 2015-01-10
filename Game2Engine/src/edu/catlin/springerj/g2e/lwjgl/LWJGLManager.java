@@ -14,10 +14,10 @@ public class LWJGLManager extends AbstractManager {
 	private Window window;
 	private WindowSystem windowSystem;
 	private Map<String, Runnable> rooms;
-	
+
 	public LWJGLManager() {
 		rooms = new HashMap<String, Runnable>();
-		
+
 		// Create the window
 		window = new Window();
 		window.initialize();
@@ -26,29 +26,29 @@ public class LWJGLManager extends AbstractManager {
 		System.out.println("Window has been created successfully.");
 	}
 
+	public void addRoom(String name, Runnable code) {
+		rooms.put(name, code);
+	}
+
+	public Window getWindow() {
+		return window;
+	}
+
 	@Override
 	public void initialize() {
-		
+
 	}
-	
+
+	public void setRoom(String name) {
+		Core.getDefaultTaskThread().clear();
+		this.clear();
+
+		rooms.get(name).run();
+	}
+
 	@Override
 	public void update() {
 		window.update();
 		windowSystem.update();
-	}
-	
-	public Window getWindow() {
-		return window;
-	}
-	
-	public void addRoom(String name, Runnable code) {
-		rooms.put(name, code);
-	}
-	
-	public void setRoom(String name) {
-		Core.getDefaultTaskThread().clear();
-		this.clear();
-		
-		rooms.get(name).run();
 	}
 }

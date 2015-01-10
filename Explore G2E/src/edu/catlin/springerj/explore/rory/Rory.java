@@ -1,6 +1,7 @@
 package edu.catlin.springerj.explore.rory;
 
 import java.io.File;
+
 import edu.catlin.springerj.explore.graphics.GreyStripedBackground;
 import edu.catlin.springerj.explore.collisions.CollisionManager;
 import edu.catlin.springerj.explore.enemy.Enemy;
@@ -17,7 +18,7 @@ import edu.catlin.springerj.g2e.lwjgl.draw.StaticImageRenderSystem;
 import edu.catlin.springerj.g2e.lwjgl.view.InstantView;
 import edu.catlin.springerj.g2e.lwjgl.view.View;
 import edu.catlin.springerj.g2e.math.Vector2;
-import edu.catlin.springerj.g2e.movement.PositionComponent;
+import edu.catlin.springerj.g2e.physics.PositionComponent;
 import edu.catlin.springerj.g2e.tiled.TiledObject;
 import edu.catlin.springerj.g2e.tiled.TiledXMLParser;
 import edu.catlin.springerj.g2e.web.WebManager;
