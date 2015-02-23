@@ -2,6 +2,7 @@ package edu.catlin.springerj.g2e.core;
 
 abstract class ManagedObject {
 	private AbstractManager manager;
+	private long id = -1;
 
 	public AbstractManager getManager() {
 		return manager;
@@ -18,5 +19,10 @@ abstract class ManagedObject {
 
 	public void setManager(AbstractManager m) {
 		manager = m;
+	}
+	
+	public long getID() {
+		if (id == -1) id = Core.allocateID();
+		return id;
 	}
 }

@@ -9,17 +9,20 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
 import edu.catlin.springerj.g2e.core.AbstractManager;
+import edu.catlin.springerj.g2e.core.Core;
 import edu.catlin.springerj.g2e.thread.Task;
 
 public class EventManager extends AbstractManager {
 
 	private List<EventListener> listeners;
+	private List<EventListener> highPriorityListeners;
 	private List<Event> queue;
 
 	public EventManager() {
-		super(Task.PRIORITY_VERY_LOW);
+		super(Task.PRIORITY_VERY_LOW, 0);
 
 		listeners = new ArrayList<EventListener>();
+		highPriorityListeners = new ArrayList<EventListener>();
 		queue = new ArrayList<Event>();
 	}
 
@@ -27,18 +30,24 @@ public class EventManager extends AbstractManager {
 	public AbstractManager clear() {
 		super.clear();
 		listeners.clear();
+		highPriorityListeners.clear();
 		queue.clear();
-
-		System.out.println(listeners.size());
+		
 		return this;
 	}
 
 	public void fire(Event e) {
+		if (e == null) {
+			throw new RuntimeException("You cannot fire a null event.");
+		}
 		e.setTarget(null);
 		queue.add(e);
 	}
 
 	public void fire(Event e, EventListener tar) {
+		if (e == null) {
+			throw new RuntimeException("You cannot fire a null event.");
+		}
 		e.setTarget(tar);
 		queue.add(e);
 	}
@@ -61,6 +70,19 @@ public class EventManager extends AbstractManager {
 		return true;
 	}
 
+	public boolean registerHighPriority(EventListener l) {
+		if (highPriorityListeners == null) {
+			highPriorityListeners = new ArrayList<EventListener>();
+		}
+
+		if (!highPriorityListeners.contains(l)) {
+			highPriorityListeners.add(l);
+		} else {
+			return false;
+		}
+		return true;
+	}
+	
 	@Override
 	public void update() {
 		while (Keyboard.next()) {
@@ -89,6 +111,7 @@ public class EventManager extends AbstractManager {
 		}
 
 		// if (listeners.size() == 0) return;
+		EVENTLOOP:
 		for (int i = 0; i < queue.size(); i++) {
 			Event event = queue.get(i);
 			queue.remove(event);
@@ -107,12 +130,14 @@ public class EventManager extends AbstractManager {
 			if (event instanceof KeyboardEvent) {
 				KeyboardEvent ev = (KeyboardEvent) event;
 				if (ev.key == Keyboard.KEY_ESCAPE && ev.pressed == true) {
+					Core.setCloseRequested(true);
 					System.exit(0);
 				}
 			}
 
-			for (int j = 0; j < listeners.size(); j++) {
-				EventListener listener = listeners.get(j);
+			for (int j = 0; j < highPriorityListeners.size(); j++) {
+				EventListener listener = highPriorityListeners.get(j);
+				if (event == null) { continue EVENTLOOP; }
 				if (event.target == null || event.target == listener) {
 					try {
 						Method[] methods = listener.getClass().getDeclaredMethods();
@@ -128,7 +153,26 @@ public class EventManager extends AbstractManager {
 						e.printStackTrace();
 					}
 				}
-
+			}
+			
+			if (!event.isCancelled()) for (int j = 0; j < listeners.size(); j++) {
+				EventListener listener = listeners.get(j);
+				if (event == null) { continue EVENTLOOP; }
+				if (event.target == null || event.target == listener) {
+					try {
+						Method[] methods = listener.getClass().getDeclaredMethods();
+						for (Method method : methods) {
+							if (method.getName().equals("onEvent") && method.getParameterTypes().length == 1) {
+								if (((Class) method.getGenericParameterTypes()[0]).getName().equals(event.getClass().getName())) {
+									method.setAccessible(true);
+									method.invoke(listener, event);
+								}
+							}
+						}
+					} catch (SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+						e.printStackTrace();
+					}
+				}
 			}
 		}
 	}

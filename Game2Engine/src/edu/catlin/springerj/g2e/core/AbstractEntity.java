@@ -13,9 +13,9 @@ import edu.catlin.springerj.g2e.thread.TaskThread;
 public abstract class AbstractEntity extends ManagedObject {
 	Task updatetask;
 	List<AbstractComponent> components;
-
 	List<AbstractSystem> systems;
-
+	int taskThread;
+	
 	public AbstractEntity() {
 		components = new ArrayList<AbstractComponent>();
 		systems = new ArrayList<AbstractSystem>();
@@ -29,6 +29,8 @@ public abstract class AbstractEntity extends ManagedObject {
 		for (AbstractComponent c : cs) {
 			String cName = c.getClass().getName();
 			boolean contains = false;
+			
+			c.taskThread = taskThread;
 
 			// check contents
 			for (AbstractComponent check : components) {
@@ -46,7 +48,7 @@ public abstract class AbstractEntity extends ManagedObject {
 					public void run() {
 						fc.initialize(thus);
 					}
-				}, TaskThread.TYPE_NONCONTINUOUS);
+				}, TaskThread.TYPE_NONCONTINUOUS, taskThread);
 			}
 		}
 
@@ -61,6 +63,8 @@ public abstract class AbstractEntity extends ManagedObject {
 		for (AbstractSystem s : ss) {
 			String cName = s.getClass().getName();
 			boolean contains = false;
+			
+			s.taskThread = taskThread;
 
 			// check contents
 			for (AbstractSystem check : systems) {
@@ -78,13 +82,13 @@ public abstract class AbstractEntity extends ManagedObject {
 					public void run() {
 						fs.initialize(thus);
 					}
-				}, TaskThread.TYPE_NONCONTINUOUS);
+				}, TaskThread.TYPE_NONCONTINUOUS, taskThread);
 
 				s.task = Core.task(new Task(Task.PRIORITY_ABOVE_NORMAL) {
 					public void run() {
 						fs.update();
 					}
-				}, TaskThread.TYPE_CONTINUOUS);
+				}, TaskThread.TYPE_CONTINUOUS, taskThread);
 			}
 		}
 

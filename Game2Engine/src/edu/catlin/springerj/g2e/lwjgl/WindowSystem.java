@@ -39,12 +39,13 @@ public class WindowSystem extends AbstractSystem {
 
 		glDisable(GL_DEPTH_TEST);
 		glDisable(GL_LIGHTING);
-
+		
 		glEnable(GL_BLEND);
 		glEnable(GL_COLOR);
 		glEnable(GL_ALPHA);
 
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glShadeModel(GL_FLAT);
 
 		update();
 	}

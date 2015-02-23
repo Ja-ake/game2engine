@@ -9,7 +9,7 @@ public abstract class Task implements Runnable {
 	public static int PRIORITY_LOW = 0x6;
 	public static int PRIORITY_VERY_LOW = 0x7;
 
-	private int id;
+	int id;
 	private int priority;
 
 	public Task() {

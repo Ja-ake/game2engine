@@ -16,20 +16,21 @@ import edu.catlin.springerj.g2e.web.WebManager;
 public abstract class AbstractManager extends ManagedObject {
 
 	protected List<AbstractManager> managers;
-
 	protected List<AbstractEntity> entities;
-
 	protected int priority;
+	protected int taskThread;
 
 	public AbstractManager() {
 		managers = new ArrayList<AbstractManager>();
 		entities = new ArrayList<AbstractEntity>();
 		priority = Task.PRIORITY_VERY_HIGH;
+		taskThread = 0;
 	}
 
-	public AbstractManager(int p) {
+	public AbstractManager(int p, int t) {
 		this();
 		priority = p;
+		taskThread = t;
 	}
 
 	public AbstractManager add(AbstractEntity... ents) {
@@ -44,6 +45,7 @@ public abstract class AbstractManager extends ManagedObject {
 		ent.setManager(this);
 
 		final AbstractEntity fent = ent;
+		ent.taskThread = taskThread;
 
 		// start initialize task
 		if (fent.updatetask == null) Core.task(new Task(Task.PRIORITY_HIGH) {
@@ -51,7 +53,7 @@ public abstract class AbstractManager extends ManagedObject {
 			public void run() {
 				fent.initialize();
 			}
-		}, TaskThread.TYPE_NONCONTINUOUS);
+		}, TaskThread.TYPE_NONCONTINUOUS, taskThread);
 
 		// start update task
 		if (fent.updatetask == null) fent.updatetask = Core.task(new Task(Task.PRIORITY_HIGH) {
@@ -59,7 +61,7 @@ public abstract class AbstractManager extends ManagedObject {
 			public void run() {
 				fent.update();
 			}
-		}, TaskThread.TYPE_CONTINUOUS);
+		}, TaskThread.TYPE_CONTINUOUS, taskThread);
 
 		for (int i = 0; i < managers.size(); i++)
 			managers.get(i).add(fent);
@@ -80,7 +82,7 @@ public abstract class AbstractManager extends ManagedObject {
 				public void run() {
 					fman.initialize();
 				}
-			}, TaskThread.TYPE_NONCONTINUOUS);
+			}, TaskThread.TYPE_NONCONTINUOUS, man.taskThread);
 
 			// start update task
 			Core.task(new Task(man.priority) {
@@ -88,7 +90,7 @@ public abstract class AbstractManager extends ManagedObject {
 				public void run() {
 					fman.update();
 				}
-			}, TaskThread.TYPE_CONTINUOUS);
+			}, TaskThread.TYPE_CONTINUOUS, man.taskThread);
 		}
 		return this;
 	}
@@ -113,7 +115,7 @@ public abstract class AbstractManager extends ManagedObject {
 			}
 		}
 
-		throw new RuntimeException("Invalid entity type.");
+		return entitiesoftypet;
 	}
 
 	public <T extends AbstractManager> T getManager(Class<T> type) {
@@ -131,12 +133,12 @@ public abstract class AbstractManager extends ManagedObject {
 
 		Core.getDefaultTaskThread().remove(ent.updatetask.getID());
 		for (AbstractComponent ac : fent.components) {
-			if (ac.task != null) Core.getDefaultTaskThread().remove(ac.task.getID());
+			if (ac.task != null) Core.getTaskThread(taskThread).remove(ac.task.getID());
 			ac.task = null;
 		}
 
 		for (AbstractSystem sc : fent.systems) {
-			if (sc.task != null) Core.getDefaultTaskThread().remove(sc.task.getID());
+			if (sc.task != null) Core.getTaskThread(taskThread).remove(sc.task.getID());
 			sc.task = null;
 		}
 
@@ -147,7 +149,7 @@ public abstract class AbstractManager extends ManagedObject {
 				fent.systems.clear();
 				entities.remove(fent);
 			}
-		}, TaskThread.TYPE_NONCONTINUOUS);
+		}, TaskThread.TYPE_NONCONTINUOUS, taskThread);
 
 		return this;
 	}
@@ -161,7 +163,7 @@ public abstract class AbstractManager extends ManagedObject {
 			public void run() {
 				thus.initialize();
 			}
-		}, TaskThread.TYPE_NONCONTINUOUS);
+		}, TaskThread.TYPE_NONCONTINUOUS, taskThread);
 
 		// start update task
 		Core.task(new Task(priority) {
@@ -169,7 +171,12 @@ public abstract class AbstractManager extends ManagedObject {
 			public void run() {
 				thus.update();
 			}
-		}, TaskThread.TYPE_CONTINUOUS);
+		}, TaskThread.TYPE_CONTINUOUS, taskThread);
+	}
+	
+	public AbstractEntity getEntity(long id) {
+		for (AbstractEntity e : entities) if (e.getID() == id) return e;
+		return null;
 	}
 
 	public abstract void update();

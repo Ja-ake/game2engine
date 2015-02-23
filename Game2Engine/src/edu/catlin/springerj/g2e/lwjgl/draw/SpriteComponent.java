@@ -1,4 +1,4 @@
-package edu.catlin.springerj.g2e.lwjgl;
+package edu.catlin.springerj.g2e.lwjgl.draw;
 
 import java.util.ArrayList;
 

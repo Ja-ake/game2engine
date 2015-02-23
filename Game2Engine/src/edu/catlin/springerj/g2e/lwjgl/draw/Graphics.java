@@ -93,4 +93,20 @@ public abstract class Graphics {
 		glEnd();
 		glPopMatrix();
 	}
+	
+	public static void fillRect(double x, double y, double w, double h, double r, double g, double b, double a) {
+		glPushMatrix();
+		glDisable(GL_TEXTURE_2D);
+		glColor4d(r, g, b, a);
+		glTranslated(x, y, 0);
+		glBegin(GL_QUADS);
+		{
+			glVertex2d(0, 0);
+			glVertex2d(w, 0);
+			glVertex2d(w, h);
+			glVertex2d(0, h);
+		}
+		glEnd();
+		glPopMatrix();
+	}
 }

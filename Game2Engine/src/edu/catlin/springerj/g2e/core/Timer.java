@@ -4,11 +4,14 @@ public class Timer {
 	private long nanotimeprev;
 	private long nanotimenow;
 	private double deltaseconds;
+	
+	private double inverseSpeed;
 
 	public Timer() {
 		nanotimeprev = System.nanoTime();
 		nanotimenow = nanotimeprev;
 		deltaseconds = 0.0f;
+		inverseSpeed = 1.0d;
 	}
 
 	public double getCurrentTime() {
@@ -16,7 +19,7 @@ public class Timer {
 	}
 
 	public double getDeltaTime() {
-		return Math.min(deltaseconds, 1.0d) / 1.0f;
+		return Math.min(deltaseconds, 0.1d) / inverseSpeed;
 	}
 
 	public void update() {
@@ -24,12 +27,13 @@ public class Timer {
 		deltaseconds = ((double) nanotimenow - (double) nanotimeprev) / 1000000000.0f;
 		nanotimeprev = nanotimenow;
 		if (deltaseconds < 0) deltaseconds = 0;
-
-		// try {
-		// Thread.sleep(1000);
-		// } catch (InterruptedException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
+	}
+	
+	public void setInverseSpeed(double nSpeed) {
+		inverseSpeed = nSpeed;
+	}
+	
+	public double getInverseSpeed() {
+		return inverseSpeed;
 	}
 }

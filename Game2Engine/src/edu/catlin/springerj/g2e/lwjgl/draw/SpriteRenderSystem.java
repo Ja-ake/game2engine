@@ -1,9 +1,10 @@
-package edu.catlin.springerj.g2e.lwjgl;
+package edu.catlin.springerj.g2e.lwjgl.draw;
 
 import edu.catlin.springerj.g2e.core.AbstractEntity;
 import edu.catlin.springerj.g2e.core.AbstractSystem;
 import edu.catlin.springerj.g2e.core.Core;
-import edu.catlin.springerj.g2e.lwjgl.draw.Graphics;
+import edu.catlin.springerj.g2e.lwjgl.DrawCommand;
+import edu.catlin.springerj.g2e.lwjgl.LWJGLManager;
 import edu.catlin.springerj.g2e.physics.PositionComponent;
 import edu.catlin.springerj.g2e.physics.RotationComponent;
 
@@ -23,8 +24,7 @@ public class SpriteRenderSystem extends AbstractSystem {
 	@Override
 	public void update() {
 		if (sprite.visible) {
-			// System.out.println(rotation.rot);
-			Graphics.drawSprite(sprite.getTexture(), position.position.x, position.position.y, rotation.rotation, sprite.red, sprite.green, sprite.blue, sprite.alpha);
+			((LWJGLManager) Core.getRootManager()).draw(DrawCommand.drawSprite(-100, sprite.getTexture(), position.position.x, position.position.y, rotation.rotation, sprite.red, sprite.green, sprite.blue, sprite.alpha));
 		}
 		sprite.imageIndex += Core.getDefaultTimer().getDeltaTime() * sprite.imageSpeed;
 	}

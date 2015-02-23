@@ -19,7 +19,7 @@ public class RotationalFrictionSystem extends AbstractSystem {
 	@Override
 	public void update() {
 		double potential = 0.0d;
-		if (Math.abs(potential = rvc.velocity * (1 - rfc.friction * Core.getDefaultTimer().getDeltaTime() / rvc.velocity)) >= 0.0001d) {
+		if (Math.abs(potential = rvc.velocity * (Math.pow(1 - rfc.friction, Core.getDefaultTimer().getDeltaTime()))) >= 0.0001d) {
 			rvc.velocity = potential;
 		} else {
 			rvc.velocity = 0.0d;
